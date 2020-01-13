@@ -1,12 +1,8 @@
 package be.helha.aemt.entities;
 
-import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import be.helha.aemt.enums.EnumContractType;
 
 
 public class Offer {
@@ -20,7 +16,9 @@ public class Offer {
 	private String functionOffer;
 	private List<String> skillsNeeded;
 	private String noteSupp;
-	private String subject;
+	private String subject; 
+	
+	
 	
 	public String getSocietyName() {
 		return societyName;
