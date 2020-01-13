@@ -6,6 +6,12 @@
 		<class>be.helha.aemt.entities.Utilisateur</class>
 		
 		<class>be.helha.aemt.entities.Visiteur</class>
+		
+		<class>be.helha.aemt.entities.Element</class>
+		<class>be.helha.aemt.entities.Event</class>
+		<class>be.helha.aemt.entities.Portrait</class>
+		<class>be.helha.aemt.entities.User</class>
+		<class>be.helha.aemt.entities.Address</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		
