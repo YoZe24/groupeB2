@@ -1,7 +1,10 @@
 package be.helha.aemt.entities;
 
+import javax.persistence.Entity;
+
 import be.helha.aemt.enums.EnumRole;
 
+@Entity
 public class Admin extends User {
 
 	private EnumRole enumRole;
@@ -9,9 +12,10 @@ public class Admin extends User {
 	public Admin() {
 		super();
 	}
-
-	public Admin(String name, String firstname, String mail, String login, String hashPwd,String phoneNumber, EnumRole enumRole) {
-		super(name, firstname, mail, login, hashPwd, phoneNumber);
+	
+	public Admin(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+			Address address, EnumRole enumRole) {
+		super(name, firstname, mail, login, hashPwd, phoneNumber, address);
 		this.enumRole = enumRole;
 	}
 
