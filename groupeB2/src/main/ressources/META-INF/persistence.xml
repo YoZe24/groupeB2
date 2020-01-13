@@ -4,7 +4,7 @@
 		<jta-data-source>jdbc/groupeB2</jta-data-source>
 
 		<class>be.helha.aemt.entities.Utilisateur</class>
-		
+
 		<class>be.helha.aemt.entities.Visiteur</class>
 
 		<class>be.helha.aemt.entities.Element</class>
@@ -16,7 +16,7 @@
 		<class>be.helha.aemt.entities.JobOffer</class>
 		<class>be.helha.aemt.entities.TrainingOffer</class>
 		<class>be.helha.aemt.entities.Offer</class>
-	
+
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties></properties>
