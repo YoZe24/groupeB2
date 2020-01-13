@@ -1,26 +1,13 @@
 package be.helha.aemt.dao;
 
-import java.lang.reflect.Field;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-
-import com.mysql.jdbc.Util;
 
 import be.helha.aemt.entities.Utilisateur;
 
