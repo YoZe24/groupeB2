@@ -7,8 +7,6 @@
 		<class>be.helha.aemt.entities.Event</class>
 		<class>be.helha.aemt.entities.Portrait</class>
 		<class>be.helha.aemt.entities.User</class>
-		<class>be.helha.aemt.entities.Admin</class>
-		<class>be.helha.aemt.entities.Ancien</class>
 		<class>be.helha.aemt.entities.Address</class>
 		<class>be.helha.aemt.entities.Offer</class>
 
