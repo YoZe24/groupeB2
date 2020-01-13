@@ -18,7 +18,7 @@ public class AddressDAO {
 	
 	public List<Address> query(){
 		Query query = em.createQuery("select address from Address address");
-		return query.getResultList();
+		return query.getResultList() != null? query.getResultList() : null;
 	}
 	
 	public List<Address> get(Address a){
@@ -29,14 +29,33 @@ public class AddressDAO {
 		query.setParameter("varNum", a.getNum());
 		query.setParameter("varCity", a.getCity());
 		query.setParameter("varCp", a.getCp());
-		return query.getResultList() != null ? query.getResultList():null;
+		return query.getResultList() != null ? query.getResultList() : null;
 	}
 	
 	public Address post(Address a) {
 		Address addressFound = (Address) get(a);
-		if(addressFound != null) return addressFound;
-		
-		Query query = em.createQuery("insert");
-		return new Address();
+		if(!isNull(addressFound)) return addressFound;
+		em.persist(a);
+		return a;
+	}
+	
+	public Address delete(Address a) {
+		Address addressFound = (Address) get(a);
+		if(isNull(addressFound)) return null;
+		em.remove(addressFound);
+		return addressFound;
+	}
+	
+	public Address update(Address a,Address newAddress) {
+		if(isNull(newAddress)) return a;
+		Address addressFound = (Address) get(a);
+		if(isNull(addressFound)) return null;
+		em.merge(addressFound).clone(newAddress);
+		return newAddress;
+	}
+	
+	//Fct to don't write "address == null"
+	private boolean isNull(Address a) {
+		return a == null? true : false;
 	}
 }

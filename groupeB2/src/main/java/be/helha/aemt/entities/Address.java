@@ -112,6 +112,17 @@ public class Address {
 			return false;
 		return true;
 	}
+	
+	public Address clone(Address a) {
+		return new Address(a.street,a.num,a.city,a.cp);
+	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", num=" + num + ", city=" + city + ", cp=" + cp + "]";
+	}
+	
+	
 
 	
 }
