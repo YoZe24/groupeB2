@@ -1,5 +1,7 @@
 package be.helha.aemt.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -14,13 +16,13 @@ public class Portrait extends Element {
 	private String description;
 	
 	
-	public Portrait(User author, DateTime publishDate, String pathFile, User user, String description) {
+	public Portrait(User author, LocalDateTime publishDate, String pathFile, User user, String description) {
 		super(author, publishDate, pathFile);
 		this.user = user;
 		this.description = description;
 	}
 
-	public Portrait(User author, DateTime publishDate, String pathFile) {
+	public Portrait(User author, LocalDateTime publishDate, String pathFile) {
 		super(author, publishDate, pathFile);
 	}
 

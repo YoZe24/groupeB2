@@ -1,6 +1,7 @@
 package be.helha.aemt.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 @Entity
 public class Element implements Serializable{
@@ -20,10 +20,10 @@ public class Element implements Serializable{
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private User author;
 	
-	private DateTime publishDate;
+	private LocalDateTime publishDate;
 	private String pathFile;	
 
-	public Element(User author, DateTime publishDate, String pathFile) {
+	public Element(User author, LocalDateTime publishDate, String pathFile) {
 		this.author = author;
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
@@ -57,14 +57,13 @@ public class Element implements Serializable{
 		this.id = id;
 	}
 
-	public DateTime getPublishDate() {
+	public LocalDateTime getPublishDate() {
 		return publishDate;
 	}
 
-	public void setPublishDate(DateTime publishDate) {
+	public void setPublishDate(LocalDateTime publishDate) {
 		this.publishDate = publishDate;
 	}
-
 
 	@Override
 	public String toString() {
