@@ -2,10 +2,14 @@ package be.helha.aemt.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -19,10 +23,15 @@ public class User {
 	private String login;
 	private String hashPwd;
 	private String phoneNumber;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Address address;
+	@OneToMany(cascade = CascadeType.PERSIST)
+	private List<Element> elements;
 
 	public User() {};
 
-	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber) {
+	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+			Address address) {
 		super();
 		this.name = name;
 		this.firstname = firstname;
@@ -30,6 +39,37 @@ public class User {
 		this.login = login;
 		this.hashPwd = hashPwd;
 		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
+
+	public User(int id, String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+			Address address, List<Element> elements) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.firstname = firstname;
+		this.mail = mail;
+		this.login = login;
+		this.hashPwd = hashPwd;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.elements = elements;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Element> getElements() {
+		return elements;
+	}
+
+	public void setElements(List<Element> elements) {
+		this.elements = elements;
 	}
 
 	public int getId() {
@@ -89,7 +129,7 @@ public class User {
 	}
 
 	public User clone() {
-		return new User(name, firstname, mail, login, hashPwd, phoneNumber);
+		return new User(name, firstname, mail, login, hashPwd, phoneNumber,address);
 	}
 	
 	public void update(User u) {
