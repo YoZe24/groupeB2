@@ -1,27 +1,66 @@
 package be.helha.aemt.entities;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
-public class Offer {
+@Entity
+public class Offer extends Element implements Serializable{
 	
 	private String societyName;
 	private String societyMail;
 	private String societySector;
 	private int societyNum;
 	//put String to Adress !!
-	private String localisation;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Address societyAddress;
 	private String functionOffer;
+	
 	private List<String> skillsNeeded;
 	private String noteSupp;
 	private String subject;
 	
+	public Offer() {
+		
+	}
+
+	public Offer(User author, LocalDateTime publishDate, String pathFile, String societyName, String societyMail,
+			String societySector, int societyNum, Address address, String functionOffer, List<String> skillsNeeded,
+			String noteSupp, String subject) {
+		super(author, publishDate, pathFile);
+		this.societyName = societyName;
+		this.societyMail = societyMail;
+		this.societySector = societySector;
+		this.societyNum = societyNum;
+		this.societyAddress = address;
+		this.functionOffer = functionOffer;
+		this.skillsNeeded = skillsNeeded;
+		this.noteSupp = noteSupp;
+		this.subject = subject;
+	}
+	
+
+
+	public Address getSocietyAddress() {
+		return societyAddress;
+	}
+
+	public void setSocietyAddress(Address societyAddress) {
+		this.societyAddress = societyAddress;
+	}
+
 	public String getSocietyName() {
 		return societyName;
 	}
@@ -52,14 +91,6 @@ public class Offer {
 
 	public void setSocietyNum(int societyNum) {
 		this.societyNum = societyNum;
-	}
-
-	public String getLocalisation() {
-		return localisation;
-	}
-
-	public void setLocalisation(String localisation) {
-		this.localisation = localisation;
 	}
 
 	public String getFunctionOffer() {
@@ -137,30 +168,6 @@ public class Offer {
 		return true;
 	}
 
-	public Offer() {
-		
-	}
 
-	public Offer(String societyName, String societyMail, String societySector, int societyNum,
-			String localisation, String functionOffer, List<String> skillsNeeded, String noteSupp, String subject) {
-		super();
-		this.societyName = societyName;
-		this.societyMail = societyMail;
-		this.societySector = societySector;
-		this.societyNum = societyNum;
-		this.localisation = localisation;
-		this.functionOffer = functionOffer;
-		this.skillsNeeded = skillsNeeded;
-		this.noteSupp = noteSupp;
-		this.subject = subject;
-	}
-
-	@Override
-	public String toString() {
-		return "societyName=" + societyName + ", societyMail=" + societyMail + ", societySector=" + societySector
-				+ ", societyNum=" + societyNum + ", localisation=" + localisation + ", functionOffer=" + functionOffer
-				+ ", skillsNeeded=" + skillsNeeded + ", noteSupp=" + noteSupp + ", subject=" + subject;
-	}
-	
 }
 	

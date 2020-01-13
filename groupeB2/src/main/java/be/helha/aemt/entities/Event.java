@@ -1,18 +1,17 @@
 package be.helha.aemt.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 @Entity
 public class Event extends Element implements Serializable{
-	private DateTime startDate;
-	private DateTime endDate;
+	
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address address;
@@ -20,7 +19,7 @@ public class Event extends Element implements Serializable{
 	private String title;
 	private String description;
 
-	public Event(User author, DateTime publishDate, String pathFile, DateTime startDate, DateTime endDate,
+	public Event(User author, LocalDateTime publishDate, String pathFile, LocalDateTime startDate, LocalDateTime endDate,
 			Address address, String title, String description) {
 		super(author, publishDate, pathFile);
 		this.startDate = startDate;
@@ -34,19 +33,19 @@ public class Event extends Element implements Serializable{
 		
 	}
 
-	public DateTime getStartDate() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public DateTime getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 
