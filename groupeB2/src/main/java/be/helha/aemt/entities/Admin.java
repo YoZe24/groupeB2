@@ -23,5 +23,23 @@ public class Admin extends User {
 		this.enumRole = enumRole;
 	}
 	
+	public void update(Admin a) {
+		super.update(a);
+		setEnumRole(enumRole);
+	}
+	
+	public Admin clone() {
+		Admin a = (Admin) super.clone();
+		a.enumRole = enumRole;
+		return a;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [enumRole=" + enumRole + "]";
+	}
+	
+	
+	
 	
 }

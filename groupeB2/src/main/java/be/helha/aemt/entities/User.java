@@ -84,8 +84,6 @@ public class User {
 		this.hashPwd = hashPwd;
 	}
 
-
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -102,6 +100,19 @@ public class User {
 		this.listElements = listElements;
 	}
 
+	public User clone() {
+		return new User(name, firstname, mail, login, hashPwd, phoneNumber);
+	}
+	
+	public void update(User u) {
+		setName(name);
+		setFirstname(firstname);
+		setMail(mail);
+		setLogin(login);
+		setHashPwd(hashPwd);
+		setPhoneNumber(phoneNumber);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -128,7 +139,13 @@ public class User {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", mail=" + mail + ", login=" + login
+				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber + ", listElements=" + listElements + "]";
+	}
 
+	
 
 
 }
