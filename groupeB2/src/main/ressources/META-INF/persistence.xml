@@ -12,7 +12,11 @@
 		<class>be.helha.aemt.entities.Portrait</class>
 		<class>be.helha.aemt.entities.User</class>
 		<class>be.helha.aemt.entities.Address</class>
-
+		<class>be.helha.aemt.entities.InternshipOffer</class>
+		<class>be.helha.aemt.entities.JobOffer</class>
+		<class>be.helha.aemt.entities.TrainingOffer</class>
+		<class>be.helha.aemt.entities.Offer</class>
+	
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties></properties>
