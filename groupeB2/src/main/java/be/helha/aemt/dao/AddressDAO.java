@@ -34,28 +34,23 @@ public class AddressDAO {
 	
 	public Address post(Address a) {
 		Address addressFound = (Address) get(a);
-		if(!isNull(addressFound)) return addressFound;
+		if(addressFound != null) return addressFound;
 		em.persist(a);
 		return a;
 	}
 	
 	public Address delete(Address a) {
 		Address addressFound = (Address) get(a);
-		if(isNull(addressFound)) return null;
+		if(addressFound == null) return null;
 		em.remove(addressFound);
 		return addressFound;
 	}
 	
 	public Address update(Address a,Address newAddress) {
-		if(isNull(newAddress)) return a;
+		if(newAddress == null) return a;
 		Address addressFound = (Address) get(a);
-		if(isNull(addressFound)) return null;
+		if(addressFound == null) return null;
 		em.merge(addressFound).clone(newAddress);
 		return newAddress;
-	}
-	
-	//Fct to don't write "address == null"
-	private boolean isNull(Address a) {
-		return a == null? true : false;
 	}
 }
