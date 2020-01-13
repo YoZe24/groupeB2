@@ -23,6 +23,10 @@ public class User {
 	private String login;
 	private String hashPwd;
 	private String phoneNumber;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Address address;
+	@OneToMany(cascade = CascadeType.PERSIST)
+	private List<Element> elements;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address address;
@@ -43,7 +47,36 @@ public class User {
 		this.hashPwd = hashPwd;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
-		this.elements = new ArrayList<Element>();
+	}
+
+	public User(int id, String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+			Address address, List<Element> elements) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.firstname = firstname;
+		this.mail = mail;
+		this.login = login;
+		this.hashPwd = hashPwd;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.elements = elements;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Element> getElements() {
+		return elements;
+	}
+
+	public void setElements(List<Element> elements) {
+		this.elements = elements;
 	}
 
 	public int getId() {
@@ -123,7 +156,7 @@ public class User {
 		if(e == null) return false;
 		elements.add(e); return true;
 	}
-	
+
 	public User clone() {
 		return new User(name, firstname, mail, login, hashPwd, phoneNumber, address);
 	}

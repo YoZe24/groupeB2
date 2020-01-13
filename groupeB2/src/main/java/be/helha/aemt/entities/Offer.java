@@ -2,18 +2,13 @@ package be.helha.aemt.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+import be.helha.aemt.enums.EnumOfferType;
 
 @Entity
 public class Offer extends Element implements Serializable{
@@ -21,9 +16,7 @@ public class Offer extends Element implements Serializable{
 	private String societyName;
 	private String societyMail;
 	private String societySector;
-	private int societyNum;
-	//put String to Adress !!
-	
+	private int societyNum;	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address societyAddress;
 	private String functionOffer;
@@ -31,27 +24,71 @@ public class Offer extends Element implements Serializable{
 	private List<String> skillsNeeded;
 	private String noteSupp;
 	private String subject;
+	private EnumOfferType offerType;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
+	private double amount;
+	
+	
+	
 	
 	public Offer() {
 		
 	}
 
+
 	public Offer(User author, LocalDateTime publishDate, String pathFile, String societyName, String societyMail,
-			String societySector, int societyNum, Address address, String functionOffer, List<String> skillsNeeded,
-			String noteSupp, String subject) {
+			String societySector, int societyNum, Address societyAddress, String functionOffer,
+			List<String> skillsNeeded, String noteSupp, String subject, EnumOfferType offerType,
+			LocalDateTime startDate, LocalDateTime endDate, double amount) {
 		super(author, publishDate, pathFile);
 		this.societyName = societyName;
 		this.societyMail = societyMail;
 		this.societySector = societySector;
 		this.societyNum = societyNum;
-		this.societyAddress = address;
+		this.societyAddress = societyAddress;
 		this.functionOffer = functionOffer;
 		this.skillsNeeded = skillsNeeded;
 		this.noteSupp = noteSupp;
 		this.subject = subject;
+		this.offerType = offerType;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.amount = amount;
 	}
-	
 
+
+	public LocalDateTime getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public EnumOfferType getOfferType() {
+		return offerType;
+	}
+
+	public void setOfferType(EnumOfferType offerType) {
+		this.offerType = offerType;
+	}
 
 	public Address getSocietyAddress() {
 		return societyAddress;
@@ -125,48 +162,12 @@ public class Offer extends Element implements Serializable{
 		this.subject = subject;
 	}
 
+
+
 	
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((functionOffer == null) ? 0 : functionOffer.hashCode());
-		result = prime * result + ((societyName == null) ? 0 : societyName.hashCode());
-		result = prime * result + societyNum;
-		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Offer other = (Offer) obj;
-		if (functionOffer == null) {
-			if (other.functionOffer != null)
-				return false;
-		} else if (!functionOffer.equals(other.functionOffer))
-			return false;
-		if (societyName == null) {
-			if (other.societyName != null)
-				return false;
-		} else if (!societyName.equals(other.societyName))
-			return false;
-		if (societyNum != other.societyNum)
-			return false;
-		if (subject == null) {
-			if (other.subject != null)
-				return false;
-		} else if (!subject.equals(other.subject))
-			return false;
-		return true;
-	}
 
 
 }
