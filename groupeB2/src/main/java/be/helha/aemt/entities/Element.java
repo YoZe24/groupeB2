@@ -64,6 +64,10 @@ public class Element implements Serializable{
 	public void setPublishDate(LocalDateTime publishDate) {
 		this.publishDate = publishDate;
 	}
+	
+	public Element clone() {
+		return new Element(author, publishDate, pathFile);
+	}
 
 	@Override
 	public String toString() {
