@@ -1,5 +1,6 @@
 package be.helha.aemt.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -14,7 +15,7 @@ import be.helha.aemt.entities.User;
 
 @Stateless
 @LocalBean
-public class UserDAO {
+public class UserDAO implements Serializable {
 	
 	@PersistenceContext(name = "groupeB2")
 	private EntityManager em;
