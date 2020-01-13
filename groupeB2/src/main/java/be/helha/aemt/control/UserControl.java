@@ -8,19 +8,26 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import be.helha.aemt.ejb.UserGestionEJB;
+import be.helha.aemt.entities.Address;
 import be.helha.aemt.entities.User;
 
 @Named
 @SessionScoped
 public class UserControl implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 
 	@EJB
 	private UserGestionEJB bean;
 	
-	public User user;
+	private User user;
+	private Address address;
 	
 	public UserControl() {
 		//bean = new UserGestionEJB();
+		user = new User();
+		address = new Address();
+		user.setAddress(address);
 	}
 
 	public List<User> getAllUsers(){
