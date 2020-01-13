@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import be.helha.aemt.managers.ElementManager;
-
 @Entity
 public class User {
 
@@ -21,7 +19,6 @@ public class User {
 	private String login;
 	private String hashPwd;
 	private String phoneNumber;
-	private List<ElementManager> listElements;
 
 	public User() {};
 
@@ -33,7 +30,6 @@ public class User {
 		this.login = login;
 		this.hashPwd = hashPwd;
 		this.phoneNumber = phoneNumber;
-		listElements = new ArrayList<ElementManager>();
 	}
 
 	public int getId() {
@@ -84,8 +80,6 @@ public class User {
 		this.hashPwd = hashPwd;
 	}
 
-
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -94,14 +88,19 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<ElementManager> getListElements() {
-		return listElements;
+	public User clone() {
+		return new User(name, firstname, mail, login, hashPwd, phoneNumber);
 	}
-
-	public void setListElements(List<ElementManager> listElements) {
-		this.listElements = listElements;
+	
+	public void update(User u) {
+		setName(name);
+		setFirstname(firstname);
+		setMail(mail);
+		setLogin(login);
+		setHashPwd(hashPwd);
+		setPhoneNumber(phoneNumber);
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -128,7 +127,13 @@ public class User {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", mail=" + mail + ", login=" + login
+				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber + "]";
+	}
 
+	
 
 
 }
