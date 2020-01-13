@@ -10,8 +10,8 @@ public class Admin extends User {
 		super();
 	}
 
-	public Admin(String name, String firstname, String mail, String login, String hashPwd,String phoneNumber, EnumRole enumRole) {
-		super(name, firstname, mail, login, hashPwd, phoneNumber);
+	public Admin(String name, String firstname, String mail, String login, String hashPwd,String phoneNumber,Address address, EnumRole enumRole) {
+		super(name, firstname, mail, login, hashPwd, phoneNumber, address = null);
 		this.enumRole = enumRole;
 	}
 
@@ -25,7 +25,7 @@ public class Admin extends User {
 	
 	public void update(Admin a) {
 		super.update(a);
-		setEnumRole(enumRole);
+		setEnumRole(a.getEnumRole());
 	}
 	
 	public Admin clone() {
@@ -36,7 +36,7 @@ public class Admin extends User {
 
 	@Override
 	public String toString() {
-		return "Admin [enumRole=" + enumRole + "]";
+		return super.toString() + "\nAdmin [enumRole=" + enumRole + "]";
 	}
 	
 	

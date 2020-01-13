@@ -2,10 +2,14 @@ package be.helha.aemt.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -20,9 +24,17 @@ public class User {
 	private String hashPwd;
 	private String phoneNumber;
 
-	public User() {};
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Address address;
 
-	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber) {
+	@OneToMany(cascade = CascadeType.PERSIST)
+	private List<Element> elements;
+
+	public User() {
+	};
+
+	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+			Address address) {
 		super();
 		this.name = name;
 		this.firstname = firstname;
@@ -30,6 +42,8 @@ public class User {
 		this.login = login;
 		this.hashPwd = hashPwd;
 		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.elements = new ArrayList<Element>();
 	}
 
 	public int getId() {
@@ -88,10 +102,32 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public User clone() {
-		return new User(name, firstname, mail, login, hashPwd, phoneNumber);
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Element> getElements() {
+		return elements;
+	}
+
+	public void setElements(List<Element> elements) {
+		this.elements = elements;
+	}
+
+	public boolean addElement(Element e) {
+		if(elements.contains(e)) return false;
+		if(e == null) return false;
+		elements.add(e); return true;
 	}
 	
+	public User clone() {
+		return new User(name, firstname, mail, login, hashPwd, phoneNumber, address);
+	}
+
 	public void update(User u) {
 		setName(name);
 		setFirstname(firstname);
@@ -99,8 +135,9 @@ public class User {
 		setLogin(login);
 		setHashPwd(hashPwd);
 		setPhoneNumber(phoneNumber);
+		setAddress(address);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -109,7 +146,7 @@ public class User {
 		return result;
 	}
 
-	//Equals only based on User's login
+	// Equals only based on User's login
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -132,8 +169,5 @@ public class User {
 		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", mail=" + mail + ", login=" + login
 				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber + "]";
 	}
-
-	
-
 
 }
