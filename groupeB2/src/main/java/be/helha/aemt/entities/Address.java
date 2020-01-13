@@ -113,8 +113,15 @@ public class Address {
 		return true;
 	}
 	
-	public Address clone(Address a) {
-		return new Address(a.street,a.num,a.city,a.cp);
+	public void update(Address a) {
+		setStreet(a.street);
+		setNum(num);
+		setCity(city);
+		setCp(cp);
+	}
+	
+	public Address clone() {
+		return new Address(street, num, city, cp);
 	}
 
 	@Override

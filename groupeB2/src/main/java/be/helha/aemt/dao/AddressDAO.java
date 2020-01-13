@@ -50,7 +50,7 @@ public class AddressDAO {
 		if(newAddress == null) return oldAddress;
 		Address addressFound = (Address) get(oldAddress);
 		if(addressFound == null) return null;
-		em.merge(addressFound).clone(newAddress);
+		em.merge(addressFound).update(newAddress);
 		return newAddress;
 	}
 }
