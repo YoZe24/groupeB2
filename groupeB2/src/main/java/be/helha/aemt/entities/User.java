@@ -2,7 +2,6 @@ package be.helha.aemt.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +11,7 @@ import be.helha.aemt.managers.ElementManager;
 
 @Entity
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -23,9 +22,9 @@ public class User {
 	private String hashPwd;
 	private String phoneNumber;
 	private List<ElementManager> listElements;
-	
+
 	public User() {};
-	
+
 	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber) {
 		super();
 		this.name = name;
@@ -84,8 +83,8 @@ public class User {
 	public void setHashPwd(String hashPwd) {
 		this.hashPwd = hashPwd;
 	}
-	
-	
+
+
 
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -128,8 +127,8 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
+
+
+
 }
