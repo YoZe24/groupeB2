@@ -46,9 +46,9 @@ public class AddressDAO {
 		return addressFound;
 	}
 	
-	public Address update(Address a,Address newAddress) {
-		if(newAddress == null) return a;
-		Address addressFound = (Address) get(a);
+	public Address update(Address oldAddress,Address newAddress) {
+		if(newAddress == null) return oldAddress;
+		Address addressFound = (Address) get(oldAddress);
 		if(addressFound == null) return null;
 		em.merge(addressFound).clone(newAddress);
 		return newAddress;
