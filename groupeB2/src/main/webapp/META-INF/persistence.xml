@@ -3,9 +3,9 @@
 	<persistence-unit name="groupeB2" transaction-type="JTA">
 		<jta-data-source>jdbc/groupeB2</jta-data-source>
 		
-		<class>be.aemt.helha.entities.Utilisateur</class>
+		<class>be.helha.aemt.entities.Utilisateur</class>
 		
-		<class>be.aemt.helha.entities.Visiteur</class>
+		<class>be.helha.aemt.entities.Visiteur</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		
