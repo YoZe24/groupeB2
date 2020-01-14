@@ -1,5 +1,6 @@
 package be.helha.aemt.control;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,7 +15,7 @@ import be.helha.aemt.entities.Event;
 
 @SessionScoped
 @Named
-public class EventControl {
+public class EventControl implements Serializable {
 
 	@EJB
 	private EventGestionEJB bean;

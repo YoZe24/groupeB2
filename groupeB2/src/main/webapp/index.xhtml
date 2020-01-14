@@ -7,12 +7,10 @@
 	Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Hello #{utilisateurControl.name}</h1>
 
 	<h:form>
 		<label for="nom">Quel est votre nom ?</label>
-		<h:inputText value="#{utilisateurControl.name}"></h:inputText>
-		<h:commandButton value="Confirmer via JSF avec inject" action="#{utilisateurControl.doList()}"></h:commandButton>
+		<h:commandButton value="Confirmer via JSF avec inject" action="{addressControl.postAddress(new Address('test2','test','test','test'))}"></h:commandButton>
 	</h:form>
 	
 	<h:form>

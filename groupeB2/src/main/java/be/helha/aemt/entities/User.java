@@ -28,12 +28,6 @@ public class User {
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Element> elements;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Address address;
-
-	@OneToMany(cascade = CascadeType.PERSIST)
-	private List<Element> elements;
-
 	public User() {
 	};
 
@@ -60,22 +54,6 @@ public class User {
 		this.hashPwd = hashPwd;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
-		this.elements = elements;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public List<Element> getElements() {
-		return elements;
-	}
-
-	public void setElements(List<Element> elements) {
 		this.elements = elements;
 	}
 

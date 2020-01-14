@@ -1,5 +1,6 @@
 package be.helha.aemt.control;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,9 +10,9 @@ import javax.inject.Named;
 import be.helha.aemt.ejb.PortraitEJB;
 import be.helha.aemt.entities.Portrait;
 
-@SessionScoped
 @Named
-public class PortraitControl {
+@SessionScoped
+public class PortraitControl implements Serializable {
 	
 	@EJB
 	private PortraitEJB bean;

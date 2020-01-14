@@ -17,7 +17,7 @@ public class UserControl implements Serializable{
 	@EJB
 	private UserGestionEJB bean;
 	
-	public User user;
+	private User user;
 	
 	public UserControl() {
 		//bean = new UserGestionEJB();
