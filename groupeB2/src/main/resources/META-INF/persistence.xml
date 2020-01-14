@@ -9,7 +9,6 @@
 		<class>be.helha.aemt.entities.User</class>
 		<class>be.helha.aemt.entities.Address</class>
 		<class>be.helha.aemt.entities.Offer</class>
-		<class>be.helha.aemt.entities.Ancient</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 

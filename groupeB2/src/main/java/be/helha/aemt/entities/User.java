@@ -71,22 +71,6 @@ public class User {
 		this.role = role;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public List<Element> getElements() {
-		return elements;
-	}
-
-	public void setElements(List<Element> elements) {
-		this.elements = elements;
-	}
-
 	public int getId() {
 		return id;
 	}
