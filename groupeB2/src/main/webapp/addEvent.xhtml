@@ -1,61 +1,100 @@
-<html xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<!DOCTYPE html>
+<html 
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
-<title>Start Page</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ajouter un événement</title>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({format: "yyyy-MM-dd HH:mm:ss"});
+        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "yyyy-MM-dd HH:mm:ss"});
+        $("#datetimepicker1").on("dp.change", function (e) {$('#datetimepicker2').data("DateTimePicker").minDate(e.date);});
+        $("#datetimepicker2").on("dp.change", function (e) {
+        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);});});
+</script>
+
 </head>
 <body>
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">Add an new event</div>
-      <div class="panel-body">
-         <div class="row">
-         <input type="datetime-local"/>
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label class="control-label">Title event</label>
-                  <input type="text" class="form-control" name="fname" id="fname"/>
-               </div>
+	
+	 <!-- <h:form>
+         <fieldset>
+         	<legend>Ajouter un événement</legend>
+         	<h:outputLabel for="title">Titre<span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="title" value="#{eventControl.event.title}" required="true" size="20" maxlength="50" />
+	        <h:message id="titleMessage" for="title" errorClass="erreur" />
+	        <br />
+         	<h:outputLabel for="description">Description<span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="description" value="#{eventControl.event.description}" size="20" maxlength="100" />
+	        <h:message id="descriptionMessage" for="description" errorClass="erreur" />
+	        <br />
+	     	<h:outputLabel for="startDate">Début de l'événement<span class="requis">*</span></h:outputLabel>
+	     	<div class='input-group date' id='datetimepicker1'>
+	            <h:inputText class="form-control" value="#{eventControl.startDateStr}"/>
+	            <span class="input-group-addon">
+	            <span class="glyphicon glyphicon-calendar"></span>
+	            </span>
             </div>
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label class="control-label">Description event</label>
-                  <h:inputTextarea class="form-control" name="lname" id="lname"/>
-               </div>
+	        <h:message id="startDateMessage" for="startDate" errorClass="erreur" />
+	        <br />
+	        <h:outputLabel for="endDate">Fin de l'événement<span class="requis">*</span></h:outputLabel>
+	        <div class='input-group date' id='datetimepicker2'>
+	            <h:inputText class="form-control" value="#{eventControl.endDateStr}"/>
+	            <span class="input-group-addon">
+	            <span class="glyphicon glyphicon-calendar"></span>
+	            </span>
             </div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label class="control-label">Start date event</label>
-                  <div class='input-group date' id='datetimepicker1'>
-                  	 <input type=""/>
-                     <span class="input-group-addon">
-                     <span class="glyphicon glyphicon-calendar"></span>
-                     </span>
-                  </div>
-               </div>
-            </div>
-            <div class='col-md-6'>
-               <div class="form-group">
-                  <label class="control-label">End date event</label>
-                  <div class='input-group date' id='datetimepicker2'>
-                     <input type='text' class="form-control"/>
-                     <span class="input-group-addon">
-                     <span class="glyphicon glyphicon-calendar"></span>
-                     </span>
-                  </div>
-               </div>
-            </div>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Submit"/>
-      </div>
-   </div>
-</div>
+	        <h:message id="endDateMessage" for="endDate" errorClass="erreur" />
+	        <br />
+	        <h:outputLabel for="pathFile">Ajout d'un fichier annexe</h:outputLabel>
+	        <h:inputText id="pathFile" value="#{eventControl.event.pathFile}"/>
+	        <h:message id="pathFileMessage" for="pathFileMessage" errorClass="erreur" />
+	        <br />
+	        
+	        <fieldset>
+         		<legend>Adresse</legend>
+         		<h:outputLabel for="street">Rue<span class="requis">*</span></h:outputLabel>
+	        	<h:inputText id="street" value="#{userControl.user.address.street}" required="true" size="20" maxlength="60" />
+	        	<h:message id="streetMessage" for="street" errorClass="erreur" />
+	        	<br />
+	        	<h:outputLabel for="num">Numéro<span class="requis">*</span></h:outputLabel>
+		        <h:inputText id="num" value="#{userControl.user.address.num}" required="true" size="20" maxlength="60"/>
+		        <h:message id="numMessage" for="num" errorClass="erreur" />
+		        <br />
+		        <h:outputLabel for="city">Ville<span class="requis">*</span></h:outputLabel>
+	        	<h:inputText id="city" value="#{userControl.user.address.city}" required="true" size="20" maxlength="60" />
+	        	<h:message id="cityMessage" for="city" errorClass="erreur" />
+	        	<br />
+	        	<h:outputLabel for="cp">Code Postal<span class="requis">*</span></h:outputLabel>
+	        	<h:inputText id="cp" value="#{userControl.user.address.cp}" required="true" size="20" maxlength="60"/>
+	        	<h:message id="cpMessage" for="cp" errorClass="erreur" />
+	        	<br />
+         	</fieldset>
+	        <h:messages globalOnly="true" infoClass="info" />
+	        <h:commandButton value="Ajouter le lieu" action="#{eventControl.submitEvent}" styleClass="sansLabel" />
+	        <h:commandButton value="Ajouter lieu manual" action="#{eventControl.submitEventManual}" styleClass="sansLabel" />
+	        <br/>
+          </fieldset>
+        </h:form> -->
+        
+        <h:form>
+        	<h:commandButton value="Ajouter event manual" action="{elementControl.submitElementManual"></h:commandButton>
+        </h:form>
+        
+	
 </body>
 </html>
