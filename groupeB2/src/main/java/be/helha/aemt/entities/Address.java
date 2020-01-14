@@ -12,13 +12,10 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	//@NotNull(message="Veuillez entrez une rue")
+
 	private String street;
-	//@NotNull(message="Veuillez entrez un numéro")
 	private String num;
-	//@NotNull(message="Veuillez entrez une ville")
 	private String city;
-	//@NotNull(message="Veuillez entrez un code postal")
 	private String cp;
 	
 	public Address() {}

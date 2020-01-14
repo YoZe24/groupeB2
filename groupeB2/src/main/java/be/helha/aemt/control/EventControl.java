@@ -61,13 +61,13 @@ public class EventControl implements Serializable {
 		return bean.update(e);
 	}
 
-	public Event submitEvent() {
+/*	public Event submitEvent() {
 		Address a = new Address("testEvent", "1", "2", "3");
 		Address aUser = new Address("testEventUser", "1", "2", "3");
 		User u = new User("test", "test", "test@gmail.com", "test", "test", "test", aUser, EnumRole.ANCIENT);
 		this.event = new Event(u, LocalDateTime.now(), "pathFile", LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(2), a, "titleEvent2", "descEvent");
 		return bean.post(event);
-	}
+	}*/
 
 	public Event getEvent() {
 		return event;
