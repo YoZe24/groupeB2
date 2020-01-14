@@ -5,22 +5,25 @@
 <meta http-equiv="
 	Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
 
-<!-- 	<h:form>
-		<label for="nom">Quel est votre nom ?</label>
-		<h:inputText value="#{utilisateurControl.name}"></h:inputText>
-		<h:commandButton value="Confirmer via JSF avec inject" action="#{utilisateurControl.doList()}"></h:commandButton>
-	</h:form> -->
+<body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 	<h1>test</h1>
-	<!--<h:form>
-		<h:commandButton value="Ajout User" action="#{userControl.submitUser()}">Ajout utilisateur</h:commandButton>
-	</h:form>-->
 	<h:form>
+		<h:commandButton class="btn btn-info" value="Ajout User" action="#{userControl.submitUserManual()}">Ajout utilisateur</h:commandButton>
+		<br/>
+
 		<h:commandButton value="Inscription Formulaire" action="registerForm.xhtml"></h:commandButton>
 	</h:form>
 	<h:form>
-		<h:commandButton value="Ajout Offre" action="addOffer.xhtml?faces-redirect=true">Ajout offre</h:commandButton>
+		<h:commandButton class="btn btn-success" value="Ajout Offre" action="addOffer.xhtml?faces-redirect=true">Ajout offre</h:commandButton>
 	</h:form>
+
 </body>
 </html>

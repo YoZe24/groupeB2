@@ -13,10 +13,10 @@ import be.helha.aemt.entities.Offer;
 @Named
 @SessionScoped
 public class OfferControl implements Serializable {
-	
+
 	@EJB
 	private OfferGestionEJB bean;
-	
+
 	private String name = "OfferEJB";
 
 	public String getName() {
@@ -26,7 +26,7 @@ public class OfferControl implements Serializable {
 		this.name = name;
 	}
 	public List<Offer> getListOffers(){
-		return bean.query();	
+		return bean.query();
 	}
 	public Offer getOffer(Offer o) {
 		return bean.get(o);
@@ -44,16 +44,16 @@ public class OfferControl implements Serializable {
 		return bean.updateStatut(o);
 	}
 	public List<Offer> getListJobOffers(){
-		return bean.getAllJobOffer();	
+		return bean.getAllJobOffer();
 	}
 	public List<Offer> getListInternshipOffers(){
-		return bean.getAllInternshipOffer();	
+		return bean.getAllInternshipOffer();
 	}
 	public List<Offer> getListTrainingOffers(){
-		return bean.getAllTrainingOffer();	
+		return bean.getAllTrainingOffer();
 	}
 	public Offer getOfferById(int id) {
 		return bean.getById(id);
 	}
-	
+
 }

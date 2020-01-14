@@ -38,11 +38,14 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private EnumRole role;
 
-	public User() {};
+	public User() {
+		this.address = new Address();
+		this.groupName = "ancien";
+	};
 
 	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
 			Address address,EnumRole role) {
-		super();
+		this();
 		this.name = name;
 		this.firstname = firstname;
 		this.mail = mail;
@@ -51,7 +54,6 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.role = role;
-		this.groupName = "ancien";
 	}
 
 	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
