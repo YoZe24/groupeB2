@@ -8,6 +8,7 @@ import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumRole;
 import be.helha.aemt.enums.EnumSection;
 
+
 public class Main {
 
 
@@ -15,6 +16,13 @@ public class Main {
 		
 		//UserControl userControl = new UserControl();
 		
+
+		//UserDAO userDAO = new UserDAO();
+		
+		//Ancien ancien = new Ancien("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1", 2020, EnumSection.ECONOMIQUE, new Address(), "");
+		//System.out.println(ancien.toString());
+//		userControl.addUser(ancien);
+		//userDAO.postUser(ancien);
 		UserDAO userDAO = new UserDAO();
 		UserGestionEJB userEJB = new UserGestionEJB();
 		
