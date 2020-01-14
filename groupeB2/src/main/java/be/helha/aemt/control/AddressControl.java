@@ -3,6 +3,7 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,7 +15,7 @@ import be.helha.aemt.entities.Address;
 @SessionScoped
 public class AddressControl implements Serializable{
 	
-	@Inject
+	@EJB
 	private AddressGestionEJB bean;
 	
 	//Give a name to the EJB
@@ -33,7 +34,7 @@ public class AddressControl implements Serializable{
 	}
 	
 	public Address getAddress(Address a) {
-		return (Address) bean.get(a);
+		return bean.get(a);
 	}
 	
 	public Address postAddress(Address a) {
@@ -44,8 +45,8 @@ public class AddressControl implements Serializable{
 		return bean.delete(a);
 	}
 	
-	public Address updateAddress(Address oldAddress, Address newAddress) {
-		return bean.update(oldAddress, newAddress);
+	public Address updateAddress(Address newAddress) {
+		return bean.update(newAddress);
 	}
 	
 }

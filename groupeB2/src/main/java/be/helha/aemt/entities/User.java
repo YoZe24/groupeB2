@@ -34,17 +34,17 @@ public class User {
 	private String hashPwd;
 	@NotNull(message="Veuillez entrez un numéro de téléphone")
 	private String phoneNumber;
-	
+
 	private String groupName;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address address;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Element> elements;
-	
+
 	@Enumerated(EnumType.STRING)
 	private EnumRole role;
-	
+
 	public User() {
 		this.address = new Address();
 		this.groupName = "ancien";
@@ -70,30 +70,14 @@ public class User {
 		this.elements = elements;
 	}
 
-	
-	
+
+
 	public EnumRole getRole() {
 		return role;
 	}
 
 	public void setRole(EnumRole role) {
 		this.role = role;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public List<Element> getElements() {
-		return elements;
-	}
-
-	public void setElements(List<Element> elements) {
-		this.elements = elements;
 	}
 
 	public int getId() {
@@ -152,10 +136,32 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Element> getElements() {
+		return elements;
+	}
+
+	public void setElements(List<Element> elements) {
+		this.elements = elements;
+	}
+
+	public boolean addElement(Element e) {
+		if(elements.contains(e)) return false;
+		if(e == null) return false;
+		elements.add(e); return true;
+	}
+
 	public User clone() {
 		return new User(name, firstname, mail, login, hashPwd, phoneNumber,address,role,elements);
 	}
-	
+
 	public void update(User u) {
 		setName(name);
 		setFirstname(firstname);
@@ -163,8 +169,9 @@ public class User {
 		setLogin(login);
 		setHashPwd(hashPwd);
 		setPhoneNumber(phoneNumber);
+		setAddress(address);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -173,7 +180,7 @@ public class User {
 		return result;
 	}
 
-	//Equals only based on User's login
+	// Equals only based on User's login
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -196,8 +203,5 @@ public class User {
 		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", mail=" + mail + ", login=" + login
 				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber + "]";
 	}
-
-	
-
 
 }

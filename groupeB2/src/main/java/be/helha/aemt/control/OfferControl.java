@@ -3,8 +3,8 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
@@ -12,9 +12,9 @@ import be.helha.aemt.entities.Offer;
 
 @Named
 @SessionScoped
-public class OfferControl implements Serializable{
+public class OfferControl implements Serializable {
 
-	@Inject
+	@EJB
 	private OfferGestionEJB bean;
 	private Offer offer;
 	private String name = "OfferEJB";

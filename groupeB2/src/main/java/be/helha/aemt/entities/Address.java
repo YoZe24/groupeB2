@@ -119,10 +119,10 @@ public class Address {
 	}
 	
 	public void update(Address a) {
-		setStreet(a.street);
-		setNum(num);
-		setCity(city);
-		setCp(cp);
+		setStreet(a.getStreet());
+		setNum(a.getNum());
+		setCity(a.getCity());
+		setCp(a.getCp());
 	}
 	
 	public Address clone() {
