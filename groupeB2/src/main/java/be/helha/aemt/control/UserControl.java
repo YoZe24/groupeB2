@@ -30,8 +30,7 @@ public class UserControl implements Serializable{
 	public UserControl() {
 		//bean = new UserGestionEJB();
 		user = new User();
-		address = new Address();
-		user.setAddress(address);
+ 
 	}
 
 	public List<User> getAllUsers(){

@@ -30,10 +30,6 @@
 	        <h:inputSecret id="password" value="#{userControl.user.hashPwd}" required="true" size="20" maxlength="30" />
 	        <h:message id="passwordMessage" for="password" errorClass="erreur" />
 	        <br />
-	        <!--<h:outputLabel for="confirmation">Confirmation du mot de passe <span class="requis">*</span></h:outputLabel>
-	        <h:inputSecret id="confirmation" value="#{inscrireBean.utilisateur.motDePasse}" required="true" size="20" maxlength="20" />
-	        <h:message id="confirmationMessage" for="confirmation" errorClass="erreur" />
-	        <br /> -->
 	        <h:outputLabel for="phoneNumber">Numéro téléphone<span class="requis">*</span></h:outputLabel>
 	        <h:inputText id="phoneNumber" value="#{userControl.user.phoneNumber}" required="true" size="20" maxlength="60" />
 	        <h:message id="phoneNumberMessage" for="mail" errorClass="erreur" />
