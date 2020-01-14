@@ -21,8 +21,8 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker1').datetimepicker({format: "DD/MM/YYYY HH:mm"});
-        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "DD/MM/YYYY HH:mm"});
+        $('#datetimepicker1').datetimepicker({format: "yyyy-MM-dd HH:mm:ss"});
+        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "yyyy-MM-dd HH:mm:ss"});
         $("#datetimepicker1").on("dp.change", function (e) {$('#datetimepicker2').data("DateTimePicker").minDate(e.date);});
         $("#datetimepicker2").on("dp.change", function (e) {
         $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);});});
@@ -30,9 +30,8 @@
 
 </head>
 <body>
-
 	
-	 <h:form>
+	 <!-- <h:form>
          <fieldset>
          	<legend>Ajouter un événement</legend>
          	<h:outputLabel for="title">Titre<span class="requis">*</span></h:outputLabel>
@@ -87,9 +86,15 @@
          	</fieldset>
 	        <h:messages globalOnly="true" infoClass="info" />
 	        <h:commandButton value="Ajouter le lieu" action="#{eventControl.submitEvent}" styleClass="sansLabel" />
+	        <h:commandButton value="Ajouter lieu manual" action="#{eventControl.submitEventManual}" styleClass="sansLabel" />
 	        <br/>
           </fieldset>
-        </h:form> 
+        </h:form> -->
+        
+        <h:form>
+        	<h:commandButton value="Ajouter event manual" action="{elementControl.submitElementManual"></h:commandButton>
+        </h:form>
+        
 	
 </body>
 </html>
