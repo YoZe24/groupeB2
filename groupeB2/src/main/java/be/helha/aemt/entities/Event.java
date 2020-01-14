@@ -5,23 +5,20 @@ import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Event extends Element implements Serializable{
-	
+
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address address;
-	
+
 	private String title;
 	private String description;
-	
+
 	public Event(User author, LocalDateTime publishDate, String pathFile, LocalDateTime startDate, LocalDateTime endDate,
 			Address address, String title, String description) {
 		super(author, publishDate, pathFile);
@@ -33,7 +30,8 @@ public class Event extends Element implements Serializable{
 	}
 	
 	public Event() {
-		
+		super();
+		this.address = new Address();
 	}
 
 	public LocalDateTime getStartDate() {
@@ -118,5 +116,5 @@ public class Event extends Element implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
