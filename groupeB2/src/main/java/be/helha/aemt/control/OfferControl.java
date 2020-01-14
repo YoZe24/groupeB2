@@ -1,5 +1,6 @@
 package be.helha.aemt.control;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -11,7 +12,7 @@ import be.helha.aemt.entities.Offer;
 
 @Named
 @SessionScoped
-public class OfferControl {
+public class OfferControl implements Serializable{
 	
 	@Inject
 	private OfferGestionEJB bean;
