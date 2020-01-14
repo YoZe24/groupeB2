@@ -75,7 +75,7 @@ public class OfferDAO {
 	public List<Offer> getAllTrainingOffer(){
 		Query query = em.createQuery("SELECT offer from Offer offer"
 				+"WHERE offer.offerType = :varOfferType");
-		query.setParameter("varOfferType", EnumOfferType.TRAINING);
+		query.setParameter("varOfferType", "TRAINING");
 		List<Offer> offers = query.getResultList();
 		return offers.size() == 0 ? null : offers;
 	}
@@ -84,7 +84,7 @@ public class OfferDAO {
 	public List<Offer> getAllInternshipOffer(){
 		Query query = em.createQuery("SELECT offer from Offer offer"
 				+"WHERE offer.offerType = :varOfferType");
-		query.setParameter("varOfferType", EnumOfferType.INTERNSHIP);
+		query.setParameter("varOfferType", "INTERNSHIP");
 		List<Offer> offers = query.getResultList();
 		return offers.size() == 0 ? null : offers;
 	}
@@ -93,8 +93,8 @@ public class OfferDAO {
 	public List<Offer> getAllJobOffer(){
 		Query query = em.createQuery("SELECT offer from Offer offer"
 				+"WHERE offer.offerType = :varOfferType OR offer.offerType = :varOfferTypeCDI");
-		query.setParameter("varOfferTypeCDD", EnumOfferType.CDD);
-		query.setParameter("varOfferTypeCDI", EnumOfferType.CDI);
+		query.setParameter("varOfferTypeCDD", "CDD");
+		query.setParameter("varOfferTypeCDI", "CDI");
 		List<Offer> offers = query.getResultList();
 		return offers.size() == 0 ? null : offers;
 	}

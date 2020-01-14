@@ -17,6 +17,9 @@ public class Offer extends Element implements Serializable{
 	private String societyMail;
 	private String societySector;
 	private int societyNum;	
+	
+	//UserPublisher ??
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address societyAddress;
 	private String functionOffer;

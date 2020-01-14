@@ -23,30 +23,30 @@ public class EventControl implements Serializable {
 
 	@EJB
 	private EventGestionEJB bean;
-	
+
 	private Event event;
 	private Address address;
-	
+
 	private String startDateStr;
 	private String endDateStr;
-	
+
 	public EventControl() {
 		event = new Event();
 		//address = new Address();
 	}
-	
+
 	public List<Event> query(){
 		return bean.query();
 	}
-	
+
 	public Event get(Event e) {
 		return bean.get(e);
 	}
-	
+
 	public Event post(Event e) {
 		return bean.get(e);
 	}
-	
+
 	public Event update(Event e) {
 		return bean.update(e);
 	}
@@ -66,7 +66,7 @@ public class EventControl implements Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+
 	public Event submitEvent() {
 		event.setStartDate(convertDateStrToLocalDateTime(startDateStr));
 		event.setEndDate(convertDateStrToLocalDateTime(endDateStr));
@@ -89,12 +89,12 @@ public class EventControl implements Serializable {
 	public void setEndDateStr(String endDateStr) {
 		this.endDateStr = endDateStr;
 	}
-	
+
 	private LocalDateTime convertDateStrToLocalDateTime(String dateStr) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		LocalDateTime dateTime = LocalDateTime.parse(dateStr, formatter);
 		return dateTime;
 	}
-	
-	
+
+
 }
