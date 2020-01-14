@@ -33,9 +33,9 @@
 	</servlet-mapping>
 
 	<security-constraint>
-		<display-name>Admin pages</display-name>
+		<display-name>Ancien pages</display-name>
 		<web-resource-collection>
-			<web-resource-name>Protected Admin Area</web-resource-name>
+			<web-resource-name>Protected Ancien Area</web-resource-name>
 			<description></description>
 			<url-pattern>/addOffer.xhtml</url-pattern>
 		</web-resource-collection>
@@ -48,7 +48,24 @@
  		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>		
-
+	</security-constraint>
+	
+	<security-constraint>
+		<display-name>Admin pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Protected Admin Area</web-resource-name>
+			<description></description>
+			<url-pattern>/adminHome.xhtml</url-pattern>
+		</web-resource-collection>
+		
+		<auth-constraint>
+			<description></description>
+			<role-name>admin</role-name>
+		</auth-constraint>
+		
+ 		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>		
 	</security-constraint>
 	
 	<login-config>
