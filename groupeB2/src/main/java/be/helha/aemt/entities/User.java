@@ -5,11 +5,15 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import be.helha.aemt.enums.EnumRole;
 
 @Entity
 public class User {
@@ -23,16 +27,21 @@ public class User {
 	private String login;
 	private String hashPwd;
 	private String phoneNumber;
+
+	private String groupName;
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address address;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Element> elements;
 
-	public User() {
-	};
+	@Enumerated(EnumType.STRING)
+	private EnumRole role;
+
+	public User() {};
 
 	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
-			Address address) {
+			Address address,EnumRole role) {
 		super();
 		this.name = name;
 		this.firstname = firstname;
@@ -40,20 +49,41 @@ public class User {
 		this.login = login;
 		this.hashPwd = hashPwd;
 		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.role = role;
+		this.groupName = "ancien";
+	}
+
+	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+			Address address, EnumRole role, List<Element> elements) {
+		this(name,firstname,mail,login,hashPwd,phoneNumber,address,role);
+//		this.id = id;
+		this.elements = elements;
+	}
+
+
+
+	public EnumRole getRole() {
+		return role;
+	}
+
+	public void setRole(EnumRole role) {
+		this.role = role;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
-	public User(int id, String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
-			Address address, List<Element> elements) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.firstname = firstname;
-		this.mail = mail;
-		this.login = login;
-		this.hashPwd = hashPwd;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
+	public List<Element> getElements() {
+		return elements;
+	}
+
+	public void setElements(List<Element> elements) {
 		this.elements = elements;
 	}
 
@@ -136,7 +166,7 @@ public class User {
 	}
 
 	public User clone() {
-		return new User(name, firstname, mail, login, hashPwd, phoneNumber, address);
+		return new User(name, firstname, mail, login, hashPwd, phoneNumber,address,role,elements);
 	}
 
 	public void update(User u) {
