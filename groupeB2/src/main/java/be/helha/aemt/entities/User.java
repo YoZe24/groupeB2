@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import be.helha.aemt.enums.EnumRole;
 
@@ -21,11 +22,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull(message="Veuillez entrez un nom")
 	private String name;
+	@NotNull(message="Veuillez entrez un prénom")
 	private String firstname;
+	@NotNull(message="Veuillez entrez un mail")
 	private String mail;
+	@NotNull(message="Veuillez entrez un login")
 	private String login;
+	@NotNull(message="Veuillez entrez un mot de passe")
 	private String hashPwd;
+	@NotNull(message="Veuillez entrez un numéro de téléphone")
 	private String phoneNumber;
 	
 	private String groupName;

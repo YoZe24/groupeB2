@@ -1,64 +1,108 @@
 <!DOCTYPE html>
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
-<head>
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
 	<meta http-equiv="
 	Content-Type" content="text/html; charset=UTF-8" />
 	<title>Insert title here</title>
-</head>
+</h:head>
+ <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
+
 <body>
-	 <h:form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+	 <h:form id="form">
          <fieldset>
          	<legend>Inscription</legend>
          	<h:outputLabel for="name">Nom<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="name" value="#{userControl.user.name}" required="true" size="20" maxlength="50" />
-	        <h:message id="nameMessage" for="name" errorClass="erreur" />
+	        <h:inputText id="name" value="#{userControl.user.name}" size="20" maxlength="50">
+	        	<f:ajax event="blur" render="nameMessage" />
+	        </h:inputText>
+	        <h:message id="nameMessage" for="name" errorClass="erreur" style="font-color : red"/>
 	        <br />
+	        
          	<h:outputLabel for="firstname">Prénom<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="firstname" value="#{userControl.user.firstname}" required="true" size="20" maxlength="50" />
-	        <h:message id="firstnameMessage" for="firstname" errorClass="erreur" />
+	        <h:inputText id="firstname" value="#{userControl.user.firstname}" size="20" maxlength="50">
+	        	<f:ajax event="blur" render="firstnameMessage" />
+	        </h:inputText>
+	        <h:message id="firstnameMessage" for="firstname" errorClass="erreur" style="font-color : red"/>
 	        <br />
+	        
 	     	<h:outputLabel for="mail">Adresse email<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="mail" value="#{userControl.user.mail}" required="true" size="20" maxlength="60" />
-	        <h:message id="emailMessage" for="mail" errorClass="erreur" />
+	        <h:inputText id="mail" value="#{userControl.user.mail}" size="20" maxlength="60">
+	        	<f:ajax event="blur" render="mailMessage" />
+	        </h:inputText>
+	        <h:message id="mailMessage" for="mail" errorClass="erreur" style="font-color : red"/>
 	        <br />
+	        
+	        
 	        <h:outputLabel for="login">Login<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="login" value="#{userControl.user.login}" required="true" size="20" maxlength="60" />
-	        <h:message id="loginMessage" for="login" errorClass="erreur" />
+	        <h:inputText id="login" value="#{userControl.user.login}" size="20" maxlength="60">
+	        	<f:ajax event="blur" render="loginMessage" />
+	        </h:inputText>
+	        <h:message id="loginMessage" for="login" errorClass="erreur" style="font-color : red"/>
 	        <br />
+	        
 	        <h:outputLabel for="password">Mot de passe<span class="requis">*</span></h:outputLabel>
-	        <h:inputSecret id="password" value="#{userControl.user.hashPwd}" required="true" size="20" maxlength="30" />
-	        <h:message id="passwordMessage" for="password" errorClass="erreur" />
+	        <h:inputSecret id="password" value="#{userControl.user.hashPwd}" size="20" minlength="20" maxlength="30">
+	        	<f:ajax event="blur" render="mailMessage" />
+	        </h:inputSecret>
+	        <h:message id="passwordMessage" for="password" errorClass="erreur" style="font-color : red"/>
 	        <br />
+	        
+	       	<h:outputLabel for="confirmation">Confirmation du mot de passe <span class="requis">*</span></h:outputLabel>
+	        <h:inputSecret id="confirmation" value="#{userControl.confirmPwd}" size="20" maxlength="20" />
+	        <br />
+	        
 	        <h:outputLabel for="phoneNumber">Numéro téléphone<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="phoneNumber" value="#{userControl.user.phoneNumber}" required="true" size="20" maxlength="60" />
-	        <h:message id="phoneNumberMessage" for="mail" errorClass="erreur" />
+	        <h:inputText id="phoneNumber" value="#{userControl.user.phoneNumber}" size="20" maxlength="60" >
+	        	<f:ajax event="blur" render="phoneNumberMessage" />
+	        </h:inputText>
+	        <h:message id="phoneNumberMessage" for="phoneNumber" errorClass="erreur" style="font-color : red"/>
 	        <br />
+	        
 	        
 	        <fieldset>
          		<legend>Adresse</legend>
          		<h:outputLabel for="street">Rue<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="street" value="#{userControl.user.address.street}" required="true" size="20" maxlength="60" />
-	        	<h:message id="streetMessage" for="street" errorClass="erreur" />
+	        	<h:inputText id="street" value="#{userControl.user.address.street}" size="20" maxlength="60" >
+	        		<f:ajax event="blur" render="streetMessage" />
+	        	</h:inputText>
+	        	<h:message id="streetMessage" for="street" errorClass="erreur" style="font-color : red"/>
 	        	<br />
+	        	
 	        	<h:outputLabel for="num">Numéro<span class="requis">*</span></h:outputLabel>
-		        <h:inputText id="num" value="#{userControl.user.address.num}" required="true" size="20" maxlength="60"/>
-		        <h:message id="numMessage" for="num" errorClass="erreur" />
+		        <h:inputText id="num" value="#{userControl.user.address.num}" size="20" maxlength="60" >
+		        	<f:ajax event="blur" render="numMessage" />
+		        </h:inputText>
+		        <h:message id="numMessage" for="num" errorClass="erreur" style="font-color : red"/>
 		        <br />
+		        
 		        <h:outputLabel for="city">Ville<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="city" value="#{userControl.user.address.city}" required="true" size="20" maxlength="60" />
-	        	<h:message id="cityMessage" for="city" errorClass="erreur" />
-	        	<br />
+	        	<h:inputText id="city" value="#{userControl.user.address.city}" size="20" maxlength="60" >
+	        		<f:ajax event="blur" render="cityMessage" />
+		        </h:inputText>
+		        <h:message id="cityMessage" for="city" errorClass="erreur" style="font-color : red"/>
+		        <br />
+		        
 	        	<h:outputLabel for="cp">Code Postal<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="cp" value="#{userControl.user.address.cp}" required="true" size="20" maxlength="60"/>
-	        	<h:message id="cpMessage" for="cp" errorClass="erreur" />
-	        	<br />
+	        	<h:inputText id="cp" value="#{userControl.user.address.cp}" size="20" maxlength="60" >
+	        		<f:ajax event="blur" render="cpMessage" />
+		        </h:inputText>
+		        <h:message id="cpMessage" for="cp" errorClass="erreur" style="font-color : red"/>
+		        
+		        <br />
          	</fieldset>
-	        <h:messages globalOnly="true" infoClass="info" />
-	        <h:commandButton value="S'inscrire" action="#{userControl.submitUser}" styleClass="sansLabel" />
-	        <br />
+		        <h:messages globalOnly="true" infoClass="info" />
+		        <h:commandButton id="submit" value="S'inscrire" action="#{userControl.submitUser}" styleClass="sansLabel" />
+		        <br />
           </fieldset>
         </h:form> 
+        
 	
 </body>
 </html>
