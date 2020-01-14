@@ -11,6 +11,7 @@ import javax.inject.Named;
 import be.helha.aemt.ejb.UserGestionEJB;
 import be.helha.aemt.entities.Address;
 import be.helha.aemt.entities.User;
+import be.helha.aemt.enums.EnumRole;
 
 @Named
 @ViewScoped
