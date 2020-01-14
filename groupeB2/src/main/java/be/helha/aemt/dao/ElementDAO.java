@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -11,12 +13,14 @@ import javax.persistence.Query;
 import be.helha.aemt.entities.Element;
 import be.helha.aemt.entities.User;
 
-@PersistenceContext(name ="groupeB2")
+@Stateless
+@LocalBean
 public class ElementDAO {
 	
 	@EJB
 	private UserDAO userDAO;
-	
+
+	@PersistenceContext(name ="groupeB2")	
 	private EntityManager em;
 	
 	public ElementDAO() {}
@@ -28,12 +32,10 @@ public class ElementDAO {
 	
 	public Element get(Element e) {
 		Query query = em.createQuery("select element from Element element "
-				+ "JOIN element.author a"
-				+ "where a = :varAuthor "
-				+ "and element.publishDate = :varPublishDate "
-				+ "and element.pathFile = :varPathFile");
+				+ " JOIN element.author a"
+				+ " where a = :varAuthor "
+				+ " and element.pathFile = :varPathFile");
 		query.setParameter("varAuthor", e.getAuthor());
-		query.setParameter("varPublishDate", e.getPublishDate());
 		query.setParameter("varPathFile", e.getPathFile());
 		return query.getResultList().size() != 0 ? (Element) query.getResultList().get(0) : null;
 	}
@@ -47,7 +49,8 @@ public class ElementDAO {
 		if(user != null)
 			e.setAuthor(user);
 		
-		em.persist(e);
+		em.merge(e);
+		
 		return e;
 	}
 	

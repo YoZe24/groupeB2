@@ -12,13 +12,13 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull(message="Veuillez entrez une rue")
+	//@NotNull(message="Veuillez entrez une rue")
 	private String street;
-	@NotNull(message="Veuillez entrez un numéro")
+	//@NotNull(message="Veuillez entrez un numéro")
 	private String num;
-	@NotNull(message="Veuillez entrez une ville")
+	//@NotNull(message="Veuillez entrez une ville")
 	private String city;
-	@NotNull(message="Veuillez entrez un code postal")
+	//@NotNull(message="Veuillez entrez un code postal")
 	private String cp;
 	
 	public Address() {}
@@ -29,6 +29,13 @@ public class Address {
 		this.num = num;
 		this.city = city;
 		this.cp = cp;
+	}
+	
+	public void setToVoid() {
+		this.street = "";
+		this.num = "";
+		this.city = "";
+		this.cp = "";
 	}
 
 	public int getId() {

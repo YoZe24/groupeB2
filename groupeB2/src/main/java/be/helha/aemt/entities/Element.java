@@ -24,13 +24,19 @@ public class Element implements Serializable{
 	private String pathFile;	
 
 	public Element(User author, LocalDateTime publishDate, String pathFile) {
+		this();
 		this.author = author;
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
 	}
 
 	public Element() {
-		
+		this.author = new User();
+		this.publishDate = LocalDateTime.now();
+	}
+	
+	public void setToVoid() {
+		this.author.setToVoid();
 	}
 	
 	public User getAuthor() {
