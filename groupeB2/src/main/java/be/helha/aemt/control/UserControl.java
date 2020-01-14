@@ -56,11 +56,11 @@ public class UserControl implements Serializable{
 	}
 
 	public User submitUser() {
-		if(confirmationPwd() == true) {
+		//if(confirmationPwd() == true) {
 			return bean.post(user);
-		}else {
-			return null;
-		}
+		//}else {
+		//	return null;
+		//}
 	}
 	public User getUser() {
 		return user;
