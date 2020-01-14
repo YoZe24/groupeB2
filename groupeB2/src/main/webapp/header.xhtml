@@ -1,10 +1,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       >
     <body>
 	    <ui:composition>
 	
-		<h1>Alumni Helha</h1>
+		
+		<div align="center">
+			<h1>Alumni Helha</h1>
+		</div>
+		<div>
+			<nav class="navbar navbar-inverse navbar-dark bg-primary">
+  				<div class="container-fluid">
+  					<div class="navbar-header">
+  						<h:link class="navbar-brand" value="Bienvenue" outcome="index"/>
+  					</div>
+					      <ul class="nav navbar-nav">
+					         <li class="dropdown">
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Offre<span class="caret"></span></a>
+						          <ul class="dropdown-menu">
+						            <li><h:link class="nav-item" value="Ajouter une offre" outcome="addOffer"/></li>
+						            <li><h:link class="nav-item" value="Consulter les offres" outcome=""/></li>
+						          </ul>
+						     </li>
+
+						     <li><h:link value="Connexion" outcome="login"/></li>
+					         <li><h:link value="Inscription" outcome="registerForm"/></li>
+					      </ul>
+  				</div>
+  			</nav>
+		</div>
 				
 	    </ui:composition>
     </body>
