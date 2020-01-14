@@ -16,8 +16,12 @@ public class OfferControl implements Serializable {
 
 	@EJB
 	private OfferGestionEJB bean;
-
+	private Offer offer;
 	private String name = "OfferEJB";
+	
+	public OfferControl() {
+		offer = new Offer();
+	}
 
 	public String getName() {
 		return name;
@@ -33,6 +37,9 @@ public class OfferControl implements Serializable {
 	}
 	public Offer postOffer(Offer o) {
 		return bean.post(o);
+	}
+	public Offer submitOffer() {
+		return bean.post(offer);
 	}
 	public Offer deleteOffer(Offer o) {
 		return bean.delete(o);
