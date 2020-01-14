@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import be.helha.aemt.entities.Address;
 import be.helha.aemt.entities.User;
 
 @Stateless
@@ -28,17 +29,21 @@ public class UserDAO implements Serializable {
 
 	public List<User> query(){
 		Query query = em.createQuery("SELECT user from User user");
-		return query.getResultList();
+		return query.getResultList(); 
 	}
 	
-	public User postUser(User u) {
-		User userFinded = findUserByEmail(u);
+	public User postUser(User user) {
+		User userFinded = findUserByEmail(user);
 		if(userFinded != null)
 			return null;
 		
-		em.persist(u);
+		Address addressFinded = findAddress(user.getAddress());
+		if(addressFinded != null)
+			user.setAddress(addressFinded);
 		
-		return u;
+		em.persist(user);
+		
+		return user;
 	}
 	
 	public User findUserByEmail(User u) {
@@ -48,6 +53,15 @@ public class UserDAO implements Serializable {
 		return users.size() == 0 ? null : users.get(0);
 	}
 	
+	public Address findAddress(Address a) {
+		Query query = em.createQuery("Select a from Address a where a.city = ?1 and a.cp = ?2 and a.num = ?3 and a.street = ?4");
+		query.setParameter(1, a.getCity());
+		query.setParameter(2, a.getCp());
+		query.setParameter(3, a.getNum());
+		query.setParameter(4, a.getStreet());
+		List<Address> addresses = query.getResultList();
+		return addresses.size() == 0 ? null : addresses.get(0);
+	}
 	
 }
 
