@@ -1,5 +1,9 @@
 package be.helha.aemt.ejb;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -23,6 +27,16 @@ public class UserGestionEJB {
 	}
 	
 	public User post(User u) {
+		MessageDigest digest;
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(u.getHashPwd().getBytes(StandardCharsets.UTF_8));
+			String encoded = Base64.getEncoder().encodeToString(hash);
+			u.setHashPwd(encoded);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
 		return ejb.postUser(u);
 	}
 

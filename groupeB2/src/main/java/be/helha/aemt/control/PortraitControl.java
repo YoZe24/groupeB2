@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import be.helha.aemt.ejb.PortraitEJB;
+import be.helha.aemt.ejb.PortraitGestionEJB;
 import be.helha.aemt.entities.Portrait;
 
 @Named
@@ -15,7 +15,7 @@ import be.helha.aemt.entities.Portrait;
 public class PortraitControl implements Serializable {
 	
 	@EJB
-	private PortraitEJB bean;
+	private PortraitGestionEJB bean;
 	
 	public List<Portrait> query(){
 		return bean.query();

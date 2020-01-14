@@ -20,7 +20,11 @@ public class EventControl implements Serializable {
 	@EJB
 	private EventGestionEJB bean;
 	
-	public EventControl() {}
+	private Event event;
+	
+	public EventControl() {
+		this.event = new Event();
+	}
 	
 	public List<Event> query(){
 		return bean.query();
@@ -37,4 +41,14 @@ public class EventControl implements Serializable {
 	public Event update(Event e) {
 		return bean.update(e);
 	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+	
+	
 }
