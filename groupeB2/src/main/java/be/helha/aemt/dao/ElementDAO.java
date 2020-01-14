@@ -3,14 +3,19 @@ package be.helha.aemt.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import be.helha.aemt.entities.Element;
+import be.helha.aemt.entities.User;
 
 @PersistenceContext(name ="groupeB2")
 public class ElementDAO {
+	
+	@EJB
+	private UserDAO userDAO;
 	
 	private EntityManager em;
 	
@@ -23,7 +28,8 @@ public class ElementDAO {
 	
 	public Element get(Element e) {
 		Query query = em.createQuery("select element from Element element "
-				+ "where element.author = :varAuthor "
+				+ "JOIN element.author a"
+				+ "where a = :varAuthor "
 				+ "and element.publishDate = :varPublishDate "
 				+ "and element.pathFile = :varPathFile");
 		query.setParameter("varAuthor", e.getAuthor());
@@ -34,21 +40,30 @@ public class ElementDAO {
 	
 	public Element post(Element e) {
 		Element elementFound = get(e);
-		if(elementFound != null) return elementFound;
+		if(elementFound != null) 
+			return elementFound;
+		
+		User user = userDAO.findUserByEmail(e.getAuthor());
+		if(user != null)
+			e.setAuthor(user);
+		
 		em.persist(e);
 		return e;
 	}
 	
 	public Element delete(Element e) {
 		Element elementFound = get(e);
-		if(elementFound == null) return null;
+		if(elementFound == null) 
+			return null;
+		
 		em.remove(elementFound);
 		return elementFound;
 	}
 	
 	public Element update(Element newElement) {
 		Element elementFound = get(newElement);
-		if(elementFound == null) return null;
+		if(elementFound == null) 
+			return null;
 		newElement.setId(elementFound.getId());
 		return em.merge(newElement);
 	}

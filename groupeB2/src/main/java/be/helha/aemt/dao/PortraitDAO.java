@@ -3,6 +3,7 @@ package be.helha.aemt.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import be.helha.aemt.entities.Portrait;
+import be.helha.aemt.entities.User;
 
 @Stateless
 @LocalBean
@@ -18,6 +20,9 @@ public class PortraitDAO {
 	@PersistenceContext(name = "groupeB2")
 	private EntityManager em;
 	
+	@EJB
+	private UserDAO userDAO;
+		
 	public PortraitDAO() {}
 	
 	public List<Portrait> query(){
@@ -27,7 +32,8 @@ public class PortraitDAO {
 	
 	public Portrait get(Portrait p) {
 		Query query = em.createQuery("select portrait from Portrait portrait where "
-				+ "portrait.user = :varUser"
+				+ "JOIN portrait.user u"
+				+ "u = :varUser"
 				+ "and protrait.description = :varDescription");
 		query.setParameter("varUser", p.getUser());
 		query.setParameter("varDescription", p.getDescription());
@@ -37,6 +43,12 @@ public class PortraitDAO {
 	public Portrait post(Portrait p) {
 		Portrait portraitFound = get(p);
 		if(portraitFound != null) return portraitFound;
+		
+		User user = userDAO.findUserByEmail(p.getAuthor());
+		if(user != null) {
+			p.setAuthor(user);
+		}
+		
 		em.persist(p);
 		return p;
 	}

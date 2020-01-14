@@ -5,17 +5,18 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import be.helha.aemt.dao.AddressDAO;
 import be.helha.aemt.dao.PortraitDAO;
 import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Portrait;
 
 @Stateless
-public class PortraitEJB {
+public class PortraitGestionEJB {
 
 	@EJB
 	private PortraitDAO ejb;
-	
-	public PortraitEJB() {}
+
+	public PortraitGestionEJB() {}
 	
 	public List<Portrait> query(){
 		return ejb.query();
