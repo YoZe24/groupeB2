@@ -64,6 +64,3 @@ public class UserDAO implements Serializable {
 	}
 
 }
-
-
-}

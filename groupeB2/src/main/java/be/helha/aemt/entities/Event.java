@@ -33,7 +33,7 @@ public class Event extends Element implements Serializable{
 	}
 	
 	public Event() {
-		
+		this.address = new Address();
 	}
 
 	public LocalDateTime getStartDate() {

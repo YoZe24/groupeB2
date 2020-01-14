@@ -26,11 +26,7 @@ public class EventDAO {
 	}
 	
 	public Event get(Event e) {
-		Query query = em.createQuery("select event from Event event where "
-				+ "event.title = :varTitle"
-				+ "and event.startDate = :varStartDate"
-				+ "and event.endDate = :varEndDate"
-				+ "and event.address = :varAddress");
+		Query query = em.createQuery("select event from Event event where event.title = :varTitle and event.startDate = :varStartDate and event.endDate = :varEndDate and event.address = :varAddress");
 		query.setParameter("varTitle", e.getTitle());
 		query.setParameter("varStartDate", e.getStartDate());
 		query.setParameter("varEndDate", e.getEndDate());
