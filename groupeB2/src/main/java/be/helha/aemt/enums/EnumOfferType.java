@@ -1,20 +1,22 @@
 package be.helha.aemt.enums;
 
 public enum EnumOfferType {
-	INTERNSHIP, CDD, CDI, TRAINING;
-}
 
-/*public enum EnumOfferType {
+	//INTERNSHIP, CDD, CDI, TRAINING;
 	INTERNSHIP("Stage"), CDD("CDD"), CDI("CDI"), TRAINING("Formation continue");
 	
-	private String name;
+	private String type;
 	
-	private EnumOfferType(String name) {
-		this.name = name;
+	EnumOfferType(String type) {
+		this.type = type;
 	}
-	
-	public String getName() {
-		return name;
+		
+	public String getType() {
+		return type;
 	}
 
-}*/
+	public String toString() {
+		return type;
+	}
+}
+

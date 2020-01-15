@@ -1,23 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html 	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jstl/core">
 <head>
 <title>Ajout d'offre</title>
 <meta http-equiv="
 	Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
-	  <link rel="stylesheet" href="Css.css"/>
+<!-- 	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+ 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
+  	<link rel="stylesheet" href="Css.css"/>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		 -->		  
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+		 
+ 	<script type="text/javascript">
+	    $(function () {
+	        $('#offerDatetimepicker1').datetimepicker({format: "YYYY-MM-DD HH:mm"});
+	        $('#offerDatetimepicker2').datetimepicker({useCurrent: false,format: "YYYY-MM-DD HH:mm"});
+	        $("#offerDatetimepicker1").on("dp.change", function (e) {$('#offerDatetimepicker2').data("DateTimePicker").minDate(e.date);});
+	        $("#offerDatetimepicker2").on("dp.change", function (e) {$('#offerDatetimepicker1').data("DateTimePicker").maxDate(e.date);});
+	    });
+	</script>
+
 </head>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <body>
-<h1>Bonjour #{userControl.userCurrent.name}</h1>
-	 <!--  <h:form>
+	<h1>Bonjour #{userControl.userCurrent.name}</h1>
+	   <h:form enctype='multipart/form-data'>
          <fieldset>
-         	<legend>Inscription</legend>
+         	<legend>Ajout d'offre de stage</legend>
          	<h:outputLabel for="societyName">Nom de la societé<span class="requis">*</span></h:outputLabel>
 	        <h:inputText id="societyName" value="#{offerControl.offer.societyName}" required="true" size="20" maxlength="50" />
 	        <h:message id="societyNameMessage" for="societyName" errorClass="erreur" />
@@ -31,7 +58,7 @@
 	        <h:message id="societySectorMessage" for="societySector" errorClass="erreur" />
 	        <br />
 	        <h:outputLabel for="societyNum">Numéro de la societé<span class="requis">*</span></h:outputLabel>
-	        <h:inputNumber id="societyNum" value="#{offerControl.offer.societyNum}" required="true"/>
+	        <h:inputText id="societyNum" value="#{offerControl.offer.societyNum}" required="true"/>
 	        <h:message id="societyNumMessage" for="societySector" errorClass="erreur" />
 	        <br />
 	        <h:outputLabel for="functionOffer">Fonction de l'offre<span class="requis">*</span></h:outputLabel>
@@ -42,48 +69,63 @@
 	        <h:inputText id="subject" value="#{offerControl.offer.subject}" required="true"/>
 	        <h:message id="subjectMessage" for="subject" errorClass="erreur" />
 	        <br />
-	        <h:outputLabel for="offerType">Type de l'offre<span class="requis">*</span></h:outputLabel>
-	        <h:select id="offerType" value="#{offerControl.offer.offerType}" required="true">
-	        	<h:option value="#{enumOfferType}"></h:option>
-	        </h:select>
+	        <h:outputLabel for="offerTypes">Type de l'offre<span class="requis">*</span></h:outputLabel>
+	        <h:selectOneMenu id="offerTypes" value="#{offerControl.offer.offerType}" required="true">
+	        	<f:selectItems value="#{offerControl.getOfferTypes()}" />
+	        </h:selectOneMenu>
 	    	<br/>
-	    	<h:outputLabel for="skillsNeeded">Compétences demandées<span class="requis">*</span></h:outputLabel>
+	    	<h:outputLabel for="skillsNeeded" id="oLskills">Compétences demandées <span class="requis">*</span></h:outputLabel>
+	    	<h:inputTextarea value="#{offerControl.offer.skillsNeeded}" cols="20" row="5"></h:inputTextarea>
 	    	<br/>
-	    	<h:outputLabel for="startDate">Date de début<span class="requis">*</span></h:outputLabel>
-	    	<br/>
-	    	<h:outputLabel for="endDate">Date de fin<span class="requis">*</span></h:outputLabel>
-	    	<br/>
-	    	<h:outputLabel for="amount">Montant de l'offre (pas obligatoire)</h:outputLabel>
-	        <h:inputNumber id="amount" value="#{offerControl.offer.amout}" />
+ 			<h:outputLabel for="offerDatetimepicker1">Date de début de l'offre<span class="requis">*</span></h:outputLabel>
+	     	<div class='input-group date' id='offerDatetimepicker1'>
+	            <h:inputText class="form-control" value="#{offerControl.startDateStr}"/>
+	            <span class="input-group-addon">
+	            <span class="glyphicon glyphicon-calendar"></span>
+	            </span>
+            </div>
+	        <h:message id="startDateMessage" for="startDate" errorClass="erreur" />
 	        <br />
-	        <h:outputLabel for="noteSupp">Sujet de l'offre</h:outputLabel>
-	        <h:inputText id="noteSupp" value="#{offerControl.offer.subject}" />
+	        <h:outputLabel for="offerDatetimepicker2">Date de fin de l'offre<span class="requis">*</span></h:outputLabel>
+	        <div class='input-group date' id='offerDatetimepicker2'>
+	            <h:inputText class="form-control" value="#{offerControl.endDateStr}"/>
+	            <span class="input-group-addon">
+	            <span class="glyphicon glyphicon-calendar"></span>
+	            </span>
+            </div>
+	        <h:message id="endDateMessage" for="endDate" errorClass="erreur" />
 	        <br />
-	        <h:message id="subjectMessage" for="subject" errorClass="erreur" />
+	        <h:outputLabel for="pathFile">Ajout d'un pdf</h:outputLabel>
+	  			<h:inputFile value="#{offerControl.pdf}"/>
+   				<br />
+		        <h:message id="pathFileMessage" for="pathFileMessage" errorClass="erreur" />
 	        <br />
-	         <fieldset>
+	        <h:outputLabel for="amount">Montant de l'offre (pas obligatoire)</h:outputLabel>
+	        <h:inputText id="amount" value="#{offerControl.offer.amount}" />
+	        <br />
+   	 	    <fieldset>
          		<legend>Adresse de la societé</legend>
          		<h:outputLabel for="street">Rue<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="street" value="#{offerControl.offer.address.street}" required="true" size="20" maxlength="60" />
+	        	<h:inputText id="street" value="#{offerControl.offer.societyAddress.street}" required="true" size="20" maxlength="60" />
 	        	<h:message id="streetMessage" for="street" errorClass="erreur" />
 	        	<br />
 	        	<h:outputLabel for="num">Numéro<span class="requis">*</span></h:outputLabel>
-		        <h:inputText id="num" value="#{offerControl.offer.address.num}" required="true" size="20" maxlength="60"/>
+		        <h:inputText id="num" value="#{offerControl.offer.societyAddress.num}" required="true" size="20" maxlength="60"/>
 		        <h:message id="numMessage" for="num" errorClass="erreur" />
 		        <br />
 		        <h:outputLabel for="city">Ville<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="city" value="#{offerControl.offer.address.city}" required="true" size="20" maxlength="60" />
+	        	<h:inputText id="city" value="#{offerControl.offer.societyAddress.city}" required="true" size="20" maxlength="60" />
 	        	<h:message id="cityMessage" for="city" errorClass="erreur" />
 	        	<br />
 	        	<h:outputLabel for="cp">Code Postal<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="cp" value="#{offerControl.offer.address.cp}" required="true" size="20" maxlength="60"/>
+	        	<h:inputText id="cp" value="#{offerControl.offer.societyAddress.cp}" required="true" size="20" maxlength="60"/>
 	        	<h:message id="cpMessage" for="cp" errorClass="erreur" />
 	        	<br />
-         	</fieldset>
+         	</fieldset> 
 	        <h:messages globalOnly="true" infoClass="info" />
-	        <h:commandButton value="S'inscrire" action="#{userControl.submitUser}" styleClass="sansLabel" />
-	        <br />
+   			   	<h:commandButton value="Ajouter l'offre" action="#{offerControl.addOffer(userControl.userCurrent)}"></h:commandButton>
+			<br />
 	     </fieldset>
-	</h:form>-->
+	</h:form>
 </body>
 </html>
