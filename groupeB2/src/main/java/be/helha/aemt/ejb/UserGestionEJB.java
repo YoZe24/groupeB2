@@ -39,5 +39,9 @@ public class UserGestionEJB {
 
 		return ejb.postUser(u);
 	}
+	
+	public User getByLogin(String login) {
+		return ejb.findByLogin(login);
+	}
 
 }

@@ -24,6 +24,10 @@ public class EventGestionEJB {
 		return ejb.get(e);
 	}
 	
+	public Event getByTitle(String str) {
+		return ejb.findByTitle(str);
+	}
+	
 	public Event post(Event e) {
 		return ejb.post(e);
 	}

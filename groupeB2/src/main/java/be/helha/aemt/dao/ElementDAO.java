@@ -27,7 +27,8 @@ public class ElementDAO {
 	
 	public List<Element> query(){
 		Query query = em.createQuery("select element from Element element");
-		return query.getResultList().size() != 0 ? (ArrayList<Element>) query.getResultList() : null;
+		List<Element> elements = query.getResultList();
+		return elements.size() == 0 ? null : elements;	
 	}
 	
 	public Element get(Element e) {
@@ -37,7 +38,8 @@ public class ElementDAO {
 				+ " and element.pathFile = :varPathFile");
 		query.setParameter("varAuthor", e.getAuthor());
 		query.setParameter("varPathFile", e.getPathFile());
-		return query.getResultList().size() != 0 ? (Element) query.getResultList().get(0) : null;
+		List<Element> elements = query.getResultList();
+		return elements.size() == 0 ? null : elements.get(0);
 	}
 	
 	public Element post(Element e) {

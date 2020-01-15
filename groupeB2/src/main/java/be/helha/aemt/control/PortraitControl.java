@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
@@ -19,16 +21,21 @@ import be.helha.aemt.entities.Portrait;
 @SessionScoped
 public class PortraitControl implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2483812624471684713L;
+
 	@EJB
 	private PortraitGestionEJB bean;
 	
 	private Part img;
 	
 	public void uploadImg() {
+		System.out.println("upload "+img.getSize());
 		try (InputStream input = img.getInputStream();){
-			String path = new File("").getAbsolutePath()+"\\files\\imgPortrait";
-			System.out.println(path);
-			Files.copy(input, new File(path,"test.png").toPath());
+			File upload = new File("/uploads");
+			//Files.copy(input, new File(upload,img.getSubmittedFileName()).toPath(),StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

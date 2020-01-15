@@ -38,6 +38,7 @@
 			<web-resource-name>Protected Ancien Area</web-resource-name>
 			<description></description>
 			<url-pattern>/addOffer.xhtml</url-pattern>
+			<url-pattern>/addEvent.xhtml</url-pattern>
 		</web-resource-collection>
 		
 		<auth-constraint>

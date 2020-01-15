@@ -99,11 +99,16 @@
 
 	<h:form>
 		<h:commandButton class="btn btn-info" value="Ajout element" action="#{eventControl.submitEvent}"></h:commandButton>
+		<h:commandButton class="btn btn-info" value="Ajout element manuel" action="#{eventControl.submitEvent}"></h:commandButton>
+		<br/>
+		<h:commandButton class="btn btn-info" value="Ajout event" action="addEvent.xhtml?faces-redirect=true"></h:commandButton>
 		<br/>
 
 		<h:commandButton value="Ajout offre manuelle" action="#{offerControl.submitOffer}"></h:commandButton>
 
 		<h:commandButton class="btn btn-info" value="Ajout portrait" action="addPortrait.xhtml"></h:commandButton>
+
+		<h:commandButton class="btn btn-warning" value="List users" action="list.xhtml"></h:commandButton>
 
 	</h:form>
 	<!--<h:form>
@@ -113,6 +118,6 @@
 	<h:form>
 		<h:commandButton class="btn btn-success" value="Aller côté admin" action="adminHome.xhtml?faces-redirect=true"></h:commandButton>
 	</h:form>-->
-	
+
 </body>
 </html>
