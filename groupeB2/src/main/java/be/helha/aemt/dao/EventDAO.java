@@ -28,7 +28,8 @@ public class EventDAO {
 
 	public List<Event> query(){
 		Query query = em.createQuery("select event from Event event");
-		return query.getResultList().size() != 0? (ArrayList<Event>) query.getResultList() : null;
+		return query.getResultList();
+		//return query.getResultList().size() != 0?(ArrayList<Event>) query.getResultList() : null;
 	}
 
 	public Event get(Event e) {

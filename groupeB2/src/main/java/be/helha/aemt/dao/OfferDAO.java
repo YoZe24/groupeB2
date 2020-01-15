@@ -2,17 +2,20 @@ package be.helha.aemt.dao;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import be.helha.aemt.entities.Address;
 import be.helha.aemt.entities.Offer;
 import be.helha.aemt.enums.EnumOfferType;
 
-@PersistenceContext(name = "groupeB2")
+@Stateless
+@LocalBean
 public class OfferDAO {
 
+	@PersistenceContext(name = "groupeB2")
 	private EntityManager em;
 	
 	public OfferDAO () {
@@ -70,9 +73,17 @@ public class OfferDAO {
 		return offerToReturn;
 	}
 	
+	public List<Offer> getAllByOfferType(EnumOfferType type){
+		Query query = em.createQuery("SELECT offer from Offer offer "
+				+"WHERE offer.offerType = :varOfferType");
+		query.setParameter("varOfferType",type);
+		List<Offer> offers = query.getResultList();
+		return offers.size() == 0 ? null : offers;
+	}
+	
 	
 	//Recup all Training
-	public List<Offer> getAllTrainingOffer(){
+/*	public List<Offer> getAllTrainingOffer(){
 		Query query = em.createQuery("SELECT offer from Offer offer"
 				+"WHERE offer.offerType = :varOfferType");
 		query.setParameter("varOfferType", "TRAINING");
@@ -97,7 +108,7 @@ public class OfferDAO {
 		query.setParameter("varOfferTypeCDI", "CDI");
 		List<Offer> offers = query.getResultList();
 		return offers.size() == 0 ? null : offers;
-	}
+	}*/
 	
 	public Offer getById(int id){
 		Query query = em.createQuery("SELECT offer from Offer offer"

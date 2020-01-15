@@ -2,6 +2,7 @@ package be.helha.aemt.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -73,11 +74,17 @@ public class Event extends Element implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public String convertDateIntoString(LocalDateTime date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E : dd/MM/yyyy - hh:mm a");
+		String dateTimeString = date.format(formatter);
+		return dateTimeString;
+	}
 
 	@Override
 	public String toString() {
 		return "Event [startDate=" + startDate + ", endDate=" + endDate + ", address=" + address + ", title=" + title
-				+ ", description=" + description + "]";
+				+ ", description=" + description +"author="+ getAuthor().toString() + "]";
 	}
 
 	@Override

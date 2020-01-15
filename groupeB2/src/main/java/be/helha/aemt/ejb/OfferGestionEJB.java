@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 
 import be.helha.aemt.dao.OfferDAO;
 import be.helha.aemt.entities.Offer;
+import be.helha.aemt.enums.EnumOfferType;
 
 @Stateless
 public class OfferGestionEJB {
@@ -40,7 +41,11 @@ public class OfferGestionEJB {
 		return ejb.updateStatut(o);
 	}
 	
-	public List<Offer> getAllJobOffer(){
+	public List<Offer> getAllByOfferType(EnumOfferType type){
+		return ejb.getAllByOfferType(type);
+	}
+	
+/*	public List<Offer> getAllJobOffer(){
 		return ejb.getAllJobOffer();
 	}
 	
@@ -50,7 +55,7 @@ public class OfferGestionEJB {
 	
 	public List<Offer> getAllInternshipOffer(){
 		return ejb.getAllInternshipOffer();
-	}
+	}*/
 	
 	public Offer getById(int id) {
 		return ejb.getById(id);

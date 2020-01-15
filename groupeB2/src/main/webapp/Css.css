@@ -2,7 +2,7 @@
 
 #welcomeMessage{
 	border-style: solid;
-	width : 500px; 
+	width : 900px; 
 	height : 100px;
 }
 #header {
@@ -23,4 +23,16 @@
 #helha_logo{
 	width : 300px;
 	heigth : 200px;
+}
+.jumbotron.scroll{
+	width : 1500px;
+	overflow-x: hidden; 
+	overflow-y: auto;
+}
+.row{
+	text-align : center;
+}
+#eventOne{
+	border-style: solid;
+	border-radius : 5px;
 }
