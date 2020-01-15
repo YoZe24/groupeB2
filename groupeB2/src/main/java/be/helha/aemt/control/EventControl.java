@@ -25,7 +25,7 @@ import be.helha.aemt.enums.EnumRole;
 public class EventControl implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -8412325343163651921L;
 
@@ -33,14 +33,14 @@ public class EventControl implements Serializable {
 	private EventGestionEJB bean;
 
 	private Part img;
-	
+
 	private Event event;
 	private Event eventManual2;
 	private Address address;
 
 	private String startDateStr = "";
 	private String endDateStr = "";
-	
+
 	Address aUser = new Address("testEventUser", "1", "2", "3");
 	User u = new User("test", "test", "test@gmail.com", "test", "test", "test", aUser, EnumRole.ANCIENT);
 
@@ -71,11 +71,11 @@ public class EventControl implements Serializable {
 	public Event getByTitle(String title) {
 		return bean.getByTitle(title);
 	}
-	
+
 	public byte[] getImgBytes(String title) {
 		return getByTitle(title).getImg();
 	}
-	
+
 	public Event post(Event e) {
 		return bean.post(e);
 	}
@@ -89,18 +89,18 @@ public class EventControl implements Serializable {
 		this.event.setEndDate(convertDateStrToLocalDateTime(endDateStr));
 		
 		System.out.println(img.getSize());
-		
+
 		byte[] picBytes = new byte[(int) img.getSize()];
 		try {
 			img.getInputStream().read(picBytes);
 			this.event.setImg(picBytes);
 		}catch (Exception e) {
 		}
-		
+
 		this.event.setAuthor(user);
 		System.out.println(event);
 		return post(event);
-		
+
 	}
 
 	public Event submitEvent() {

@@ -1,40 +1,35 @@
+<!DOCTYPE html>
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
-<title>Start Page</title>
 <meta http-equiv="
 	Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<title>Insert title here</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
 	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
 	  <link rel="stylesheet" href="Css.css"/>
 </head>
+<body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	
-<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 	<div id="header">
 		<ui:insert name="header" >
 		  <ui:include src="header.xhtml" />
 		</ui:insert>
 	 </div>
+	 <br/>
+	 
+	 <div class="container text-center" id="about">
+	 	<img  src = "helha_logo.jpg" id="helha_logo"/> 
+	 	<p>Site réalisé par Diricq François, Cardinal Pierre, Hennebo Eliot, </p>
+	 	<p>étudiants en informatique de gestion à la HELHa Campus Mons ,</p> 
+	 	<p>dans le cadre du cours d' Applications entreprise multi tiers de Mr. V. Altares.</p>
+	 </div>
 
-	<br/>
-		<div class="container text-center" id="form">
-			<img  src = "helha_logo.jpg" id="helha_logo"/> 
-			<form method="POST" action="j_security_check">
-				<div class="form-group">
-					<label id="label" for="j_username">Login</label>
-					<input class="form-control" type="text" name="j_username" placeholder="Entrez votre login"/>
-					<label id="label" for="j_password">Mot de passe</label>
-					<input class="form-control" type="password" name="j_password" placeholder="Entrez votre mot de passe"/>
-					<br/>
-					<button class="btn btn-success" type="submit">Se connecter</button>  
-				</div>
-			</form>
-		</div>
 </body>
 </html>

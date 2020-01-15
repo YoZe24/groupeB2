@@ -3,8 +3,24 @@
 #welcomeMessage{
 	border-style: solid;
 	width : 500px; 
-	height : 100px
+	height : 100px;
 }
 #header {
 	background-color: Seagreen;
+}
+#form{
+	width : 600px;
+}
+#label{
+	font-size : 20px;
+}
+#about{
+	border-style: solid;
+	width : 700px; 
+	height : 400px;
+	font-size : 20px;
+}
+#helha_logo{
+	width : 300px;
+	heigth : 200px;
 }
