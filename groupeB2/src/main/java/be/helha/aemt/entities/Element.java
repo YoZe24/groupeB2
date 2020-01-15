@@ -1,5 +1,11 @@
 package be.helha.aemt.entities;
 
+import java.awt.Image;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -8,7 +14,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
+import com.sun.el.stream.Stream;
 
 
 @Entity
@@ -16,14 +25,24 @@ public class Element implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private User author;
-	
+
 	private LocalDateTime publishDate;
 	private String pathFile;
-	
+
 	//private boolean confirmed;
+	@Lob
+	private byte[] img;
+
+	public Element(User author, LocalDateTime publishDate, String pathFile, byte[] img) {
+		this();
+		this.author = author;
+		this.publishDate = publishDate;
+		this.pathFile = pathFile;
+		this.img = img;
+	}
 
 	public Element(User author, LocalDateTime publishDate, String pathFile) {
 		this();
@@ -38,11 +57,33 @@ public class Element implements Serializable{
 		this.publishDate = LocalDateTime.now();
 		//this.confirmed = false;
 	}
-	
+
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+
+	public void setImgWithPath(String path) {
+		File file = new File(path);
+		byte[] picInBytes = new byte[(int) file.length()];
+		FileInputStream fileInputStream;
+		try {
+			fileInputStream = new FileInputStream(file);
+			fileInputStream.read(picInBytes);
+			fileInputStream.close();
+			this.img = picInBytes;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void setToVoid() {
 		this.author.setToVoid();
 	}
-	
+
 	public User getAuthor() {
 		return author;
 	}
@@ -74,9 +115,9 @@ public class Element implements Serializable{
 	public void setPublishDate(LocalDateTime publishDate) {
 		this.publishDate = publishDate;
 	}
-	
-	
-	
+
+
+
 //	public boolean isConfirmed() {
 //		return confirmed;
 //	}

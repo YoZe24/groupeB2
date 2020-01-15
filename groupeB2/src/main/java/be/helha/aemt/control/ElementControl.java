@@ -20,7 +20,6 @@ import be.helha.aemt.enums.EnumRole;
 @SessionScoped
 public class ElementControl implements Serializable {
 
-
 	@EJB
 	private ElementGestionEJB bean;
 

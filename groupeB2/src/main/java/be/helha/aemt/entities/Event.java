@@ -29,7 +29,7 @@ public class Event extends Element implements Serializable{
 		this.title = title;
 		this.description = description;
 	}
-	
+
 	public Event() {
 		super();
 		this.address = new Address();
@@ -74,7 +74,7 @@ public class Event extends Element implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public String convertDateInToString(LocalDateTime date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy HH:mm ");
 		String dateTimeString = date.format(formatter);

@@ -1,6 +1,7 @@
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:f="http://java.sun.com/jsf/core">
 <head>
 <title>Start Page</title>
 <meta http-equiv="
@@ -23,28 +24,100 @@
 	 </div>
 	 <br/>
 	 <div class="container text-center" id="welcomeMessage">
-		<p>Message de bienvenue</p>
-		<a href="https://www.facebook.com/helha.be">Facebook</a>    <a href="https://www.instagram.com/helhabe/">Instagram</a>    <a href="https://www.helha.be">Site Web</a>
+	 	<p>Message de bienvenue</p>
+	 	<br/>
+	 	<a href="https://www.facebook.com/helha.be">Facebook</a>                     <a href="https://www.instagram.com/helhabe/">Instagram</a>                     <a href="https://www.helha.be">Site Web</a>
 	 </div>
+	 <br/>
+
+	 <div  class="container jumbotron" id="listEventDiv">
+	 	<ui:repeat value="#{eventControl.query()}" var="event">
+	 		<div id="eventOne">
+	 			<div class="container">
+	 				<div class="row">
+	 					<div class="col">
+	 						<h1 class="display-4">#{event.title}</h1>
+	 					</div>
+	 				</div>
+					<div class="row">
+					    <div class="col">
+					      	<p class="lead">#{event.description}</p>
+					    </div>
+					</div>
+					<hr class="my-4"/>
+					<div class="row">
+					    <div class="col">
+					      	<h4>Date de l'événement</h4>
+					    </div>
+					    <div class="col">
+					      	<h4>Adresse de l'évènement</h4>
+					    </div>
+					</div>
+					<div class="row">
+					    <div class="col">
+					      	<p class="lead">#{event.convertDateIntoString(event.startDate)}</p>
+					      	<p class="lead">#{event.convertDateIntoString(event.endDate)}</p>
+					    </div>
+					    <div class="col">
+					      	<p class="lead">#{event.address.street}</p><p class="lead">#{event.address.num}</p>
+					      	<p class="lead">#{event.address.city}</p><p class="lead">#{event.address.cp}</p>
+					    </div>
+					</div>
+				</div>
+	 		</div>
+	 	</ui:repeat>
+
+
+	 	<!--  <h:dataTable value="#{eventControl.query()}" var="event"
+	 			styleClass="list-background table table-striped table-bordered text-center"
+	 			columnClasses="listColumnCenter,listColumnCenter,listColumnCenter,listColumnCenter"
+	 			headerClass="list-header"
+	 			rowClasses="list-row">
+	 		<h:column>
+			    <f:facet name="header">Titre</f:facet>
+			    	<h:outputText value="#{event.title}"/>
+			</h:column>
+			<h:column>
+			    <f:facet name="header">Description</f:facet>
+			    	<h:outputText value="#{event.description}"/>
+			</h:column>
+			<h:column>
+			    <f:facet name="header">Date début</f:facet>
+			    	<h:outputText value="#{event.startDate}"/>
+			</h:column>
+			<h:column>
+			    <f:facet name="header">Date de fin</f:facet>
+			    	<h:outputText value="#{event.endDate}">
+			    		<f:convertDateTime type="date" pattern="yyyy-MM-dd"/>
+			    	</h:outputText>
+			</h:column>
+	 	</h:dataTable>-->
+	 </div>
+
+
+
 
 	<h:form>
 		<h:commandButton class="btn btn-info" value="Ajout element" action="#{eventControl.submitEvent}"></h:commandButton>
+		<h:commandButton class="btn btn-info" value="Ajout element manuel" action="#{eventControl.submitEvent}"></h:commandButton>
+		<br/>
+		<h:commandButton class="btn btn-info" value="Ajout event" action="addEvent.xhtml?faces-redirect=true"></h:commandButton>
 		<br/>
 
-		<h:commandButton value="Inscription Formulaire" action="registerForm.xhtml"></h:commandButton>
+		<h:commandButton value="Ajout offre manuelle" action="#{offerControl.submitOffer}"></h:commandButton>
 
 		<h:commandButton class="btn btn-info" value="Ajout portrait" action="addPortrait.xhtml"></h:commandButton>
 		<h:commandButton class="btn btn-info" value="Afficher les utilisateurs" onclick="#{userControl.loadUsers()}" action="seeAllUsers.xhtml"></h:commandButton>
 		<h:commandButton class="btn btn-info" value="Afficher les events" onclick="#{eventControl.loadEvents()}" action="seeAllEvents.xhtml"></h:commandButton>
-		
+
 	</h:form>
-	<h:form>
+	<!--<h:form>
 		<h:commandButton class="btn btn-success" value="Ajout Offre" action="addOffer.xhtml?faces-redirect=true">Ajout offre</h:commandButton>
 		<br/>
 	</h:form>
 	<h:form>
 		<h:commandButton class="btn btn-success" value="Aller côté admin" action="adminHome.xhtml?faces-redirect=true"></h:commandButton>
-	</h:form>
-	
+	</h:form>-->
+
 </body>
 </html>
