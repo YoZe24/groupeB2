@@ -26,8 +26,6 @@ public class UserDAO implements Serializable {
 	}
 
 
-	public UserDAO() {}
-
 	public List<User> query(){
 		Query query = em.createQuery("SELECT user from User user");
 		List<User> users = query.getResultList();
