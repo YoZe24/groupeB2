@@ -39,10 +39,15 @@ public class UserGestionEJB {
 
 		return ejb.postUser(u);
 	}
-	
+
 	public User get(User u) {
 		return ejb.get(u);
 	}
+
+	public User getById(int id) {
+		return ejb.findUserById(id);
+	}
+
 	public User findById(int id) {
 		return ejb.findById(id);
 	}
@@ -53,6 +58,10 @@ public class UserGestionEJB {
 
 	public User getByLogin(String login) {
 		return ejb.findByLogin(login);
+	}
+
+	public User removeUser(User user) {
+		return ejb.removeUser(user);
 	}
 
 }
