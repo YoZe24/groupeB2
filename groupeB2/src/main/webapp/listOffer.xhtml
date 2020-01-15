@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
   <link rel="stylesheet" href="Css.css"/>
-<title>Insert title here</title>
+<title>Offres</title>
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -31,8 +31,8 @@
     	</h:selectOneMenu>
     	 <h:commandButton id="submit" value="Afficher" onclick="#{offerControl.loadListOffer(offerControl.typeOfferChoose)}" styleClass="btn btn-success" style="float : right;"/>
 	 </div>
-	 <div  class="container jumbotron" id="listOfferDiv">
-	 	<ui:repeat value="#{offerControl.listOfferLoad}" var="offer">
+	 <div  class="container jumbotron" id="listOfferDiv" hidden="false">
+	 	<ui:repeat value="#{offerControl.getListOffers()}" var="offer">
 	 		<div id="offerOne">
 	 			<div class="container">
 	 			#{offer}
