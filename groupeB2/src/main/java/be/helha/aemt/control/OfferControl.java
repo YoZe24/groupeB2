@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
@@ -24,7 +25,7 @@ public class OfferControl implements Serializable {
 	private OfferGestionEJB bean;
 	private Offer offer;
 	private String name = "OfferEJB";
-	private EnumOfferType typeOfferChoose = EnumOfferType.TRAINING;
+	private EnumOfferType typeOfferChoose = null;
 	private List<Offer> listOfferLoad = new ArrayList<>();
 	
 
@@ -53,7 +54,7 @@ public class OfferControl implements Serializable {
 		List<String> skills = new ArrayList<>();
 		Address a = new Address("testOffer", "offerNum", "offerCity", "offerCp");
 		Address aUser = new Address("testOfferUser", "userNum", "userCity", "userCp");
-		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer", aUser, EnumRole.ANCIENT);
+		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
 		this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector",1,a,"functionOffer",true, skills,"noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
 		return bean.post(offer);
 	}
@@ -68,9 +69,9 @@ public class OfferControl implements Serializable {
 		return bean.updateStatut(o);
 	}
 	public void loadListOffer (EnumOfferType type) {
-		this.listOfferLoad = getAllByOfferType(EnumOfferType.CDD);
+		System.out.println("Type choisis: " + typeOfferChoose);
+		this.listOfferLoad = getAllByOfferType(type);
 	}
-	
 	public List<Offer> getAllByOfferType(EnumOfferType type){
 		return bean.getAllByOfferType(type);
 	}
@@ -95,5 +96,6 @@ public class OfferControl implements Serializable {
 	public void setListOfferLoad(List<Offer> listOfferLoad) {
 		this.listOfferLoad = listOfferLoad;
 	}
+	
 
 }

@@ -25,7 +25,6 @@ public class UserDAO implements Serializable {
 	public UserDAO() {
 	}
 
-	public UserDAO() {}
 
 	public List<User> query(){
 		Query query = em.createQuery("SELECT user from User user");
@@ -69,6 +68,13 @@ public class UserDAO implements Serializable {
 	public User findByLogin(String login) {
 		Query query = em.createQuery("Select u from User u where u.login = ?1");
 		query.setParameter(1, login);
+		List<User> users = query.getResultList();
+		return users.size() == 0 ? null : users.get(0);
+	}
+	
+	public User findById(int id) {
+		Query query = em.createQuery("Select u from User u where u.id = ?1");
+		query.setParameter(1, id);
 		List<User> users = query.getResultList();
 		return users.size() == 0 ? null : users.get(0);
 	}

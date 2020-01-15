@@ -43,7 +43,19 @@
 			     	<div class="col-sm-8">
 				        <h:inputText  class="form-control" id="mail" value="#{userControl.user.mail}" size="20" maxlength="60"  p:placeholder="Entrez votre adresse email" required="true" requiredMessage="Veuillez entrez une adresse email"/>
 				    </div>
-			    </div>		    
+			    </div>
+			    <div class="form-group row">
+			     	<h:outputLabel  class="col-sm-2 col-form-label" for="degreeYear">Année diplômation</h:outputLabel>
+			     	<div class="col-sm-8">
+				        <h:inputText  class="form-control" id="degreeYear" value="#{userControl.user.degreeYear}" size="20" maxlength="60"  p:placeholder="Entrez votre année d'obtention de diplôme" required="true" requiredMessage="Veuillez entrez votre année d'obtention de diplôme"/>
+				    </div>
+			    </div>
+			    <div class="form-group row">
+			     	<h:outputLabel  class="col-sm-2 col-form-label" for="section">Section (diplôme)</h:outputLabel>
+			     	<div class="col-sm-8">
+				        <h:inputText  class="form-control" id="section" value="#{userControl.user.section}" size="20" maxlength="60"  p:placeholder="Entrez votre section (diplôme)" required="true" requiredMessage="Veuillez entrez section (diplôme)"/>
+				    </div>
+			    </div>			    
 		        <div class="form-group row">
 			        <h:outputLabel  class="col-sm-2 col-form-label" for="login">Login</h:outputLabel>
 			        <div class="col-sm-8">

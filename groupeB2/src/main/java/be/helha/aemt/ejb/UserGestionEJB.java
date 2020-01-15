@@ -43,6 +43,9 @@ public class UserGestionEJB {
 	public User get(User u) {
 		return ejb.get(u);
 	}
+	public User findById(int id) {
+		return ejb.findById(id);
+	}
 
 	public User update(User u) {
 		return ejb.update(u);

@@ -28,6 +28,8 @@ public class User {
 	private String login;
 	private String hashPwd;
 	private String phoneNumber;
+	private String degreeYear;
+	private String section;
 	private boolean confirmed;
 
 	private String groupName;
@@ -46,7 +48,7 @@ public class User {
 		this.confirmed = false;
 	};
 
-	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber, String degreeYear, String section,
 			Address address,EnumRole role) {
 		this();
 		this.name = name;
@@ -55,14 +57,16 @@ public class User {
 		this.login = login;
 		this.hashPwd = hashPwd;
 		this.phoneNumber = phoneNumber;
+		this.degreeYear = degreeYear;
+		this.section = section;
 		this.address = address;
 		this.role = role;
 		this.confirmed = false;
 	}
 
-	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
+	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber, String degreeYear, String section,
 			Address address, EnumRole role, List<Element> elements) {
-		this(name,firstname,mail,login,hashPwd,phoneNumber,address,role);
+		this(name,firstname,mail,login,hashPwd,phoneNumber,degreeYear,section,address,role);
 //		this.id = id;
 		this.elements = elements;
 		this.confirmed = false;
@@ -75,6 +79,8 @@ public class User {
 		this.login = "";
 		this.hashPwd = "";
 		this.phoneNumber = "";
+		this.degreeYear = "";
+		this.section = "";
 		this.address.setToVoid();
 	}
 
@@ -173,8 +179,24 @@ public class User {
 		elements.add(e); return true;
 	}
 
+	public String getDegreeYear() {
+		return degreeYear;
+	}
+
+	public void setDegreeYear(String degreeYear) {
+		this.degreeYear = degreeYear;
+	}
+
+	public String getSection() {
+		return section;
+	}
+
+	public void setSection(String section) {
+		this.section = section;
+	}
+
 	public User clone() {
-		return new User(name, firstname, mail, login, hashPwd, phoneNumber,address,role,elements);
+		return new User(name, firstname, mail, login, hashPwd, phoneNumber,degreeYear,section,address,role,elements);
 	}
 
 	public void update(User u) {
@@ -216,7 +238,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", mail=" + mail + ", login=" + login
-				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber + "]";
+				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber +", degreeYear=" + degreeYear +", section=" + section+"]";
 	}
 
 }

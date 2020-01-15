@@ -2,6 +2,7 @@ package be.helha.aemt.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -181,6 +182,12 @@ public class Offer extends Element implements Serializable{
 				+ functionOffer + ", skillsNeeded=" + skillsNeeded + ", noteSupp=" + noteSupp + ", subject=" + subject
 				+ ", offerType=" + offerType + ", startDate=" + startDate + ", endDate=" + endDate + ", amount="
 				+ amount + super.toString() + "]";
+	}
+	
+	public String convertDateIntoString(LocalDateTime date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dateTimeString = date.format(formatter);
+		return dateTimeString;
 	}
 	
 	

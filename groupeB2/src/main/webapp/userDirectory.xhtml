@@ -23,7 +23,39 @@
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	
+	<br/>
+	<div class="container">
+		<h:dataTable id="users" 
+		 			columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
+		 			headerClass="list-header" 
+		 			rowClasses="list-row" 
+		 			styleClass="list-background table table-striped table-bordered text-center" 
+		 			value="#{userControl.getAllUsers()}" 
+		 			var="user">
+		 						
+			 <h:column>
+			 	<f:facet name="header">
+			 		<h:outputText value="N°"/>
+			 	</f:facet>
+			 	<h:outputText value="#{user.id}"/>
+			 </h:column>
+			 						
+			 <h:column>
+			 	<f:facet name="header">
+			 		<h:outputText value="Nom"/>
+			 	</f:facet>
+			 	<h:link outcome = "singleUser" onclick="#{userControl.singleUserDetails(user.id)}" action="singleUser.xhtml"><h:outputText value="#{user.name}"/></h:link>
+			 </h:column>
+			 
+			 <h:column>
+			 	<f:facet name="header">
+			 		<h:outputText value="Prénom"/>
+			 	</f:facet>
+			 	<h:outputText value="#{user.firstname}"/>
+			 </h:column>
+			 
+		 </h:dataTable>
+	 </div>
 
 </body>
 </html>
