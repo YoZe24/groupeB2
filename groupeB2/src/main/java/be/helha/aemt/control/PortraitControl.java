@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.PortraitGestionEJB;
 import be.helha.aemt.entities.Portrait;
+import be.helha.aemt.entities.User;
 
 @Named
 @SessionScoped
@@ -31,6 +32,12 @@ public class PortraitControl implements Serializable {
 	
 	private Part img;
 	
+	private Portrait portrait;
+	
+	public PortraitControl() {
+		this.portrait = new Portrait();
+	}
+	
 	public void uploadImg() {
 		System.out.println("upload "+img.getSize());
 		try (InputStream input = img.getInputStream();){
@@ -40,6 +47,19 @@ public class PortraitControl implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public Portrait addPortrait(User user) {
+		byte[] picBytes = new byte[(int) img.getSize()];
+		try {
+			img.getInputStream().read(picBytes);
+			this.portrait.setImg(picBytes);
+		}catch (Exception e) {
+		}
+		
+		this.portrait.setAuthor(user);
+		
+		return post(portrait);
 	}
 	
 	public Part getImg() {
@@ -69,4 +89,14 @@ public class PortraitControl implements Serializable {
 	public Portrait update(Portrait p) {
 		return bean.update(p);
 	}
+
+	public Portrait getPortrait() {
+		return portrait;
+	}
+
+	public void setPortrait(Portrait portrait) {
+		this.portrait = portrait;
+	}
+	
+	
 }

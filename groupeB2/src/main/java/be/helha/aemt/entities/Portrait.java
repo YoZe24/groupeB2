@@ -11,30 +11,45 @@ import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 @Entity
 public class Portrait extends Element {
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	private User user;
+//	@ManyToOne(cascade = CascadeType.PERSIST)
+//	private User user;
+
+	private String name;
+	private String firstname;
 	private String description;
-	
-	
-	public Portrait(User author, LocalDateTime publishDate, String pathFile, User user, String description) {
-		super(author, publishDate, pathFile);
-		this.user = user;
+		
+	public Portrait(User author, LocalDateTime publishDate, String pathFile, byte[] img, String name, String firstname,
+			String description) {
+		super(author, publishDate, pathFile, img);
+		this.name = name;
+		this.firstname = firstname;
 		this.description = description;
+		this.setConfirmed(true);
 	}
 
 	public Portrait(User author, LocalDateTime publishDate, String pathFile) {
 		super(author, publishDate, pathFile);
+		this.setConfirmed(true);
 	}
 
 	public Portrait() {
+		this.setConfirmed(true);
+	}
+	
+	public String getName() {
+		return name;
 	}
 
-	public User getUser() {
-		return user;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getDescription() {
@@ -47,7 +62,7 @@ public class Portrait extends Element {
 
 	@Override
 	public String toString() {
-		return "Portrait [user=" + user + ", description=" + description + "]";
+		return "Portrait [name=" + name + ", firstname=" + firstname + ", description=" + description + "]";
 	}
 
 	@Override
@@ -55,7 +70,8 @@ public class Portrait extends Element {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -73,13 +89,19 @@ public class Portrait extends Element {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (firstname == null) {
+			if (other.firstname != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!firstname.equals(other.firstname))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
+
 	
 	
 
