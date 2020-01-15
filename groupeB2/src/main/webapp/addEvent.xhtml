@@ -6,31 +6,31 @@
 	xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    >
 <head>
 	<meta http-equiv="
 	Content-Type" content="text/html; charset=UTF-8" />
 	<title>Ajouter un événement</title>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
 
 
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker1').datetimepicker({format: "YYYY-MM-DD HH:mm:ss"});
-        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "YYYY-MM-DD HH:mm:ss"});
+        $('#datetimepicker1').datetimepicker({format: "YYYY-MM-DD HH:mm"});
+        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "YYYY-MM-DD HH:mm"});
         $("#datetimepicker1").on("dp.change", function (e) {$('#datetimepicker2').data("DateTimePicker").minDate(e.date);});
         $("#datetimepicker2").on("dp.change", function (e) {$('#datetimepicker1').data("DateTimePicker").maxDate(e.date);});
     });
 </script>
 </head>
- <link rel="icon" type="image/x-icon" href="favicon.ico"/>
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
- <link rel="stylesheet" href="Css.css"/>
 <body>
 
 	  <h:form enctype='multipart/form-data'>
@@ -86,18 +86,11 @@
 	        	<h:inputText id="cp" value="#{eventControl.event.address.cp}" required="true" size="20" maxlength="60"/>
 	        	<h:message id="cpMessage" for="cp" errorClass="erreur" />
 	        	<br />
-     			   	<h:commandButton value="Ajouter event manual" action="#{eventControl.addEvent(userControl.userCurrent)}"></h:commandButton>
+     			   	<h:commandButton value="Ajouter l'évènement" action="#{eventControl.addEvent(userControl.userCurrent)}"></h:commandButton>
          	</fieldset>
 	        <h:messages globalOnly="true" infoClass="info" />
-<!-- 	        <h:commandButton value="Ajouter le lieu" action="#{eventControl.submitEvent}" styleClass="sansLabel" />
-	        <h:commandButton value="Ajouter lieu manual" action="#{eventControl.submitEventManual}" styleClass="sansLabel" />
- -->	        <br/>
           </fieldset>
 
-        </h:form>
-
-        <h:form>
-        	<h:commandButton value="Ajouter event manual" action="{elementControl.submitElementManual"></h:commandButton>
         </h:form>
 
 

@@ -75,7 +75,7 @@ public class Event extends Element implements Serializable{
 		this.description = description;
 	}
 
-	public String convertDateInToString(LocalDateTime date) {
+	public String convertDateIntoString(LocalDateTime date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy HH:mm ");
 		String dateTimeString = date.format(formatter);
 		return dateTimeString;

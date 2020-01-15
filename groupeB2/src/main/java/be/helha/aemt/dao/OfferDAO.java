@@ -2,13 +2,16 @@ package be.helha.aemt.dao;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import be.helha.aemt.entities.Address;
 import be.helha.aemt.entities.Offer;
+import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumOfferType;
 
 @Stateless
@@ -17,6 +20,9 @@ public class OfferDAO {
 
 	@PersistenceContext(name = "groupeB2")
 	private EntityManager em;
+	
+	@EJB
+	private UserDAO userDAO; 
 	
 	public OfferDAO () {
 		
@@ -42,6 +48,15 @@ public class OfferDAO {
 	public Offer post(Offer o) {
 		Offer offerFound = (Offer) get(o);
 		if(offerFound != null) return offerFound;
+		
+		User userFinded = userDAO.findUserByEmail(o.getAuthor());
+		if(userFinded != null)
+			o.setAuthor(userFinded);
+
+		Address addressFromEventFinded = userDAO.findAddress(o.getSocietyAddress());
+		if(addressFromEventFinded != null)
+			o.setSocietyAddress(addressFromEventFinded);
+
 		em.persist(o);
 		return o;
 	}

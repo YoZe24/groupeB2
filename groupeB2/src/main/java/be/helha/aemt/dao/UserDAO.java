@@ -22,9 +22,6 @@ public class UserDAO implements Serializable {
 	@PersistenceContext(name = "groupeB2")
 	private EntityManager em;
 
-	public UserDAO() {
-	}
-
 	public UserDAO() {}
 
 	public List<User> query(){
