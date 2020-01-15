@@ -39,5 +39,13 @@ public class UserGestionEJB {
 
 		return ejb.postUser(u);
 	}
+	
+	public User get(User u) {
+		return ejb.get(u);
+	}
+	
+	public User update(User u) {
+		return ejb.update(u);
+	}
 
 }

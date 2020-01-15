@@ -34,7 +34,9 @@
 		<h:commandButton value="Inscription Formulaire" action="registerForm.xhtml"></h:commandButton>
 
 		<h:commandButton class="btn btn-info" value="Ajout portrait" action="addPortrait.xhtml"></h:commandButton>
-
+		<h:commandButton class="btn btn-info" value="Afficher les utilisateurs" onclick="#{userControl.loadUsers()}" action="seeAllUsers.xhtml"></h:commandButton>
+		<h:commandButton class="btn btn-info" value="Afficher les events" onclick="#{eventControl.loadEvents()}" action="seeAllEvents.xhtml"></h:commandButton>
+		
 	</h:form>
 	<h:form>
 		<h:commandButton class="btn btn-success" value="Ajout Offre" action="addOffer.xhtml?faces-redirect=true">Ajout offre</h:commandButton>

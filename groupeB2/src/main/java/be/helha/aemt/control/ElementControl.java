@@ -68,4 +68,8 @@ public class ElementControl implements Serializable {
 		System.out.println(eventManual.toString());
 		return post(eventManual);
 	}
+	
+	public String convertBoolToString(boolean bool) {
+		return bool == false ? "Pas validé" : "Validé";
+	}
 }

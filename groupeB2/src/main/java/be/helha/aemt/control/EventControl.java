@@ -3,6 +3,7 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -40,6 +41,8 @@ public class EventControl implements Serializable {
 
 	private Event eventManual = new Event(userTest, dateTimePublish,"testPathFile",startDateTestEvent, endDateTestEvent, addressEventTest, "testTitle", "testDescription");
 
+	private List<Event> events = new ArrayList<Event>();
+	
 	public EventControl() {
 		event = new Event();
 		//address = new Address();
@@ -59,6 +62,14 @@ public class EventControl implements Serializable {
 
 	public Event update(Event e) {
 		return bean.update(e);
+	}
+	
+	public List<Event> getAllEvents(){
+		return bean.query();
+	}
+	
+	public void loadEvents(){
+		this.events = getAllEvents();
 	}
 
 	public Event submitEvent() {
@@ -85,13 +96,6 @@ public class EventControl implements Serializable {
 		this.address = address;
 	}
 
-	public Event submitEvent() {
-		event.setStartDate(convertDateStrToLocalDateTime(startDateStr));
-		event.setEndDate(convertDateStrToLocalDateTime(endDateStr));
-		//event.setAddress(address);
-		return post(event);
-	}
-
 	public Event submitEventManual() {
 		return post(eventManual);
 	}
@@ -113,10 +117,20 @@ public class EventControl implements Serializable {
 	}
 
 	private LocalDateTime convertDateStrToLocalDateTime(String dateStr) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm:ss");
 		LocalDateTime dateTime = LocalDateTime.parse(dateStr, formatter);
 		return dateTime;
 	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
+	
 
 
 }

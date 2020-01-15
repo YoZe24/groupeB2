@@ -21,18 +21,22 @@ public class Element implements Serializable{
 	private User author;
 	
 	private LocalDateTime publishDate;
-	private String pathFile;	
+	private String pathFile;
+	
+	//private boolean confirmed;
 
 	public Element(User author, LocalDateTime publishDate, String pathFile) {
 		this();
 		this.author = author;
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
+		//this.confirmed = false;
 	}
 
 	public Element() {
 		this.author = new User();
 		this.publishDate = LocalDateTime.now();
+		//this.confirmed = false;
 	}
 	
 	public void setToVoid() {
@@ -71,6 +75,16 @@ public class Element implements Serializable{
 		this.publishDate = publishDate;
 	}
 	
+	
+	
+//	public boolean isConfirmed() {
+//		return confirmed;
+//	}
+//
+//	public void setConfirmed(boolean confirmed) {
+//		this.confirmed = confirmed;
+//	}
+
 	public Element clone() {
 		return new Element(author, publishDate, pathFile);
 	}

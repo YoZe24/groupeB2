@@ -7,7 +7,10 @@
 	Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Hello #{utilisateurControl.name}</h1>	
-	<h2>Hello #{utilisateurControl.doList()}</h2>	
+
+<h:form>
+	<h:commandButton class="" value="Load user" action="#{userControl.loadUsers}"></h:commandButton>
+</h:form>
+	<h2>#{userControl.users}</h2>	
 </body>
 </html>

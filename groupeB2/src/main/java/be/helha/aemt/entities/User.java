@@ -22,18 +22,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	//@NotNull(message="Veuillez entrez un nom")
  	private String name;
- 	//@NotNull(message="Veuillez entrez un prénom")
 	private String firstname;
-	//@NotNull(message="Veuillez entrez un mail")
 	private String mail;
-	//@NotNull(message="Veuillez entrez un login")
 	private String login;
-	//@NotNull(message="Veuillez entrez un mot de passe")
 	private String hashPwd;
-	//@NotNull(message="Veuillez entrez un numéro de téléphone")
 	private String phoneNumber;
+	private boolean confirmed;
 
 	private String groupName;
 
@@ -48,6 +43,7 @@ public class User {
 	public User() {
 		this.address = new Address();
 		this.groupName = "ancien";
+		this.confirmed = false;
 	};
 
 	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
@@ -61,6 +57,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.role = role;
+		this.confirmed = false;
 	}
 
 	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
@@ -68,6 +65,7 @@ public class User {
 		this(name,firstname,mail,login,hashPwd,phoneNumber,address,role);
 //		this.id = id;
 		this.elements = elements;
+		this.confirmed = false;
 	}
 
 	public void setToVoid() {
@@ -159,6 +157,14 @@ public class User {
 
 	public void setElements(List<Element> elements) {
 		this.elements = elements;
+	}
+
+	public boolean isConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(boolean isValid) {
+		this.confirmed = isValid;
 	}
 
 	public boolean addElement(Element e) {
