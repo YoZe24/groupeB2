@@ -21,17 +21,17 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker1').datetimepicker({format: "yyyy-MM-dd HH:mm:ss"});
-        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "yyyy-MM-dd HH:mm:ss"});
+        $('#datetimepicker1').datetimepicker({format: "YYYY-MM-DD HH:mm"});
+        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "YYYY-MM-DD HH:mm"});
         $("#datetimepicker1").on("dp.change", function (e) {$('#datetimepicker2').data("DateTimePicker").minDate(e.date);});
-        $("#datetimepicker2").on("dp.change", function (e) {
-        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);});});
+        $("#datetimepicker2").on("dp.change", function (e) {$('#datetimepicker1').data("DateTimePicker").maxDate(e.date);});
+    });
 </script>
 
 </head>
 <body>
 	
-	 <!-- <h:form>
+	  <h:form enctype='multipart/form-data'>
          <fieldset>
          	<legend>Ajouter un événement</legend>
          	<h:outputLabel for="title">Titre<span class="requis">*</span></h:outputLabel>
@@ -60,41 +60,39 @@
             </div>
 	        <h:message id="endDateMessage" for="endDate" errorClass="erreur" />
 	        <br />
-	        <h:outputLabel for="pathFile">Ajout d'un fichier annexe</h:outputLabel>
-	        <h:inputText id="pathFile" value="#{eventControl.event.pathFile}"/>
-	        <h:message id="pathFileMessage" for="pathFileMessage" errorClass="erreur" />
+	        <h:outputLabel for="pathFile">Ajout d'une image ou d'un pdf</h:outputLabel>
+	  			<h:inputFile value="#{eventControl.img}"/>
+   				<br />
+		        <h:message id="pathFileMessage" for="pathFileMessage" errorClass="erreur" />
 	        <br />
 	        
 	        <fieldset>
          		<legend>Adresse</legend>
          		<h:outputLabel for="street">Rue<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="street" value="#{userControl.user.address.street}" required="true" size="20" maxlength="60" />
+	        	<h:inputText id="street" value="#{eventControl.event.address.street}" required="true" size="20" maxlength="60" />
 	        	<h:message id="streetMessage" for="street" errorClass="erreur" />
 	        	<br />
 	        	<h:outputLabel for="num">Numéro<span class="requis">*</span></h:outputLabel>
-		        <h:inputText id="num" value="#{userControl.user.address.num}" required="true" size="20" maxlength="60"/>
+		        <h:inputText id="num" value="#{eventControl.event.address.num}" required="true" size="20" maxlength="60"/>
 		        <h:message id="numMessage" for="num" errorClass="erreur" />
 		        <br />
 		        <h:outputLabel for="city">Ville<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="city" value="#{userControl.user.address.city}" required="true" size="20" maxlength="60" />
+	        	<h:inputText id="city" value="#{eventControl.event.address.city}" required="true" size="20" maxlength="60" />
 	        	<h:message id="cityMessage" for="city" errorClass="erreur" />
 	        	<br />
 	        	<h:outputLabel for="cp">Code Postal<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="cp" value="#{userControl.user.address.cp}" required="true" size="20" maxlength="60"/>
+	        	<h:inputText id="cp" value="#{eventControl.event.address.cp}" required="true" size="20" maxlength="60"/>
 	        	<h:message id="cpMessage" for="cp" errorClass="erreur" />
 	        	<br />
+     			   	<h:commandButton value="Ajouter event manual" action="#{eventControl.addEvent(userControl.userCurrent)}"></h:commandButton>
          	</fieldset>
 	        <h:messages globalOnly="true" infoClass="info" />
-	        <h:commandButton value="Ajouter le lieu" action="#{eventControl.submitEvent}" styleClass="sansLabel" />
+<!-- 	        <h:commandButton value="Ajouter le lieu" action="#{eventControl.submitEvent}" styleClass="sansLabel" />
 	        <h:commandButton value="Ajouter lieu manual" action="#{eventControl.submitEventManual}" styleClass="sansLabel" />
-	        <br/>
+ -->	        <br/>
           </fieldset>
-        </h:form> -->
-        
-        <h:form>
-        	<h:commandButton value="Ajouter event manual" action="{elementControl.submitElementManual"></h:commandButton>
         </h:form>
-        
-	
+       
+       
 </body>
 </html>

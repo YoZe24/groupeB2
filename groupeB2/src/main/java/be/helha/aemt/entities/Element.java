@@ -1,5 +1,11 @@
 package be.helha.aemt.entities;
 
+import java.awt.Image;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -8,7 +14,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
+import com.sun.el.stream.Stream;
 
 
 @Entity
@@ -21,7 +30,18 @@ public class Element implements Serializable{
 	private User author;
 	
 	private LocalDateTime publishDate;
-	private String pathFile;	
+	private String pathFile;
+	
+	@Lob
+	private byte[] img;
+	
+	public Element(User author, LocalDateTime publishDate, String pathFile, byte[] img) {
+		this();
+		this.author = author;
+		this.publishDate = publishDate;
+		this.pathFile = pathFile;
+		this.img = img;
+	}
 
 	public Element(User author, LocalDateTime publishDate, String pathFile) {
 		this();
@@ -33,6 +53,28 @@ public class Element implements Serializable{
 	public Element() {
 		this.author = new User();
 		this.publishDate = LocalDateTime.now();
+	}
+	
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+	
+	public void setImgWithPath(String path) {
+		File file = new File(path);
+		byte[] picInBytes = new byte[(int) file.length()];
+		FileInputStream fileInputStream;
+		try {
+			fileInputStream = new FileInputStream(file);
+			fileInputStream.read(picInBytes);
+			fileInputStream.close();
+			this.img = picInBytes;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setToVoid() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -18,29 +19,25 @@ import be.helha.aemt.enums.EnumRole;
 public class UserControl implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-
 	@EJB
 	private UserGestionEJB bean;
 
 	private User user;
-	private Address address;
 	
-	//Varaible for confirmation PWD
+	private User userCurrent;
+	
+	//Variable for confirmation PWD
 	private String confirmPwd = "";
 
 
 	private String messageErrorConfirmPwd = "";
 	
-	//private Address a = new Address("S1", "N1", "C1", "CP1");
-	//private User user = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1", a,EnumRole.ANCIENT);
 
 	private Address addressManuel = new Address("S1", "N1", "C1", "CP1");
 	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1", addressManuel,EnumRole.ANCIENT);
 
 	public UserControl() {
 		user = new User();
-		//address = new Address();
-		//user.setAddress(address);
 	}
 
 	public List<User> getAllUsers(){
@@ -53,6 +50,10 @@ public class UserControl implements Serializable{
 
 	public User submitUserManual() {
 		return bean.post(userManual);
+	}
+	
+	public User getUserByLogin(String login) {
+		return bean.getByLogin(login);
 	}
 
 	public User submitUser() {
@@ -84,4 +85,19 @@ public class UserControl implements Serializable{
 	public void setConfirmPwd(String confirmPwd) {
 		this.confirmPwd = confirmPwd;
 	}
+
+	public User getUserCurrent() {
+		if(userCurrent == null) {
+			String login = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+			this.userCurrent = getUserByLogin(login);
+			if(userCurrent == null) userCurrent = new User();
+		}
+		return userCurrent;
+	}
+
+	public void setUserCurrent(User userCurrent) {
+		this.userCurrent = userCurrent;
+	}
+	
+	
 }
