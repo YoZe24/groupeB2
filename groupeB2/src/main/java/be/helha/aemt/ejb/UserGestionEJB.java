@@ -43,6 +43,10 @@ public class UserGestionEJB {
 	public User get(User u) {
 		return ejb.get(u);
 	}
+	
+	public User getById(int id) {
+		return ejb.findUserById(id);
+	}
 
 	public User update(User u) {
 		return ejb.update(u);
@@ -50,6 +54,10 @@ public class UserGestionEJB {
 
 	public User getByLogin(String login) {
 		return ejb.findByLogin(login);
+	}
+	
+	public User removeUser(User user) {
+		return ejb.removeUser(user);
 	}
 
 }

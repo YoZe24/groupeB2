@@ -3,6 +3,7 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -50,8 +51,8 @@ public class UserControl implements Serializable{
 		return bean.query();
 	}
 
-	public User updateUser(User u) {
-		User userToUpdate = bean.get(u);
+	public User updateUser(int id) {
+		User userToUpdate = bean.getById(id);
 		userToUpdate.setConfirmed(true);
 		return userToUpdate;
 	}
@@ -109,15 +110,30 @@ public class UserControl implements Serializable{
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-
-	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validï¿½" : "Validï¿½";
+	
+	public User removeUser(User user) {
+		return bean.removeUser(user);
+	}
+	
+	public void removeUser() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idRemoved"));
+		User userToRemove = getUserById(userId);
+		removeUser(userToRemove);
 	}
 
-	public void confirmUser(User u) {
-		User userUpdated = updateUser(u);
+	public String convertBoolToString(boolean bool) {
+		return bool == false? "Non validé" : "Validé";
+	}
+
+	public void confirmUser() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idConfirmed"));		
+		User userUpdated = updateUser(userId);
 		bean.update(userUpdated);
-}
+	}
 
 	public User getUserCurrent() {
 		if(userCurrent == null) {
@@ -130,6 +146,10 @@ public class UserControl implements Serializable{
 
 	public void setUserCurrent(User userCurrent) {
 		this.userCurrent = userCurrent;
+	}
+	
+	public User getUserById(int id) {
+		return bean.getById(id);
 	}
 
 

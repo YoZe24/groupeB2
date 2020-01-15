@@ -32,7 +32,7 @@ public class Element implements Serializable{
 	private LocalDateTime publishDate;
 	private String pathFile;
 
-	//private boolean confirmed;
+	private boolean confirmed;
 	@Lob
 	private byte[] img;
 
@@ -42,6 +42,7 @@ public class Element implements Serializable{
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
 		this.img = img;
+		this.confirmed = false;
 	}
 
 	public Element(User author, LocalDateTime publishDate, String pathFile) {
@@ -49,13 +50,13 @@ public class Element implements Serializable{
 		this.author = author;
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
-		//this.confirmed = false;
+		this.confirmed = false;
 	}
 
 	public Element() {
 		this.author = new User();
 		this.publishDate = LocalDateTime.now();
-		//this.confirmed = false;
+		this.confirmed = false;
 	}
 
 	public byte[] getImg() {
@@ -118,13 +119,13 @@ public class Element implements Serializable{
 
 
 
-//	public boolean isConfirmed() {
-//		return confirmed;
-//	}
-//
-//	public void setConfirmed(boolean confirmed) {
-//		this.confirmed = confirmed;
-//	}
+	public boolean isConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(boolean confirmed) {
+		this.confirmed = confirmed;
+	}
 
 	public Element clone() {
 		return new Element(author, publishDate, pathFile);

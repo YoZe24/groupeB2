@@ -1,7 +1,8 @@
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <head>
 <title>Start Page</title>
 <meta http-equiv="
@@ -18,7 +19,6 @@
 
 </head>	
 <body>
-
 	<div id="header">
 		<ui:insert name="header" >
 			<ui:include src="header.xhtml" />
@@ -29,21 +29,21 @@
 	 	<p>Admin</p>
 	 </div>
 	<div class="container" id="listUsers">
-	
-	
 		<h:dataTable id="users" 
+							value="#{userControl.users}" 
+	 						var="user"
 	 						columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
 	 						headerClass="list-header" 
 	 						rowClasses="list-row" 
-	 						styleClass="list-background table table-striped table-bordered text-center" 
-	 						value="#{userControl.users}" 
-	 						var="user">
+	 						styleClass="list-background table table-striped table-bordered text-center">
 	 						
+	 						
+	 	
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Id"/>
 	 	</f:facet>
-	 	<h:outputText value="#{user.id}"/>
+	 		<h:outputText value="#{user.id}"/>	 
 	 </h:column>
 	 						
 	 <h:column>
@@ -90,7 +90,7 @@
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Valid"/>
+	 		<h:outputText value="Validé"/>
 	 	</f:facet>
 	 	<h:outputText value="#{userControl.convertBoolToString(user.confirmed)}"/>
 	 </h:column>
@@ -99,14 +99,24 @@
 	 	<f:facet name="header">
 	 		<h:outputText value="Supprimer les utilisateurs"/>
 	 	</f:facet>
-	 	<h:commandButton value="Supprimer" class="btn btn-danger"></h:commandButton>
+	 	<h:form>
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{userControl.removeUser}">
+	 			<f:param name="idRemoved" value="#{user.id}"/>
+	 		</h:commandButton>
+	 	</h:form>
+	 	
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Confirmer l'utilisateur"/>
 	 	</f:facet>
-	 	<h:commandButton value="Confirmer" class="btn btn-info" action="#{userControl.confirmUser(user)}"></h:commandButton>
+	 	<h:form>
+	 		<h:commandButton type="submit" value="Confirmer" class="btn btn-info" action="#{userControl.confirmUser}" rendered="#{not user.confirmed}">
+	 			<f:param name="idConfirmed" value="#{user.id}"/>
+	 		</h:commandButton>
+	 	</h:form>
+	 	
 	 </h:column>
 	 
 	 </h:dataTable> 

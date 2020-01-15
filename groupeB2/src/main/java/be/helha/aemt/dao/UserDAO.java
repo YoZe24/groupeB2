@@ -22,9 +22,6 @@ public class UserDAO implements Serializable {
 	@PersistenceContext(name = "groupeB2")
 	private EntityManager em;
 
-	public UserDAO() {
-	}
-
 	public UserDAO() {}
 
 	public List<User> query(){
@@ -59,6 +56,13 @@ public class UserDAO implements Serializable {
 
 		return user;
 	}
+	
+	public User removeUser(User user) {
+		User userFound = findUserById(user.getId());
+		if(userFound == null) return null;
+		em.remove(userFound);
+		return userFound;
+	}
 
 	public User update(User u) {
 		User eventFound = get(u);
@@ -78,6 +82,12 @@ public class UserDAO implements Serializable {
 		query.setParameter(1, u.getMail());
 		List<User> users = query.getResultList();
 		return users.size() == 0 ? null : users.get(0);
+	}
+	
+	public User findUserById(int id) {
+		Query query = em.createQuery("select user from User user where user.id = :varId");
+		query.setParameter("varId", id);
+		return query.getResultList().size() != 0 ? (User) query.getResultList().get(0) : null;
 	}
 
 	public Address findAddress(Address a) {
