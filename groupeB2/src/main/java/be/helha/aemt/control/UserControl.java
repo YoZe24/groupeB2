@@ -28,6 +28,7 @@ public class UserControl implements Serializable{
 	private User user;
 
 	private User userCurrent;
+	private User singleUser;
 
 	//Variable for confirmation PWD
 	private String confirmPwd = "";
@@ -37,7 +38,7 @@ public class UserControl implements Serializable{
 
 
 	private Address addressManuel = new Address("S1", "N1", "C1", "CP1");
-	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1", addressManuel,EnumRole.ANCIENT);
+	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010","section", addressManuel,EnumRole.ANCIENT);
 
 
 	private List<User> users= new ArrayList<User>();
@@ -110,11 +111,11 @@ public class UserControl implements Serializable{
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
+
 	public User removeUser(User user) {
 		return bean.removeUser(user);
 	}
-	
+
 	public void removeUser() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map map = context.getExternalContext().getRequestParameterMap();
@@ -124,13 +125,13 @@ public class UserControl implements Serializable{
 	}
 
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validé" : "Validé";
+		return bool == false? "Non validÃ©" : "ValidÃ©";
 	}
 
 	public void confirmUser() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map map = context.getExternalContext().getRequestParameterMap();
-		int userId = Integer.parseInt((String) map.get("idConfirmed"));		
+		int userId = Integer.parseInt((String) map.get("idConfirmed"));
 		User userUpdated = updateUser(userId);
 		bean.update(userUpdated);
 	}
@@ -147,9 +148,21 @@ public class UserControl implements Serializable{
 	public void setUserCurrent(User userCurrent) {
 		this.userCurrent = userCurrent;
 	}
-	
+
 	public User getUserById(int id) {
 		return bean.getById(id);
+}
+	public void singleUserDetails(int id) {
+		this.singleUser = new User();
+		this.singleUser = bean.findById(id);
+	}
+
+	public User getSingleUser() {
+		return singleUser;
+	}
+
+	public void setSingleUser(User singleUser) {
+		this.singleUser = singleUser;
 	}
 
 

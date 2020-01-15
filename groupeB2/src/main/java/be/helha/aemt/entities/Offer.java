@@ -2,10 +2,13 @@ package be.helha.aemt.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
 import be.helha.aemt.enums.EnumOfferType;
@@ -16,17 +19,18 @@ public class Offer extends Element implements Serializable{
 	private String societyName;
 	private String societyMail;
 	private String societySector;
-	private int societyNum;	
+	private String societyNum;	
 	
-	//UserPublisher ??
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address societyAddress;
 	private String functionOffer;
 	private Boolean available;
-	private List<String> skillsNeeded;
+	private String skillsNeeded;
 	private String noteSupp;
 	private String subject;
+	
+	@Enumerated(EnumType.STRING)
 	private EnumOfferType offerType;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
@@ -34,12 +38,12 @@ public class Offer extends Element implements Serializable{
 	
 	
 	public Offer() {
-		
+		this.societyAddress = new Address();
 	}
 
 	public Offer(User author, LocalDateTime publishDate, String pathFile, String societyName, String societyMail,
-			String societySector, int societyNum, Address societyAddress, String functionOffer, Boolean available,
-			List<String> skillsNeeded, String noteSupp, String subject, EnumOfferType offerType,
+			String societySector, String societyNum, Address societyAddress, String functionOffer, Boolean available,
+			String skillsNeeded, String noteSupp, String subject, EnumOfferType offerType,
 			LocalDateTime startDate, LocalDateTime endDate, double amount) {
 		super(author, publishDate, pathFile);
 		this.societyName = societyName;
@@ -106,10 +110,10 @@ public class Offer extends Element implements Serializable{
 	public void setSocietySector(String societySector) {
 		this.societySector = societySector;
 	}
-	public int getSocietyNum() {
+	public String getSocietyNum() {
 		return societyNum;
 	}
-	public void setSocietyNum(int societyNum) {
+	public void setSocietyNum(String societyNum) {
 		this.societyNum = societyNum;
 	}
 	public String getFunctionOffer() {
@@ -118,10 +122,10 @@ public class Offer extends Element implements Serializable{
 	public void setFunctionOffer(String functionOffer) {
 		this.functionOffer = functionOffer;
 	}
-	public List<String> getSkillsNeeded() {
+	public String getSkillsNeeded() {
 		return skillsNeeded;
 	}
-	public void setSkillsNeeded(List<String> skillsNeeded) {
+	public void setSkillsNeeded(String skillsNeeded) {
 		this.skillsNeeded = skillsNeeded;
 	}
 	public String getNoteSupp() {
@@ -142,6 +146,8 @@ public class Offer extends Element implements Serializable{
 	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
+	
+	
 	public Offer clone() {
 		Element el = super.clone();
 		return new Offer(el.getAuthor(), el.getPublishDate(), el.getPathFile(), societyName, societyMail, societySector, societyNum, societyAddress, functionOffer, available, skillsNeeded, noteSupp, subject, offerType, startDate, endDate, amount);
@@ -181,6 +187,12 @@ public class Offer extends Element implements Serializable{
 				+ functionOffer + ", skillsNeeded=" + skillsNeeded + ", noteSupp=" + noteSupp + ", subject=" + subject
 				+ ", offerType=" + offerType + ", startDate=" + startDate + ", endDate=" + endDate + ", amount="
 				+ amount + super.toString() + "]";
+	}
+	
+	public String convertDateIntoString(LocalDateTime date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dateTimeString = date.format(formatter);
+		return dateTimeString;
 	}
 	
 	

@@ -2,12 +2,16 @@ package be.helha.aemt.control;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
 import be.helha.aemt.entities.Address;
@@ -24,12 +28,19 @@ public class OfferControl implements Serializable {
 	private OfferGestionEJB bean;
 	private Offer offer;
 	private String name = "OfferEJB";
-	private EnumOfferType typeOfferChoose = EnumOfferType.TRAINING;
+	private EnumOfferType typeOfferChoose = null;
 	private List<Offer> listOfferLoad = new ArrayList<>();
 	
+	private Part pdf;
+	
+	private String startDateStr = "";
+	private String endDateStr = "";
+	
+	private boolean offerTypeIsOk;
 
 	public OfferControl() {
 		offer = new Offer();
+		offer.setOfferType(EnumOfferType.CDD);
 	}
 	public EnumOfferType[] getOfferTypes() {
 		return EnumOfferType.values();
@@ -49,13 +60,39 @@ public class OfferControl implements Serializable {
 	public Offer postOffer(Offer o) {
 		return bean.post(o);
 	}
+	
+	public Offer addOffer(User u) {
+		if(this.offer.getOfferType() != EnumOfferType.CDD) {
+			this.offer.setStartDate(convertDateStrToLocalDateTime(startDateStr));
+			this.offer.setEndDate(convertDateStrToLocalDateTime(endDateStr));
+		}
+		
+		byte[] pdfBytes = new byte[(int) pdf.getSize()];
+		try {
+			pdf.getInputStream().read(pdfBytes);
+			this.offer.setImg(pdfBytes);
+		}catch (Exception e) {
+		}
+		
+		this.offer.setAuthor(u);
+		
+		System.out.println(offer);
+		return postOffer(offer);
+	}
+	
 	public Offer submitOffer() {
 		List<String> skills = new ArrayList<>();
 		Address a = new Address("testOffer", "offerNum", "offerCity", "offerCp");
 		Address aUser = new Address("testOfferUser", "userNum", "userCity", "userCp");
-		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer", aUser, EnumRole.ANCIENT);
+		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
 		this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector",1,a,"functionOffer",true, skills,"noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
+		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
+		this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector","03",a,"functionOffer",true, "Java,Mysql","noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
 		return bean.post(offer);
+	}
+	
+	public boolean renderDate() {
+		return offer.getOfferType() != EnumOfferType.CDD;
 	}
 	
 	public Offer deleteOffer(Offer o) {
@@ -68,9 +105,9 @@ public class OfferControl implements Serializable {
 		return bean.updateStatut(o);
 	}
 	public void loadListOffer (EnumOfferType type) {
-		this.listOfferLoad = getAllByOfferType(EnumOfferType.CDD);
+		System.out.println("Type choisis: " + typeOfferChoose);
+		this.listOfferLoad = getAllByOfferType(type);
 	}
-	
 	public List<Offer> getAllByOfferType(EnumOfferType type){
 		return bean.getAllByOfferType(type);
 	}
@@ -95,5 +132,39 @@ public class OfferControl implements Serializable {
 	public void setListOfferLoad(List<Offer> listOfferLoad) {
 		this.listOfferLoad = listOfferLoad;
 	}
+	
+	public boolean isOfferTypeIsOk() {
+		return renderDate();
+	}
+	public void setOfferTypeIsOk(boolean offerTypeIsOk) {
+		this.offerTypeIsOk = offerTypeIsOk;
+	}
+	
+	private LocalDateTime convertDateStrToLocalDateTime(String dateStr) {
+		if(dateStr == null || dateStr.length() == 0) return LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime dateTime = LocalDateTime.parse(dateStr, formatter);
+		return dateTime;
+	}
+	public String getStartDateStr() {
+		return startDateStr;
+	}
+	public void setStartDateStr(String startDateStr) {
+		this.startDateStr = startDateStr;
+	}
+	public String getEndDateStr() {
+		return endDateStr;
+	}
+	public void setEndDateStr(String endDateStr) {
+		this.endDateStr = endDateStr;
+	}
+	public Part getPdf() {
+		return pdf;
+	}
+	public void setPdf(Part pdf) {
+		this.pdf = pdf;
+	}
 
+	
+	
 }

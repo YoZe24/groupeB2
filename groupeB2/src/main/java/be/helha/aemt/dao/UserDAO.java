@@ -56,7 +56,7 @@ public class UserDAO implements Serializable {
 
 		return user;
 	}
-	
+
 	public User removeUser(User user) {
 		User userFound = findUserById(user.getId());
 		if(userFound == null) return null;
@@ -77,13 +77,20 @@ public class UserDAO implements Serializable {
 		return users.size() == 0 ? null : users.get(0);
 	}
 
+	public User findById(int id) {
+		Query query = em.createQuery("Select u from User u where u.id = ?1");
+		query.setParameter(1, id);
+		List<User> users = query.getResultList();
+		return users.size() == 0 ? null : users.get(0);
+	}
+
 	public User findUserByEmail(User u) {
 		Query query = em.createQuery("Select user from User user where user.mail = ?1");
 		query.setParameter(1, u.getMail());
 		List<User> users = query.getResultList();
 		return users.size() == 0 ? null : users.get(0);
 	}
-	
+
 	public User findUserById(int id) {
 		Query query = em.createQuery("select user from User user where user.id = :varId");
 		query.setParameter("varId", id);

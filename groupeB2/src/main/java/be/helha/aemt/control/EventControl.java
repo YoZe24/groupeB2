@@ -1,5 +1,7 @@
 package be.helha.aemt.control;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,12 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.persistence.PersistenceContext;
 import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.EventGestionEJB;
@@ -43,12 +43,12 @@ public class EventControl implements Serializable {
 	private String endDateStr = "";
 
 	Address aUser = new Address("testEventUser", "1", "2", "3");
-	User u = new User("test", "test", "test@gmail.com", "test", "test", "test", aUser, EnumRole.ANCIENT);
+	User u = new User("test", "test", "test@gmail.com", "test", "test", "test","test","test", aUser, EnumRole.ANCIENT);
 
 
 	private Address addressUserTest = new Address("S2", "N2", "C2", "CP2");
 	private Address addressEventTest = new Address("TEST", "TEST", "TEST", "TEST");
-	private User userTest = new User("userTestName", "userTestFirstName", "userTestMail", "userTestLogin", "testMDP", "00000", addressUserTest, EnumRole.ADMINISTRATOR);
+	private User userTest = new User("userTestName", "userTestFirstName", "userTestMail", "userTestLogin", "testMDP", "00000","2010","Assistant de direction", addressUserTest, EnumRole.ADMINISTRATOR);
 	private LocalDateTime dateTimePublish = LocalDateTime.parse("2020-01-08 00:00:00",DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	private LocalDateTime startDateTestEvent = LocalDateTime.parse("2020-01-09 00:00:00",DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	private LocalDateTime endDateTestEvent = LocalDateTime.parse("2020-01-10 00:00:00",DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -67,6 +67,7 @@ public class EventControl implements Serializable {
 		return bean.query();
 	}
 
+	
 	public Event get(Event e) {
 		return bean.get(e);
 	}
@@ -94,12 +95,22 @@ public class EventControl implements Serializable {
 	public void loadEvents(){
 		this.events = getAllEvents();
 	}
+	
+	public void download() throws IOException {
+       FacesContext facesContext = FacesContext.getCurrentInstance();
+       ExternalContext externalContext = facesContext.getExternalContext();
+       externalContext.responseReset();
+       externalContext.setResponseContentType("application/pdf");
+       externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "file.pdf" + "\"");
+       OutputStream outputStream = externalContext.getResponseOutputStream();
+       outputStream.write(getImgBytes("titleEvent3"));
+       facesContext.responseComplete();
+	}
 
 	public Event addEvent(User user) {
 		this.event.setStartDate(convertDateStrToLocalDateTime(startDateStr));
 		this.event.setEndDate(convertDateStrToLocalDateTime(endDateStr));
 
-		System.out.println(img.getSize());
 
 		byte[] picBytes = new byte[(int) img.getSize()];
 		try {
@@ -109,7 +120,6 @@ public class EventControl implements Serializable {
 		}
 
 		this.event.setAuthor(user);
-		System.out.println(event);
 		return post(event);
 
 	}
@@ -117,7 +127,7 @@ public class EventControl implements Serializable {
 	public Event submitEvent() {
 		Address a = new Address("testEvent", "1", "2", "3");
 		this.eventManual2 = new Event(u, LocalDateTime.now(), "pathFile", LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(2), a, "titleEvent3", "descEvent");
-		this.eventManual2.setImgWithPath("C:\\Users\\eliot\\Desktop\\cv\\Capture.PNG");
+		this.eventManual2.setImgWithPath("C:\\Users\\eliot\\Desktop\\cv\\CV_ANGLAIS.pdf");
 		return bean.post(eventManual2);
 	}
 
