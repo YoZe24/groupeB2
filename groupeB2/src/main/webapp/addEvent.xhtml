@@ -20,8 +20,8 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker1').datetimepicker({format: "YYYY-MM-DD HH:mm"});
-        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "YYYY-MM-DD HH:mm"});
+        $('#datetimepicker1').datetimepicker({format: "YYYY-MM-DD HH:mm:ss"});
+        $('#datetimepicker2').datetimepicker({useCurrent: false,format: "YYYY-MM-DD HH:mm:ss"});
         $("#datetimepicker1").on("dp.change", function (e) {$('#datetimepicker2').data("DateTimePicker").minDate(e.date);});
         $("#datetimepicker2").on("dp.change", function (e) {$('#datetimepicker1').data("DateTimePicker").maxDate(e.date);});
     });
@@ -93,6 +93,11 @@
 	        <h:commandButton value="Ajouter lieu manual" action="#{eventControl.submitEventManual}" styleClass="sansLabel" />
  -->	        <br/>
           </fieldset>
+
+        </h:form>
+
+        <h:form>
+        	<h:commandButton value="Ajouter event manual" action="{elementControl.submitElementManual"></h:commandButton>
         </h:form>
 
 

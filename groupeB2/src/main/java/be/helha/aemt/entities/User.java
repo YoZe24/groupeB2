@@ -28,6 +28,7 @@ public class User {
 	private String login;
 	private String hashPwd;
 	private String phoneNumber;
+	private boolean confirmed;
 
 	private String groupName;
 
@@ -42,6 +43,7 @@ public class User {
 	public User() {
 		this.address = new Address();
 		this.groupName = "ancien";
+		this.confirmed = false;
 	};
 
 	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
@@ -55,6 +57,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.role = role;
+		this.confirmed = false;
 	}
 
 	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber,
@@ -62,6 +65,7 @@ public class User {
 		this(name,firstname,mail,login,hashPwd,phoneNumber,address,role);
 //		this.id = id;
 		this.elements = elements;
+		this.confirmed = false;
 	}
 
 	public void setToVoid() {
@@ -153,6 +157,14 @@ public class User {
 
 	public void setElements(List<Element> elements) {
 		this.elements = elements;
+	}
+
+	public boolean isConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(boolean isValid) {
+		this.confirmed = isValid;
 	}
 
 	public boolean addElement(Element e) {

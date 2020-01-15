@@ -29,7 +29,7 @@
 	 	<a href="https://www.facebook.com/helha.be">Facebook</a>                     <a href="https://www.instagram.com/helhabe/">Instagram</a>                     <a href="https://www.helha.be">Site Web</a>
 	 </div>
 	 <br/>
-	 
+
 	 <div  class="container jumbotron" id="listEventDiv">
 	 	<ui:repeat value="#{eventControl.query()}" var="event">
 	 		<div id="eventOne">
@@ -66,36 +66,36 @@
 				</div>
 	 		</div>
 	 	</ui:repeat>
-	 
-	 
-	 	<!--  <h:dataTable value="#{eventControl.query()}" var="event" 
+
+
+	 	<!--  <h:dataTable value="#{eventControl.query()}" var="event"
 	 			styleClass="list-background table table-striped table-bordered text-center"
 	 			columnClasses="listColumnCenter,listColumnCenter,listColumnCenter,listColumnCenter"
 	 			headerClass="list-header"
 	 			rowClasses="list-row">
-	 		<h:column>    				
-			    <f:facet name="header">Titre</f:facet>    				
+	 		<h:column>
+			    <f:facet name="header">Titre</f:facet>
 			    	<h:outputText value="#{event.title}"/>
 			</h:column>
-			<h:column>    				
-			    <f:facet name="header">Description</f:facet>    				
+			<h:column>
+			    <f:facet name="header">Description</f:facet>
 			    	<h:outputText value="#{event.description}"/>
 			</h:column>
-			<h:column>    				
-			    <f:facet name="header">Date début</f:facet>    				
+			<h:column>
+			    <f:facet name="header">Date début</f:facet>
 			    	<h:outputText value="#{event.startDate}"/>
 			</h:column>
-			<h:column>    				
-			    <f:facet name="header">Date de fin</f:facet>    		
+			<h:column>
+			    <f:facet name="header">Date de fin</f:facet>
 			    	<h:outputText value="#{event.endDate}">
-			    		<f:convertDateTime type="date" pattern="yyyy-MM-dd"/>		
+			    		<f:convertDateTime type="date" pattern="yyyy-MM-dd"/>
 			    	</h:outputText>
 			</h:column>
 	 	</h:dataTable>-->
 	 </div>
-	 
-	 
-	 
+
+
+
 
 	<h:form>
 		<h:commandButton class="btn btn-info" value="Ajout element" action="#{eventControl.submitEvent}"></h:commandButton>
@@ -107,8 +107,8 @@
 		<h:commandButton value="Ajout offre manuelle" action="#{offerControl.submitOffer}"></h:commandButton>
 
 		<h:commandButton class="btn btn-info" value="Ajout portrait" action="addPortrait.xhtml"></h:commandButton>
-
-		<h:commandButton class="btn btn-warning" value="List users" action="list.xhtml"></h:commandButton>
+		<h:commandButton class="btn btn-info" value="Afficher les utilisateurs" onclick="#{userControl.loadUsers()}" action="seeAllUsers.xhtml"></h:commandButton>
+		<h:commandButton class="btn btn-info" value="Afficher les events" onclick="#{eventControl.loadEvents()}" action="seeAllEvents.xhtml"></h:commandButton>
 
 	</h:form>
 	<!--<h:form>

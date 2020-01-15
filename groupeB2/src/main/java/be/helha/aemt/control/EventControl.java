@@ -3,6 +3,7 @@ package be.helha.aemt.control;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -54,6 +55,8 @@ public class EventControl implements Serializable {
 
 	private Event eventManual = new Event(userTest, dateTimePublish,"testPathFile",startDateTestEvent, endDateTestEvent, addressEventTest, "testTitle", "testDescription");
 
+	private List<Event> events = new ArrayList<Event>();
+
 	public EventControl() {
 		event = new Event();
 		eventManual = new Event();
@@ -84,10 +87,18 @@ public class EventControl implements Serializable {
 		return bean.update(e);
 	}
 
+	public List<Event> getAllEvents(){
+		return bean.query();
+	}
+
+	public void loadEvents(){
+		this.events = getAllEvents();
+	}
+
 	public Event addEvent(User user) {
 		this.event.setStartDate(convertDateStrToLocalDateTime(startDateStr));
 		this.event.setEndDate(convertDateStrToLocalDateTime(endDateStr));
-		
+
 		System.out.println(img.getSize());
 
 		byte[] picBytes = new byte[(int) img.getSize()];
@@ -177,7 +188,17 @@ public class EventControl implements Serializable {
 		LocalDateTime dateTime = LocalDateTime.parse(dateStr, formatter);
 		return dateTime;
 	}
-	
+
+
+
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
 
 
 

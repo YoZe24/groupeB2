@@ -28,92 +28,109 @@
 	 <div class="container text-center" id="welcomeMessage">
 	 	<p>Admin</p>
 	 </div>
-	<div class="container" id="listUsers">
+	 <div class="container" id="listEvents">
 	
 	
-		<h:dataTable id="users" 
-	 						columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
+		<h:dataTable id="events" 
+	 						columnClasses="columnCenter,columnCenter,columnCenter" 
 	 						headerClass="list-header" 
 	 						rowClasses="list-row" 
 	 						styleClass="list-background table table-striped table-bordered text-center" 
-	 						value="#{userControl.users}" 
-	 						var="user">
+	 						value="#{eventControl.events}" 
+	 						var="event">
 	 						
+	<h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Date publication"/>
+	 	</f:facet>
+	 	<h:outputText value="#{event.convertDateInToString(event.publishDate)}"/>
+	 </h:column> 						
+	
+	
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Id"/>
+	 		<h:outputText value="Auteur"/>
 	 	</f:facet>
-	 	<h:outputText value="#{user.id}"/>
+	 	<h:outputText value="#{event.author.login}"/>
 	 </h:column>
-	 						
+	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Nom"/>
 	 	</f:facet>
-	 	<h:outputText value="#{user.name}"/>
+	 	<h:outputText value="#{event.author.name}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Prénom"/>
 	 	</f:facet>
-	 	<h:outputText value="#{user.firstname}"/>
+	 	<h:outputText value="#{event.author.firstname}"/>
+	 </h:column>
+	 						
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Titre événement"/>
+	 	</f:facet>
+	 	<h:outputText value="#{event.title}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Mail"/>
+	 		<h:outputText value="Description"/>
 	 	</f:facet>
-	 	<h:outputText value="#{user.mail}"/>
+	 	<h:outputText value="#{event.description}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Login"/>
+	 		<h:outputText value="Début de l'événement"/>
 	 	</f:facet>
-	 	<h:outputText value="#{user.login}"/>
+	 	<h:outputText value="#{event.convertDateInToString(event.startDate)}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Numéro de téléphone"/>
+	 		<h:outputText value="Fin de l'événement"/>
 	 	</f:facet>
-	 	<h:outputText value="#{user.phoneNumber}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Adresse"/>
-	 	</f:facet>
-	 	<h:outputText value="#{user.address}"/>
+	 	<h:outputText value="#{event.convertDateInToString(event.endDate)}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Valid"/>
 	 	</f:facet>
-	 	<h:outputText value="#{userControl.convertBoolToString(user.confirmed)}"/>
+	 	<h:outputText value="#{elementControl.convertBoolToString(event.confirmed)}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Supprimer les utilisateurs"/>
+	 		<h:outputText value="Lieu"/>
+	 	</f:facet>
+	 	<h:outputText value="#{event.address}"/>
+	 </h:column>
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Supprimer les évenements"/>
 	 	</f:facet>
 	 	<h:commandButton value="Supprimer" class="btn btn-danger"></h:commandButton>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Confirmer l'utilisateur"/>
+	 		<h:outputText value="Confirmer l'événement"/>
 	 	</f:facet>
-	 	<h:commandButton value="Confirmer" class="btn btn-info" action="#{userControl.confirmUser(user)}"></h:commandButton>
+	 	<h:commandButton value="Confirmer" class="btn btn-info"></h:commandButton>
 	 </h:column>
+	 
+	 
 	 
 	 </h:dataTable> 
 	
 	
 	</div>
-	 
+	  
 	 
 	 
 	 

@@ -25,16 +25,17 @@ public class Element implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private User author;
-	
+
 	private LocalDateTime publishDate;
 	private String pathFile;
-	
+
+	//private boolean confirmed;
 	@Lob
 	private byte[] img;
-	
+
 	public Element(User author, LocalDateTime publishDate, String pathFile, byte[] img) {
 		this();
 		this.author = author;
@@ -48,13 +49,15 @@ public class Element implements Serializable{
 		this.author = author;
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
+		//this.confirmed = false;
 	}
 
 	public Element() {
 		this.author = new User();
 		this.publishDate = LocalDateTime.now();
+		//this.confirmed = false;
 	}
-	
+
 	public byte[] getImg() {
 		return img;
 	}
@@ -62,7 +65,7 @@ public class Element implements Serializable{
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
-	
+
 	public void setImgWithPath(String path) {
 		File file = new File(path);
 		byte[] picInBytes = new byte[(int) file.length()];
@@ -76,11 +79,11 @@ public class Element implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setToVoid() {
 		this.author.setToVoid();
 	}
-	
+
 	public User getAuthor() {
 		return author;
 	}
@@ -112,7 +115,17 @@ public class Element implements Serializable{
 	public void setPublishDate(LocalDateTime publishDate) {
 		this.publishDate = publishDate;
 	}
-	
+
+
+
+//	public boolean isConfirmed() {
+//		return confirmed;
+//	}
+//
+//	public void setConfirmed(boolean confirmed) {
+//		this.confirmed = confirmed;
+//	}
+
 	public Element clone() {
 		return new Element(author, publishDate, pathFile);
 	}

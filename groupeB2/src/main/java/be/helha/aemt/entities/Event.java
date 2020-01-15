@@ -29,7 +29,7 @@ public class Event extends Element implements Serializable{
 		this.title = title;
 		this.description = description;
 	}
-	
+
 	public Event() {
 		super();
 		this.address = new Address();
@@ -74,9 +74,9 @@ public class Event extends Element implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public String convertDateIntoString(LocalDateTime date) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E : dd/MM/yyyy - hh:mm a");
+
+	public String convertDateInToString(LocalDateTime date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy HH:mm ");
 		String dateTimeString = date.format(formatter);
 		return dateTimeString;
 	}
@@ -84,7 +84,7 @@ public class Event extends Element implements Serializable{
 	@Override
 	public String toString() {
 		return "Event [startDate=" + startDate + ", endDate=" + endDate + ", address=" + address + ", title=" + title
-				+ ", description=" + description +"author="+ getAuthor().toString() + "]";
+				+ ", description=" + description + "author=" + getAuthor().toString() + "]";
 	}
 
 	@Override

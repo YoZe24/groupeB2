@@ -14,18 +14,18 @@ import be.helha.aemt.entities.User;
 
 @Stateless
 public class UserGestionEJB {
-	
+
 	@EJB
 	private UserDAO ejb;
-	
+
 	public UserGestionEJB() {
 		//ejb = new UserDAO();
 	}
-	
+
 	public List<User> query(){
 		return ejb.query();
 	}
-	
+
 	public User post(User u) {
 		MessageDigest digest;
 		try {
@@ -40,6 +40,14 @@ public class UserGestionEJB {
 		return ejb.postUser(u);
 	}
 	
+	public User get(User u) {
+		return ejb.get(u);
+	}
+
+	public User update(User u) {
+		return ejb.update(u);
+	}
+
 	public User getByLogin(String login) {
 		return ejb.findByLogin(login);
 	}
