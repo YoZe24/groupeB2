@@ -37,4 +37,8 @@ public class PortraitGestionEJB {
 	public Portrait update(Portrait p) {
 		return ejb.update(p);
 	}
+	
+	public Portrait getById(int id) {
+		return ejb.findById(id);
+	}
 }

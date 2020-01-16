@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -15,6 +17,7 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.PortraitGestionEJB;
+import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Portrait;
 import be.helha.aemt.entities.User;
 
@@ -33,6 +36,8 @@ public class PortraitControl implements Serializable {
 	private Part img;
 	
 	private Portrait portrait;
+	
+	private List<Portrait> portraits = new ArrayList<Portrait>();
 	
 	public PortraitControl() {
 		this.portrait = new Portrait();
@@ -97,6 +102,42 @@ public class PortraitControl implements Serializable {
 	public void setPortrait(Portrait portrait) {
 		this.portrait = portrait;
 	}
+
+	public List<Portrait> getPortraits() {
+		return portraits;
+	}
+
+	public void setPortraits(List<Portrait> portraits) {
+		this.portraits = portraits;
+	}
+	
+	public Portrait getPortraitById(int id) {
+		return bean.getById(id);
+	}
+	
+	public void removePortrait() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int portraitId = Integer.parseInt((String) map.get("idRemoved"));
+		
+		Portrait portraitToRemove = getPortraitById(portraitId);
+		removePortrait(portraitToRemove);
+		portraits.remove(portraitToRemove);
+	}
+	
+	public Portrait removePortrait(Portrait portrait) {
+		return bean.delete(portrait);
+	}
+	
+	public void loadPortrait(){
+		this.portraits = getAllPortraits();
+	}
+	
+	public List<Portrait> getAllPortraits(){
+		return bean.query();
+	}
+	
+	
 	
 	
 }

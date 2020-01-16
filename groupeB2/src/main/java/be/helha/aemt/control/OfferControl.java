@@ -88,7 +88,7 @@ public class OfferControl implements Serializable {
 		List<String> skills = new ArrayList<>();
 		Address a = new Address("testOffer", "offerNum", "offerCity", "offerCp");
 		Address aUser = new Address("testOfferUser", "userNum", "userCity", "userCp");
-		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer",EnumSection.ECONOMIQUE, aUser, EnumRole.ANCIENT);
+		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer",EnumSection.ASSISTANT_DIRECTION, aUser, EnumRole.ANCIENT);
 		//this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector",1,a,"functionOffer",true, skills,"noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
 		//User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
 		this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector","03",a,"functionOffer",true, "Java,Mysql","noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
@@ -106,6 +106,7 @@ public class OfferControl implements Serializable {
 	}
 	
 	public Offer removeOffer(Offer offer) {
+		listOfferLoad.remove(offer);
 		return bean.delete(offer);
 	}
 	
@@ -115,8 +116,10 @@ public class OfferControl implements Serializable {
 		Map map = context.getExternalContext().getRequestParameterMap();
 		int offerId = Integer.parseInt((String) map.get("idConfirmed"));
 		Offer offerUpdated = updateOffer(offerId);
+		System.out.println(offerUpdated);
 		bean.update(offerUpdated);
 		listOfferLoad.set(listOfferLoad.indexOf(offerUpdated), offerUpdated);
+		//System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++"+listOfferLoad.get(offerId));
 	}
 	
 	public Offer updateOffer(int id) {
@@ -141,6 +144,8 @@ public class OfferControl implements Serializable {
 	
 	public void loadListOffer() {
 		this.listOfferLoad = getAllByOffer();
+		for (Offer offer : listOfferLoad) {
+		}
 	}
 	
 	public void loadListOffer (EnumOfferType type) {
@@ -211,6 +216,18 @@ public class OfferControl implements Serializable {
 	
 	public String convertBoolToString(boolean bool) {
 		return bool == false? "Non validé" : "Validé";
+	}
+	
+	public void seeNotConfirmedUsers() {
+		List<Offer> listOfferNotConfirmed = new ArrayList<Offer>();
+		for (Offer offer : listOfferLoad) {
+			if(!offer.isConfirmed()) listOfferNotConfirmed.add(offer);
+		}
+		setListOfferLoad(listOfferNotConfirmed);
+	}
+	
+	public void seeAllOffers() {
+		loadListOffer();
 	}
 
 	

@@ -17,6 +17,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script>
+$(document).ready(function(){
+  $("#searchBar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".list-row").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 </head>	
 <body>
 
@@ -27,8 +38,40 @@
 	 </div>
 	 <br/>
 	 <div class="container text-center" id="welcomeMessage">
-	 	<p>Admin</p>
+	 	<div><b>Section admin : </b></div>	
+	 	<div><b>Listes des offres postées par les utilisateurs</b></div>	 	
 	 </div>
+	 
+	 
+	 <div class="container text-center">
+	 
+	 		 <div class="d-flex justify-content-center">
+	 	
+	 		<div class="p-3">
+			<h:form>
+				<h:commandButton type="submit" value="Afficher les offres non validés" class="btn btn-warning form-control" action="#{offerControl.seeNotConfirmedUsers}"/>
+			</h:form>
+		 </div>
+	 
+		 <div class="p-3">
+			<h:form>
+				<h:commandButton type="submit" value="Afficher les offres" class="btn btn-warning" action="#{offerControl.seeAllOffers}"/>
+			</h:form>
+		 </div>
+	 
+	 	
+	 
+	 		</div>
+	 
+	 <div class="d-flex justify-content-center">
+	 	<i class="fas fa-file-signature prefix align-self-center"/>
+	 	<input type="text" id="searchBar" class="form-control" placeholder="Rechercher une offre postée"/>
+	 </div>
+	 
+	 </div>
+	 
+	 
+	 
 	 <div class="container-fluid" id="listOffers">
 	
 	
@@ -117,22 +160,6 @@
 	 	</f:facet>
 	 	<h:outputText value="#{offerControl.convertBoolToString(offer.confirmed)}"/>
 	 </h:column>
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 	 
 	 
