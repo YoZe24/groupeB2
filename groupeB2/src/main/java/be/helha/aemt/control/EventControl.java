@@ -69,7 +69,7 @@ public class EventControl implements Serializable {
 		return bean.query();
 	}
 
-	
+
 	public Event get(Event e) {
 		return bean.get(e);
 	}
@@ -97,7 +97,7 @@ public class EventControl implements Serializable {
 	public void loadEvents(){
 		this.events = getAllEvents();
 	}
-	
+
 	public void download() throws IOException {
        FacesContext facesContext = FacesContext.getCurrentInstance();
        ExternalContext externalContext = facesContext.getExternalContext();
@@ -211,25 +211,25 @@ public class EventControl implements Serializable {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-	
+
 	public Event getEventById(int id) {
 		return bean.getById(id);
 	}
-	
+
 	public void removeEvent() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map map = context.getExternalContext().getRequestParameterMap();
 		int eventId = Integer.parseInt((String) map.get("idRemoved"));
-		
+
 		Event eventToRemove = getEventById(eventId);
 		removeEvent(eventToRemove);
 		events.remove(eventToRemove);
 	}
-	
+
 	public Event removeEvent(Event event) {
 		return bean.delete(event);
 	}
-	
+
 	public void confirmEvent() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map map = context.getExternalContext().getRequestParameterMap();
@@ -238,7 +238,7 @@ public class EventControl implements Serializable {
 		bean.update(eventUpdated);
 		events.set(events.indexOf(eventUpdated),eventUpdated);
 	}
-	
+
 	public Event updateEvent(int id) {
 		Event eventToUpdate = bean.getById(id);
 		eventToUpdate.setConfirmed(true);

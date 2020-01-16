@@ -77,7 +77,7 @@ public class UserControl implements Serializable{
 		users.remove(userToRemove);
 		return bean.removeWithElements(userToRemove);
 	}
-	
+
 	public User submitUserManual() {
 		return bean.post(userManual);
 	}
@@ -138,7 +138,7 @@ public class UserControl implements Serializable{
 	}
 
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validé" : "Validé";
+		return bool == false? "Non validï¿½" : "Validï¿½";
 	}
 
 	public void confirmUser() {
@@ -166,14 +166,11 @@ public class UserControl implements Serializable{
 	public User getUserById(int id) {
 		return bean.getById(id);
 }
-	public void singleUserDetails(int id) {
-		this.singleUser = new User();
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		Map map = context.getExternalContext().getRequestParameterMap();
-//		int userId = Integer.parseInt((String) map.get("idUser"));
-//		System.out.println(userId);
-		System.out.println(id);
-		this.singleUser = bean.findById(id);
+	public void singleUserDetails() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idClicked"));
+		setSingleUser(bean.getById(userId));
 	}
 
 	public User getSingleUser() {
@@ -183,7 +180,7 @@ public class UserControl implements Serializable{
 	public void setSingleUser(User singleUser) {
 		this.singleUser = singleUser;
 	}
-	
+
 	public void seeNotConfirmedUsers() {
 		List<User> listUserNotConfirmed = new ArrayList<User>();
 		for (User user : users) {
@@ -191,10 +188,13 @@ public class UserControl implements Serializable{
 		}
 		setUsers(listUserNotConfirmed);
 	}
-	
+
 	public void seeAllUsers() {
 		loadUsers();
 	}
 
+	public String changePage() {
+		return "singleUser.xhtml";
+	}
 
 }

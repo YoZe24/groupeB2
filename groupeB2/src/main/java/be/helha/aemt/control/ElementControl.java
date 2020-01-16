@@ -34,7 +34,7 @@ public class ElementControl implements Serializable {
 
 	private Address addressUserTest = new Address("S2", "N2", "C2", "CP2");
 	private Address addressEventTest = new Address("TEST", "TEST", "TEST", "TEST");
-	private User userTest = new User("userTestName", "userTestFirstName", "userTestMail", "userTestLogin", "testMDP", "00000", "2010", EnumSection.COMPTABILITE, addressUserTest, EnumRole.ADMINISTRATOR);
+	private User userTest = new User("userTestName", "userTestFirstName", "userTestMail", "userTestLogin", "testMDP", "00000", "2010", EnumSection.INFORMATIQUE, addressUserTest, EnumRole.ADMINISTRATOR);
 	private LocalDateTime dateTimePublish = LocalDateTime.parse("2020-01-08 00:00:00",DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	private LocalDateTime startDateTestEvent = LocalDateTime.parse("2020-01-09 00:00:00",DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	private LocalDateTime endDateTestEvent = LocalDateTime.parse("2020-01-10 00:00:00",DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -53,19 +53,19 @@ public class ElementControl implements Serializable {
 	public Element post(Element e) {
 		return bean.post(e);
 	}
-	
+
 	public Element remove(Element e) {
 		return bean.remove(e);
 	}
-	
+
 	public boolean removeElementFromAuthor(User user) {
 		return bean.removeElementsFromAuthor(user);
 	}
-	
+
 //	public Element removeFromForm(Element e) {
-//		
+//
 //	}
-	
+
 	public List<Element> getElementsFromUser(User user){
 		return bean.getElementsFromUser(user);
 	}
@@ -86,35 +86,35 @@ public class ElementControl implements Serializable {
 		System.out.println(eventManual.toString());
 		return post(eventManual);
 	}
-	
+
 	public String convertBoolToString(boolean bool) {
-		return !bool ? "Pas validé" : "Validé";
+		return !bool ? "Pas validï¿½" : "Validï¿½";
 	}
-	
+
 	public String getTitleOrNull(Element e) {
 		if(e instanceof Event) {
 			return ((Event)e).getTitle();
 		}return "/";
 	}
-	
+
 	public String getFunctionOfferOrNull(Element e) {
 		if(e instanceof Offer) {
 			return ((Offer)e).getFunctionOffer();
 		}return "/";
 	}
-	
+
 	public String getOfferTypeOrNull(Element e) {
 		if(e instanceof Offer) {
 			return ((Offer)e).getOfferType().getType();
 		}return "/";
 	}
-	
+
 	public String getNameOrNull(Element e) {
 		if(e instanceof Portrait) {
 			return ((Portrait)e).getName();
 		}return "/";
 	}
-	
+
 	public String getFirstnameOrNull(Element e) {
 		if(e instanceof Portrait) {
 			return ((Portrait)e).getFirstname();

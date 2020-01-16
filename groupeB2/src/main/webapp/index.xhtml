@@ -68,7 +68,16 @@
 	 		<br/>
 	 	</ui:repeat>
 	 </div>
-
+	 <div  class="container jumbotron" id="listPortraitDiv">
+	 	<ui:repeat value="#{portraitControl.query()}" var="port">
+	 		<div id="portraitOne">
+	 			<div class="container">
+	 			#{port}
+				</div>
+	 		</div>
+	 		<br/>
+	 	</ui:repeat>
+	 </div>
 
 
 
