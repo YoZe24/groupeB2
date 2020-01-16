@@ -1,5 +1,7 @@
 package be.helha.aemt.control;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +20,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
 import be.helha.aemt.entities.Address;
@@ -73,19 +87,91 @@ public class OfferControl implements Serializable {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		externalContext.responseReset();
 		externalContext.setResponseContentType("application/pdf");
-		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "file.pdf" + "\"");
+		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + offer.getId()+"uploaded_offre.pdf" + "\"");
 		OutputStream outputStream = externalContext.getResponseOutputStream();
 		outputStream.write(offer.getImg());
-
+		
 		facesContext.responseComplete();
 	}
 
+	public void createOfferInPdf(Offer offer) throws DocumentException, IOException {
+		Document document = new Document();
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		externalContext.responseReset();
+		externalContext.setResponseContentType("application/pdf");
+		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + offer.getId()+"_offre.pdf" + "\"");
+		PdfWriter.getInstance(document, externalContext.getResponseOutputStream());
+		
+		document.open();
+		document.addTitle(offer.getOfferType().getType() + " - " +offer.getFunctionOffer());
+		document.addAuthor(offer.getAuthor().getName()+" "+offer.getAuthor().getFirstname());
+
+		PdfPTable table = new PdfPTable(5);
+		addTableHeader(table);
+		addRows(table,offer);
+		
+		document.add(table);
+		document.close();
+		facesContext.responseComplete();
+	}
+	
+	private void addRows(PdfPTable table,Offer o) {
+		table.addCell("Nom : ");
+		table.addCell(o.getSocietyName());
+		table.addCell("   ");
+		table.addCell("Fonction : ");
+		table.addCell(o.getFunctionOffer());
+		
+		table.addCell("Email : ");
+		table.addCell(o.getSocietyMail());
+		table.addCell("   ");
+		table.addCell("Sujet : ");
+		table.addCell(o.getSubject());
+
+		table.addCell("Numéro de tél : ");
+		table.addCell(o.getSocietyNum());
+		table.addCell("   ");
+		table.addCell("Compétences requises : ");
+		table.addCell(o.getSkillsNeeded());
+		
+		table.addCell("Secteur : ");
+		table.addCell(o.getSocietySector());
+		table.addCell("   ");
+		table.addCell("Informations supp. : ");
+		table.addCell(o.getNoteSupp());
+
+		table.addCell("Addresse : ");
+		table.addCell(o.getSocietyAddress().toString());
+		table.addCell("   ");
+		table.addCell("Date : ");
+		table.addCell(o.getStartDate() +" au " +o.getEndDate());
+
+		table.addCell("Statut : ");
+		table.addCell("Disponible");
+		table.addCell("   ");
+		table.addCell("Rémunération : ");
+		table.addCell(o.getAmount()+"€/mois");
+
+	}
+	private void addTableHeader(PdfPTable table) {
+		Stream.of("\t", "Entreprise","", "\t","Offre")
+	      .forEach(columnTitle -> {
+	        PdfPCell header = new PdfPCell();
+	        header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+	        header.setBorderWidth(2);
+	        header.setPhrase(new Phrase(columnTitle));
+	        table.addCell(header);
+	    });
+	}
+	
 	private byte[] getPdfBytes(Offer offer) {
 
 		return getOffer(offer).getImg();
 	}
 
-	public Offer addOffer(User u) {
+	public String addOffer(User u) {
 		if(this.offer.getOfferType() != EnumOfferType.CDD) {
 			this.offer.setStartDate(convertDateStrToLocalDateTime(startDateStr));
 			this.offer.setEndDate(convertDateStrToLocalDateTime(endDateStr));
@@ -100,8 +186,9 @@ public class OfferControl implements Serializable {
 
 		this.offer.setAuthor(u);
 
-		System.out.println(offer);
-		return postOffer(offer);
+		postOffer(offer);
+
+		return "/listOffer.xhtml";
 	}
 
 	public Offer submitOffer() {

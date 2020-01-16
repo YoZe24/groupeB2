@@ -40,5 +40,9 @@ public class ElementGestionEJB {
 	public Element remove(Element e) {
 		return ejb.delete(e);
 	}
+	
+	public Element removeById(Element e) {
+		return ejb.deleteById(e);
+	}
 
 }

@@ -98,9 +98,9 @@
 	 		<h:outputText value="Supprimer l'élément"/>
 	 	</f:facet>
 	 	<h:form>
-	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{elementControl.remove(element)}">
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{elementControl.removeById(element)}"/>
 <!-- 	 			<f:param name="idRemoved" value="#{user.id}"/>
- -->	 		</h:commandButton>
+ -->	 		
 	 	</h:form>
 	 	
 	 </h:column>

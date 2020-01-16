@@ -27,7 +27,8 @@ public class PortraitDAO {
 	
 	public List<Portrait> query(){
 		Query query = em.createQuery("select portrait from Portrait portrait");
-		return query.getResultList().size() != 0? (ArrayList<Portrait>) query.getResultList() : null;
+		List<Portrait> portraits = query.getResultList();
+		return portraits.size() != 0? portraits: null;
 	}
 	
 	public Portrait get(Portrait p) {

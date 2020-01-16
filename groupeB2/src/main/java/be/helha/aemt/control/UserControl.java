@@ -86,12 +86,13 @@ public class UserControl implements Serializable{
 		return bean.getByLogin(login);
 	}
 
-	public User submitUser() {
-		//if(confirmationPwd() == true) {
-			return bean.post(user);
-		//}else {
-		//	return null;
-		//}
+	public String submitUser() {
+		if(confirmationPwd() == true) {
+			bean.post(user);
+			return "/index.xhtml";
+		}else {
+			return "";
+		}
 	}
 	public User getUser() {
 		return user;
@@ -100,7 +101,7 @@ public class UserControl implements Serializable{
 		this.user = user;
 	}
 	public boolean confirmationPwd() {
-		if(user.getHashPwd() == confirmPwd) {
+		if(user.getHashPwd().equals(confirmPwd)) {
 			return true;
 		}else {
 			messageErrorConfirmPwd = "Le mot de passe ne correspond pas";

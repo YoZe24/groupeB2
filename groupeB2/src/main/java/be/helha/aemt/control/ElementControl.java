@@ -57,6 +57,11 @@ public class ElementControl implements Serializable {
 	public Element remove(Element e) {
 		return bean.remove(e);
 	}
+	
+	public Element removeById(Element e) {
+		System.out.println(e);
+		return bean.removeById(e);
+	}
 
 	public boolean removeElementFromAuthor(User user) {
 		return bean.removeElementsFromAuthor(user);

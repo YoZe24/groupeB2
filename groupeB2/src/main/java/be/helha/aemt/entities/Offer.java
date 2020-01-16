@@ -39,6 +39,7 @@ public class Offer extends Element implements Serializable{
 	
 	public Offer() {
 		this.societyAddress = new Address();
+		this.available = false;
 	}
 
 	public Offer(User author, LocalDateTime publishDate, String pathFile, String societyName, String societyMail,

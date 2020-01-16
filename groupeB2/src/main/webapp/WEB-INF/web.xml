@@ -39,6 +39,9 @@ version="4.0">
 			<description></description>
 			<url-pattern>/addOffer.xhtml</url-pattern>
 			<url-pattern>/userElements.xhtml</url-pattern>
+			<url-pattern>/listOffer.xhtml</url-pattern>
+			<url-pattern>/singleUser.xhtml</url-pattern>
+			<url-pattern>/userDirectory.xhtml</url-pattern>
 		</web-resource-collection>
 		
 		<auth-constraint>
@@ -50,8 +53,8 @@ version="4.0">
  		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>		
-	</security-constraint>
-	
+	</security-constraint>	
+
 	<security-constraint>
 		<display-name>Admin pages</display-name>
 		<web-resource-collection>
@@ -61,6 +64,8 @@ version="4.0">
 			<url-pattern>/addEvent.xhtml</url-pattern>
 			<url-pattern>/addPortrait.xhtml</url-pattern>					
 			<url-pattern>/seeAllUsers.xhtml</url-pattern>					
+			<url-pattern>/seeAllEvents.xhtml</url-pattern>					
+			<url-pattern>/seeAllOffers.xhtml</url-pattern>					
 		</web-resource-collection>
 		
 		<auth-constraint>

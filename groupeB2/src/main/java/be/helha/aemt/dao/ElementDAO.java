@@ -87,6 +87,21 @@ public class ElementDAO {
 		return elementFound;
 	}
 	
+	public Element getById(Element e) {
+		Query query = em.createQuery("select element from Element element "
+				+ " where element.id = ?1 ");
+		query.setParameter(1, e.getId());
+		List<Element> elements = query.getResultList();
+		return elements.size() == 0 ? null : elements.get(0);
+	}
+	
+	public Element deleteById(Element e) {
+		if(getById(e) == null)return null;
+		if(!em.contains(e))e = em.merge(e);
+		em.remove(e);
+		return e;
+	}
+	
 	public Element update(Element newElement) {
 		Element elementFound = get(newElement);
 		if(elementFound == null) 

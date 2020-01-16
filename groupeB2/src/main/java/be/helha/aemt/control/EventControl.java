@@ -45,7 +45,7 @@ public class EventControl implements Serializable {
 	private String endDateStr = "";
 
 	Address aUser = new Address("testEventUser", "1", "2", "3");
-	User u = new User("test", "test", "test@gmail.com", "test", "test", "test","test",EnumSection.ASSITANT_DIRECTION, aUser, EnumRole.ANCIENT);
+	User u = new User("test", "test", "test@gmail.com", "test", "test", "test","test",EnumSection.ASSISTANT_DIRECTION, aUser, EnumRole.ANCIENT);
 
 
 	private Address addressUserTest = new Address("S2", "N2", "C2", "CP2");
@@ -109,7 +109,7 @@ public class EventControl implements Serializable {
        facesContext.responseComplete();
 	}
 
-	public Event addEvent(User user) {
+	public String addEvent(User user) {
 		this.event.setStartDate(convertDateStrToLocalDateTime(startDateStr));
 		this.event.setEndDate(convertDateStrToLocalDateTime(endDateStr));
 
@@ -122,8 +122,9 @@ public class EventControl implements Serializable {
 		}
 
 		this.event.setAuthor(user);
-		return post(event);
-
+		post(event);
+		
+		return "/index.xhtml";
 	}
 
 	public Event submitEvent() {

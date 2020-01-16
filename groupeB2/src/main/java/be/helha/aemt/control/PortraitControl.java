@@ -49,7 +49,7 @@ public class PortraitControl implements Serializable {
 		}
 	}
 	
-	public Portrait addPortrait(User user) {
+	public String addPortrait(User user) {
 		byte[] picBytes = new byte[(int) img.getSize()];
 		try {
 			img.getInputStream().read(picBytes);
@@ -59,7 +59,9 @@ public class PortraitControl implements Serializable {
 		
 		this.portrait.setAuthor(user);
 		
-		return post(portrait);
+		post(portrait);
+		
+		return "/index.xhtml";
 	}
 	
 	public Part getImg() {
