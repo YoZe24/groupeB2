@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import be.helha.aemt.dao.ElementDAO;
 import be.helha.aemt.dao.UserDAO;
 import be.helha.aemt.entities.User;
 
@@ -17,7 +18,10 @@ public class UserGestionEJB {
 
 	@EJB
 	private UserDAO ejb;
-
+	
+	@EJB
+	private ElementDAO elemDAO;
+	
 	public UserGestionEJB() {
 		//ejb = new UserDAO();
 	}
@@ -61,6 +65,11 @@ public class UserGestionEJB {
 	}
 
 	public User removeUser(User user) {
+		return ejb.removeUser(user);
+	}
+
+	public User removeWithElements(User user) {
+		elemDAO.removeElementsFromAuthor(user);
 		return ejb.removeUser(user);
 	}
 

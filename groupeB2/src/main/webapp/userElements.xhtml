@@ -26,7 +26,7 @@
 	 </div>
 	 <br/>
 	 <div class="container text-center" id="welcomeMessage">
-	 	<p>Vos offres/évènements</p>
+	 	<p>Bonjour #{userControl.userCurrent.firstname},voici vos offres/évènements</p>
 	 </div>
 	<div class="container" id="listElements">
 		<h:dataTable id="elements" 
@@ -51,40 +51,40 @@
 	 	<h:outputText value="#{element.convertDateIntoString(element.publishDate)}"/>
 	 </h:column>
 	 						 		 						
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Nom"/>
-	 	</f:facet>
-	 	<h:outputText value="#{element.author.name}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Prénom"/>
-	 	</f:facet>
-	 	<h:outputText value="#{element.author.firstname}"/>
-	 </h:column>
-	 
  	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Titre"/>
+	 		<h:outputText value="Titre (E)"/>
 	 	</f:facet>
 	 	<h:outputText value="#{elementControl.getTitleOrNull(element)}"/>
 	 </h:column>	
 	 
  	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Fonction"/>
+	 		<h:outputText value="Fonction (O)"/>
 	 	</f:facet>
 	 	<h:outputText value="#{elementControl.getFunctionOfferOrNull(element)}"/>
 	 </h:column>	
 	 
-	 	 <h:column>
+	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Type d'offre"/>
+	 		<h:outputText value="Type d'offre (O)"/>
 	 	</f:facet>
 	 	<h:outputText value="#{elementControl.getOfferTypeOrNull(element)}"/>
 	 </h:column>	
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Nom (P)"/>
+	 	</f:facet>
+	 	<h:outputText value="#{elementControl.getNameOrNull(element)}"/>
+	 </h:column>
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Prenom (P)"/>
+	 	</f:facet>
+	 	<h:outputText value="#{elementControl.getFirstnameOrNull(element)}"/>
+	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">

@@ -37,7 +37,7 @@ public class UserControl implements Serializable{
 
 
 	private Address addressManuel = new Address("S1", "N1", "C1", "CP1");
-	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010",EnumSection.ART_APPLIQUES, addressManuel,EnumRole.ANCIENT);
+	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010",EnumSection.COMPTABILITE, addressManuel,EnumRole.ANCIENT);
 
 
 	private List<User> users= new ArrayList<User>();
@@ -69,6 +69,15 @@ public class UserControl implements Serializable{
 		return bean.post(u);
 	}
 
+	public User removeWithElements() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idRemoved"));
+		User userToRemove = getUserById(userId);
+		users.remove(userToRemove);
+		return bean.removeWithElements(userToRemove);
+	}
+	
 	public User submitUserManual() {
 		return bean.post(userManual);
 	}
@@ -159,6 +168,11 @@ public class UserControl implements Serializable{
 }
 	public void singleUserDetails(int id) {
 		this.singleUser = new User();
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		Map map = context.getExternalContext().getRequestParameterMap();
+//		int userId = Integer.parseInt((String) map.get("idUser"));
+//		System.out.println(userId);
+		System.out.println(id);
 		this.singleUser = bean.findById(id);
 	}
 

@@ -189,11 +189,6 @@ public class Offer extends Element implements Serializable{
 				+ amount + super.toString() + "]";
 	}
 	
-	public String convertDateIntoString(LocalDateTime date) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String dateTimeString = date.format(formatter);
-		return dateTimeString;
-	}
 	
 	
 

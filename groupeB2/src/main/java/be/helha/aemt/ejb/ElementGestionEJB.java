@@ -25,6 +25,10 @@ public class ElementGestionEJB {
 		return ejb.getElementsByAuthor(user);
 	}
 	
+	public boolean removeElementsFromAuthor(User user) {
+		return ejb.removeElementsFromAuthor(user);
+	}
+	
 	public Element get(Element a){
 		return ejb.get(a);
 	}

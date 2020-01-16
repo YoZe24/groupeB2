@@ -73,19 +73,22 @@
 
 
 	<h:form>
-		<h:commandButton class="btn btn-info" value="Ajout element" action="#{eventControl.submitEvent}"></h:commandButton>
+<!-- 		<h:commandButton class="btn btn-info" value="Ajout element" action="#{eventControl.submitEvent}"></h:commandButton>
 		<h:commandButton class="btn btn-info" value="Ajout element manuel" action="#{eventControl.submitEvent}"></h:commandButton>
 		<br/>
 		<h:commandButton class="btn btn-info" value="Ajout event" action="addEvent.xhtml?faces-redirect=true"></h:commandButton>
 		<br/>
 
 		<h:commandButton value="Ajout offre manuelle" action="#{offerControl.submitOffer}"></h:commandButton>
-
+ -->
 		<h:commandButton class="btn btn-info" value="Ajout portrait" action="addPortrait.xhtml?faces-redirect=true"></h:commandButton>
-		<h:commandButton class="btn btn-info" value="Afficher les utilisateurs" onclick="#{userControl.loadUsers()}" action="seeAllUsers.xhtml"></h:commandButton>
-		<h:commandButton class="btn btn-info" value="Afficher les events" onclick="#{eventControl.loadEvents()}" action="seeAllEvents.xhtml"></h:commandButton>
+		<br/>
+		<h:commandButton class="btn btn-info" value="Afficher les utilisateurs" onclick="#{userControl.loadUsers()}" action="seeAllUsers.xhtml?faces-redirect=true"></h:commandButton>
+		<br/>
+		<h:commandButton class="btn btn-info" value="Afficher les events" onclick="#{eventControl.loadEvents()}" action="seeAllEvents.xhtml?faces-redirect=true"></h:commandButton>
+		<br/>
 		<h:commandButton class="btn btn-info" value="Afficher les offres" onclick="#{offerControl.loadListOffer()}" action="seeAllOffers.xhtml"></h:commandButton>
-
+		<br/>
 	</h:form>
 	<!--<h:form>
 		<h:commandButton class="btn btn-success" value="Ajout Offre" action="addOffer.xhtml?faces-redirect=true">Ajout offre</h:commandButton>

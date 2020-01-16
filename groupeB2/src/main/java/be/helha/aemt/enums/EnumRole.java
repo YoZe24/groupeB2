@@ -1,7 +1,7 @@
 package be.helha.aemt.enums;
 
 public enum EnumRole {
-	ADMINISTRATOR("Admin"),MODERATOR("Modérateur"),ANCIENT("Ancien");
+	ADMINISTRATOR("admin"),MODERATOR("Modérateur"),ANCIENT("ancien"),VISITOR("visiteur");
 
 	public String role;
 	

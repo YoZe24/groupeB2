@@ -37,7 +37,7 @@ public class User {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address address;
 	
-	@OneToMany(cascade = CascadeType.PERSIST,mappedBy = "author")
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Element> elements;
 
 	@Enumerated(EnumType.STRING)
@@ -47,6 +47,8 @@ public class User {
 		this.address = new Address();
 		this.groupName = "visiteur";
 		this.confirmed = false;
+		this.section = EnumSection.INFORMATIQUE;
+		this.role = EnumRole.VISITOR;
 	};
 
 	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber, String degreeYear, EnumSection section,
@@ -81,7 +83,7 @@ public class User {
 		this.hashPwd = "";
 		this.phoneNumber = "";
 		this.degreeYear = "";
-		this.section = EnumSection.AGRONOMIE;
+		this.section = EnumSection.INFORMATIQUE;
 		this.address.setToVoid();
 	}
 

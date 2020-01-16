@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       >
 	    <ui:composition>
 		<div align="center">
@@ -36,6 +37,9 @@
                   <li class = "nav-item text-center" id="item">
                      <a class = "nav-link" href = "registerForm.xhtml">Inscription</a>
                   </li>
+<!--                   <li class = "nav-item text-center" id="item" rendered="#{userControl.userCurrent == null}">
+                    <a class = "nav-link" href = "userElements.xhtml"><span class=""></span>#{userControl.userCurrent.firstname}</a>
+                  </li> -->
                   <li class = "nav-item text-center" id="item">
                     <a class = "nav-link" href = "adminHome.xhtml">Admin Partie</a>
                   </li>

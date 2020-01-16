@@ -1,5 +1,7 @@
 package be.helha.aemt.control;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +12,7 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
@@ -65,6 +68,23 @@ public class OfferControl implements Serializable {
 		return bean.post(o);
 	}
 	
+	public void download(Offer offer) throws IOException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		externalContext.responseReset();
+		externalContext.setResponseContentType("application/pdf");
+		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "file.pdf" + "\"");
+		OutputStream outputStream = externalContext.getResponseOutputStream();
+		outputStream.write(offer.getImg());
+       
+		facesContext.responseComplete();
+	}
+	
+	private byte[] getPdfBytes(Offer offer) {
+		
+		return getOffer(offer).getImg();
+	}
+	
 	public Offer addOffer(User u) {
 		if(this.offer.getOfferType() != EnumOfferType.CDD) {
 			this.offer.setStartDate(convertDateStrToLocalDateTime(startDateStr));
@@ -88,9 +108,7 @@ public class OfferControl implements Serializable {
 		List<String> skills = new ArrayList<>();
 		Address a = new Address("testOffer", "offerNum", "offerCity", "offerCp");
 		Address aUser = new Address("testOfferUser", "userNum", "userCity", "userCp");
-		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer",EnumSection.ECONOMIQUE, aUser, EnumRole.ANCIENT);
-		//this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector",1,a,"functionOffer",true, skills,"noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
-		//User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
+		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer",EnumSection.COMPTABILITE, aUser, EnumRole.ANCIENT);
 		this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector","03",a,"functionOffer",true, "Java,Mysql","noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
 		return bean.post(offer);
 	}

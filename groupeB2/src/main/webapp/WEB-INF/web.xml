@@ -38,16 +38,15 @@ version="4.0">
 			<web-resource-name>Protected Ancien Area</web-resource-name>
 			<description></description>
 			<url-pattern>/addOffer.xhtml</url-pattern>
-			<url-pattern>/addEvent.xhtml</url-pattern>
-			<url-pattern>/addPortrait.xhtml</url-pattern>
 			<url-pattern>/userElements.xhtml</url-pattern>
 		</web-resource-collection>
 		
 		<auth-constraint>
 			<description></description>
 			<role-name>ancien</role-name>
+			<role-name>admin</role-name>
 		</auth-constraint>
-		
+
  		<user-data-constraint>
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>		
@@ -59,6 +58,9 @@ version="4.0">
 			<web-resource-name>Protected Admin Area</web-resource-name>
 			<description></description>
 			<url-pattern>/adminHome.xhtml</url-pattern>
+			<url-pattern>/addEvent.xhtml</url-pattern>
+			<url-pattern>/addPortrait.xhtml</url-pattern>					
+			<url-pattern>/seeAllUsers.xhtml</url-pattern>					
 		</web-resource-collection>
 		
 		<auth-constraint>

@@ -44,7 +44,10 @@
 			 	<f:facet name="header">
 			 		<h:outputText value="Nom"/>
 			 	</f:facet>
-			 	<h:link outcome = "singleUser" onclick="#{userControl.singleUserDetails(user.id)}" action="singleUser.xhtml"><h:outputText value="#{user.name}"/></h:link>
+			 	<h:link outcome = "singleUser" onclick="#{userControl.singleUserDetails(user.id)}" action="singleUser.xhtml">
+			 		<h:outputText value="#{user.name}"/>
+		 			<f:param name="idUser" value="#{user.id}"/>
+		 		</h:link>
 			 </h:column>
 			 
 			 <h:column>

@@ -141,7 +141,7 @@ $(document).ready(function(){
 	 		<h:outputText value="Supprimer les utilisateurs"/>
 	 	</f:facet>
 	 	<h:form>
-	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{userControl.removeUser}">
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{userControl.removeWithElements}">
 	 			<f:param name="idRemoved" value="#{user.id}"/>
 	 		</h:commandButton>
 	 	</h:form>
