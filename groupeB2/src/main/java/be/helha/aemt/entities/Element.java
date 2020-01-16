@@ -33,6 +33,7 @@ public class Element implements Serializable{
 	private String pathFile;
 
 	private boolean confirmed;
+	
 	@Lob
 	private byte[] img;
 
@@ -129,8 +130,8 @@ public class Element implements Serializable{
 
 	public String convertDateIntoString(LocalDateTime date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-//		String dateTimeString = date.format(formatter);
-		String dateTimeString = date.format(DateTimeFormatter.RFC_1123_DATE_TIME);
+		String dateTimeString = date.format(formatter);
+//		String dateTimeString = date.format(DateTimeFormatter.RFC_1123_DATE_TIME);
 		return dateTimeString;
 	}
 	

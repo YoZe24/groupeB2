@@ -68,19 +68,28 @@
 	 		<br/>
 	 	</ui:repeat>
 	 </div>
-
+	 <div  class="container jumbotron" id="listPortraitDiv">
+	 	<ui:repeat value="#{portraitControl.query()}" var="port">
+	 		<div id="portraitOne">
+	 			<div class="container">
+	 			#{port}
+				</div>
+	 		</div>
+	 		<br/>
+	 	</ui:repeat>
+	 </div>
 
 
 
 	<h:form>
-		<h:commandButton class="btn btn-info" value="Ajout element" action="#{eventControl.submitEvent}"></h:commandButton>
+<!-- 		<h:commandButton class="btn btn-info" value="Ajout element" action="#{eventControl.submitEvent}"></h:commandButton>
 		<h:commandButton class="btn btn-info" value="Ajout element manuel" action="#{eventControl.submitEvent}"></h:commandButton>
 		<br/>
 		<h:commandButton class="btn btn-info" value="Ajout event" action="addEvent.xhtml?faces-redirect=true"></h:commandButton>
 		<br/>
 
 		<h:commandButton value="Ajout offre manuelle" action="#{offerControl.submitOffer}"></h:commandButton>
-
+ -->
 		<h:commandButton class="btn btn-info" value="Ajout portrait" action="addPortrait.xhtml?faces-redirect=true"></h:commandButton>
  		<!-- <h:commandButton class="btn btn-info" value="Afficher les utilisateurs" onclick="#{userControl.loadUsers()}" action="seeAllUsers.xhtml"></h:commandButton>
 		<h:commandButton class="btn btn-info" value="Afficher les events" onclick="#{eventControl.loadEvents()}" action="seeAllEvents.xhtml"></h:commandButton>

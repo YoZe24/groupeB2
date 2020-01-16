@@ -43,9 +43,9 @@ public class PortraitDAO {
 	}
 	
 	public Portrait post(Portrait p) {
-		Portrait portraitFound = get(p);
-		if(portraitFound != null) return portraitFound;
-		
+//		Portrait portraitFound = get(p);
+//		if(portraitFound != null) return portraitFound;
+//		
 		User user = userDAO.findUserByEmail(p.getAuthor());
 		if(user != null) {
 			p.setAuthor(user);

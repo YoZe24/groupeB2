@@ -25,35 +25,51 @@
 	</div>
 	<br/>
 	<div class="container">
-		<h:dataTable id="users" 
-		 			columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
-		 			headerClass="list-header" 
-		 			rowClasses="list-row" 
-		 			styleClass="list-background table table-striped table-bordered text-center" 
-		 			value="#{userControl.getAllUsers()}" 
+		<h:dataTable id="users"
+		 			columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter"
+		 			headerClass="list-header"
+		 			rowClasses="list-row"
+		 			styleClass="list-background table table-striped table-bordered text-center"
+		 			value="#{userControl.getAllUsers()}"
 		 			var="user">
-		 						
-			 <h:column>
-			 	<f:facet name="header">
-			 		<h:outputText value="N°"/>
-			 	</f:facet>
-			 	<h:outputText value="#{user.id}"/>
-			 </h:column>
-			 						
+
 			 <h:column>
 			 	<f:facet name="header">
 			 		<h:outputText value="Nom"/>
 			 	</f:facet>
-			 	<h:link outcome = "singleUser" onclick="#{userControl.singleUserDetails(user.id)}" action="singleUser.xhtml"><h:outputText value="#{user.name}"/></h:link>
+			 		<h:outputText value="#{user.name}"/>
 			 </h:column>
-			 
+
 			 <h:column>
 			 	<f:facet name="header">
 			 		<h:outputText value="Prénom"/>
 			 	</f:facet>
 			 	<h:outputText value="#{user.firstname}"/>
 			 </h:column>
-			 
+			 <h:column>
+			 	<f:facet name="header">
+			 		<h:outputText value="Année (diplôme)"/>
+			 	</f:facet>
+			 	<h:outputText value="#{user.degreeYear}"/>
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">
+			 		<h:outputText value="Section"/>
+			 	</f:facet>
+			 	<h:outputText value="#{user.section}"/>
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">
+			 		<h:outputText value="Détails"/>
+			 	</f:facet>
+			 		<h:form>
+	 					<h:commandButton type="submit" value="Voir détails" class="btn btn-info" action="singleUser.xhtml">
+	 						<f:param name="idClicked" value="#{user.id}"/>
+	 						<f:actionListener binding="#{userControl.singleUserDetails()}" />
+	 					</h:commandButton>
+	 				</h:form>
+			 </h:column>
+
 		 </h:dataTable>
 	 </div>
 

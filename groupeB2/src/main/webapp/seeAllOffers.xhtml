@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
   <link rel="stylesheet" href="Css.css"/>
-  
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -28,7 +28,7 @@ $(document).ready(function(){
 });
 </script>
 
-</head>	
+</head>
 <body>
 
 	<div id="header">
@@ -38,130 +38,128 @@ $(document).ready(function(){
 	 </div>
 	 <br/>
 	 <div class="container text-center" id="welcomeMessage">
-	 	<div><b>Section admin : </b></div>	
-	 	<div><b>Listes des offres postées par les utilisateurs</b></div>	 	
+	 	<div><b>Section admin : </b></div>
+	 	<div><b>Listes des offres postées par les utilisateurs</b></div>
 	 </div>
-	 
-	 
+
+
 	 <div class="container text-center">
-	 
+
 	 		 <div class="d-flex justify-content-center">
-	 	
+
 	 		<div class="p-3">
 			<h:form>
 				<h:commandButton type="submit" value="Afficher les offres non validés" class="btn btn-warning form-control" action="#{offerControl.seeNotConfirmedUsers}"/>
 			</h:form>
 		 </div>
-	 
+
 		 <div class="p-3">
 			<h:form>
 				<h:commandButton type="submit" value="Afficher les offres" class="btn btn-warning" action="#{offerControl.seeAllOffers}"/>
 			</h:form>
 		 </div>
-	 
-	 	
-	 
+
+
+
 	 		</div>
-	 
+
 	 <div class="d-flex justify-content-center">
 	 	<i class="fas fa-file-signature prefix align-self-center"/>
 	 	<input type="text" id="searchBar" class="form-control" placeholder="Rechercher une offre postée"/>
 	 </div>
-	 
+
 	 </div>
-	 
-	 
-	 
+
+
+
 	 <div class="container-fluid" id="listOffers">
-	
-	
-		<h:dataTable id="offers" 
-							value="#{offerControl.listOfferLoad}" 
+
+
+		<h:dataTable id="offers"
+							value="#{offerControl.listOfferLoad}"
 	 						var="offer"
-	 						columnClasses="columnCenter" 
-	 						headerClass="list-header" 
-	 						rowClasses="list-row" 
-	 						styleClass="list-background table table-striped table-bordered text-center">					
-	 
-	 	
+	 						columnClasses="columnCenter"
+	 						headerClass="list-header"
+	 						rowClasses="list-row"
+	 						styleClass="list-background table table-striped table-bordered text-center">
+
+
 	<h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Date publication"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.convertDateIntoString(offer.publishDate)}"/>
-	 </h:column> 						
-	 
+	 </h:column>
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Nom"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.author.name}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Prénom"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.author.firstname}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Nom de l'entreprise"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.societyName}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Mail"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.societyMail}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Compétence requise"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.skillsNeeded}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Type d'offre"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.offerType}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Début de l'offre"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.convertDateIntoString(offer.startDate)}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Fin de l'offre"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.convertDateIntoString(offer.endDate)}"/>
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Note supplémentaire"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.noteSupp}"/>
 	 </h:column>
-	 
+
 	  <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Validé"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offerControl.convertBoolToString(offer.confirmed)}"/>
 	 </h:column>
-	 
-	 
 	 
 	 <h:column>
 	 	<f:facet name="header">
@@ -172,9 +170,9 @@ $(document).ready(function(){
 	 			<f:param name="idRemoved" value="#{offer.id}"/>
 	 		</h:commandButton>
 	 	</h:form>
-	 	
+
 	 </h:column>
-	 
+
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Confirmer l'offre"/>
@@ -184,19 +182,19 @@ $(document).ready(function(){
 	 			<f:param name="idConfirmed" value="#{offer.id}"/>
 	 		</h:commandButton>
 	 	</h:form>
-	 	
+
 	 </h:column>
-	 
-	 
-	 
-	 </h:dataTable> 
-	
-	
+
+
+
+	 </h:dataTable>
+
+
 	</div>
-	  
-	 
-	 
-	 
-	 
+
+
+
+
+
 </body>
 </html>
