@@ -44,6 +44,7 @@ public class OfferControl implements Serializable {
 	private String endDateStr = "";
 
 	private boolean offerTypeIsOk;
+	private Offer singleOffer;
 
 	public OfferControl() {
 		offer = new Offer();
@@ -162,8 +163,6 @@ public class OfferControl implements Serializable {
 
 	public void loadListOffer() {
 		this.listOfferLoad = getAllByOffer();
-		for (Offer offer : listOfferLoad) {
-		}
 	}
 
 	public void loadListOffer (EnumOfferType type) {
@@ -233,7 +232,7 @@ public class OfferControl implements Serializable {
 	}
 
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validï¿½" : "Validï¿½";
+		return bool == false? "Non validé" : "Validé";
 	}
 
 	public void seeNotConfirmedUsers() {
@@ -247,6 +246,23 @@ public class OfferControl implements Serializable {
 	public void seeAllOffers() {
 		loadListOffer();
 	}
+	
+	public void singleOfferDetails() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idClicked"));
+		setSingleOffer(bean.getById(userId));
+	}
+	
+	public void setSingleOffer(Offer singleOffer) {
+		this.singleOffer = singleOffer;
+	}
+	public Offer getSingleOffer() {
+		return singleOffer;
+	}
+	
+	
+	
 
 
 

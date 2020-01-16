@@ -137,6 +137,14 @@ public class PortraitControl implements Serializable {
 		return bean.query();
 	}
 	
+	public void seeAllPortraits() {
+		loadListPortrait();
+	}
+	
+	public void loadListPortrait() {
+		this.portraits = getAllPortraits();
+	}
+	
 	
 	
 	

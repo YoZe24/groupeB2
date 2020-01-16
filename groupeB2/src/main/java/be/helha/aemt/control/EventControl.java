@@ -245,6 +245,14 @@ public class EventControl implements Serializable {
 		eventToUpdate.setConfirmed(true);
 		return eventToUpdate;
 	}
+	
+	public void seeAllEvents() {
+		loadListOffer();
+	}
+	
+	public void loadListOffer() {
+		this.events = getAllEvents();
+	}
 
 
 

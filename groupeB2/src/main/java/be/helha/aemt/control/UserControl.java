@@ -28,6 +28,7 @@ public class UserControl implements Serializable{
 
 	private User userCurrent;
 	private User singleUser;
+	private Boolean adminConnected = false;
 
 	//Variable for confirmation PWD
 	private String confirmPwd = "";
@@ -138,7 +139,7 @@ public class UserControl implements Serializable{
 	}
 
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validï¿½" : "Validï¿½";
+		return bool == false? "Non validé" : "Validé";
 	}
 
 	public void confirmUser() {
@@ -151,9 +152,15 @@ public class UserControl implements Serializable{
 	}
 
 	public User getUserCurrent() {
+		System.out.println("ELIOT A UN GROS ZIZIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		if(userCurrent == null) {
 			String login = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
 			this.userCurrent = getUserByLogin(login);
+			System.out.println(userCurrent.toString());
+			if(userCurrent.getGroupName().equals("admin")) {
+				adminConnected = true;
+				System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+			}
 			if(userCurrent == null) userCurrent = new User();
 		}
 		return userCurrent;
@@ -196,5 +203,15 @@ public class UserControl implements Serializable{
 	public String changePage() {
 		return "singleUser.xhtml";
 	}
+
+	public Boolean getUserConnected() {
+		return adminConnected;
+	}
+
+	public void setUserConnected(Boolean userConnected) {
+		this.adminConnected = userConnected;
+	}
+	
+	
 
 }

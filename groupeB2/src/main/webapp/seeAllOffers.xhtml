@@ -114,20 +114,6 @@ $(document).ready(function(){
 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Mail"/>
-	 	</f:facet>
-	 	<h:outputText value="#{offer.societyMail}"/>
-	 </h:column>
-
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Compétence requise"/>
-	 	</f:facet>
-	 	<h:outputText value="#{offer.skillsNeeded}"/>
-	 </h:column>
-
-	 <h:column>
-	 	<f:facet name="header">
 	 		<h:outputText value="Type d'offre"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.offerType}"/>
@@ -145,13 +131,6 @@ $(document).ready(function(){
 	 		<h:outputText value="Fin de l'offre"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.convertDateIntoString(offer.endDate)}"/>
-	 </h:column>
-
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Note supplémentaire"/>
-	 	</f:facet>
-	 	<h:outputText value="#{offer.noteSupp}"/>
 	 </h:column>
 
 	  <h:column>
@@ -184,6 +163,18 @@ $(document).ready(function(){
 	 	</h:form>
 
 	 </h:column>
+	 
+	 <h:column>
+			 	<f:facet name="header">
+			 		<h:outputText value="Détails"/>
+			 	</f:facet>
+			 		<h:form>
+	 					<h:commandButton type="submit" value="Voir détails" class="btn btn-secondary" action="singleOffer.xhtml">
+	 						<f:param name="idClicked" value="#{offer.id}"/>
+	 						<f:actionListener binding="#{offerControl.singleOfferDetails()}" />
+	 					</h:commandButton>
+	 				</h:form>
+			 </h:column>
 
 
 

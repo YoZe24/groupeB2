@@ -26,22 +26,13 @@
                      <a class = "nav-link" href = "userDirectory.xhtml">Annuaire</a>
                   </li>
                   <li class = "nav-item text-center" id="item">
-                     <a class = "nav-link" href = "addEvent.xhtml">Ajout évènement</a>
-                  </li>
-                  <li class = "nav-item text-center" id="item">
-                     <a class = "nav-link" href = "addPortrait.xhtml">Ajout portrait</a>
-                  </li>
-                  <li class = "nav-item text-center" id="item">
                      <a class = "nav-link" href = "login.xhtml">Connexion</a>
                   </li>
                   <li class = "nav-item text-center" id="item">
                      <a class = "nav-link" href = "registerForm.xhtml">Inscription</a>
                   </li>
 
-
-
-
-                  <!-- <c:if test="#{userControl.userCurrent.groupName != 'admin'}"> -->
+					<c:if test="#{userControl.userConnected}">
                   	<li class = "nav-item text-center dropdown" id="item">
                   		<a class = "nav-link dropdown-toggle" href = "#"
                         id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown"
@@ -51,9 +42,11 @@
 	                       <h:link class="dropdown-item" value="Voir les offres postées" outcome="seeAllOffers" action="#{eventControl.loadEvents()}"/>
 	                       <h:link class="dropdown-item" value="Voir les event postés" outcome="seeAllEvents" action="#{offerControl.loadListOffer()}"/>
 	                       <h:link class="dropdown-item" value="Voir les portraits postés" outcome="seeAllPortraits" action="#{portraitControl.loadPortrait()}"/>
+	                       <h:link class="dropdown-item" value="Ajout énèvement" outcome="addEvent"/>
+	                       <h:link class="dropdown-item" value="Ajout portrait" outcome="addPortrait"/>
                      </div>
                   	</li>
-                <!-- </c:if> -->
+                  	</c:if>
 
                   <li class = "nav-item text-center" id="item">
                     <a class = "nav-link" href = "about.xhtml">A propos</a>

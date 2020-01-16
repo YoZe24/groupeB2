@@ -42,6 +42,22 @@ $(document).ready(function(){
 	 	<div><b>Listes des événements postés par les admins</b></div>	 	
 	 </div>
 	 
+	 <div class="container text-center">
+
+	 		 <div class="d-flex justify-content-center">
+
+	 		
+
+					 <div class="p-3">
+						<h:form>
+							<h:commandButton type="submit" value="Afficher les événements" class="btn btn-warning" action="#{eventControl.seeAllEvents}"/>
+						</h:form>
+					 </div>
+
+
+			</div>
+	 	</div>
+	 
 	 
 	 <div class="container text-center">
 	 
@@ -120,13 +136,6 @@ $(document).ready(function(){
 	 		<h:outputText value="Fin de l'événement"/>
 	 	</f:facet>
 	 	<h:outputText value="#{event.convertDateIntoString(event.endDate)}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Valid"/>
-	 	</f:facet>
-	 	<h:outputText value="#{elementControl.convertBoolToString(event.confirmed)}"/>
 	 </h:column>
 	 
 	 <h:column>
