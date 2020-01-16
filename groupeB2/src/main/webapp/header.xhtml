@@ -1,6 +1,7 @@
-<html xmlns="http://www.w3.org/1999/xhtml"   
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       >
 	    <ui:composition>
 		<div align="center">
@@ -11,10 +12,10 @@
 	  				<h:link class="navbar-brand" value="Bienvenue" outcome="index"/>
 	  		</div>
             <div class = "container-fluid collapse navbar-collapse center" id = "navbarNavDropdown" >
-               <ul class = "navbar-nav">      
+               <ul class = "navbar-nav">
                   <li class = "nav-item dropdown" id="item">
-                     <a class = "nav-link dropdown-toggle" href = "#" 
-                        id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown" 
+                     <a class = "nav-link dropdown-toggle" href = "#"
+                        id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown"
                         aria-haspopup = "true" aria-expanded = "false">Offre</a>
                      <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
                         <h:link class="dropdown-item" value="Ajouter une offre" outcome="addOffer"/>
@@ -36,14 +37,29 @@
                   <li class = "nav-item text-center" id="item">
                      <a class = "nav-link" href = "registerForm.xhtml">Inscription</a>
                   </li>
-                  <li class = "nav-item text-center" id="item">
-                    <a class = "nav-link" href = "adminHome.xhtml">Admin Partie</a>
-                  </li>
+
+
+
+
+                  <!-- <c:if test="#{userControl.userCurrent.groupName != 'admin'}"> -->
+                  	<li class = "nav-item text-center dropdown" id="item">
+                  		<a class = "nav-link dropdown-toggle" href = "#"
+                        id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown"
+                        aria-haspopup = "true" aria-expanded = "false">Admin</a>
+                        <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
+	                       <h:link class="dropdown-item" value="Voir les utilisateurs" outcome="seeAllUsers" action="#{userControl.loadUsers()}"/>
+	                       <h:link class="dropdown-item" value="Voir les offres postées" outcome="seeAllOffers" action="#{eventControl.loadEvents()}"/>
+	                       <h:link class="dropdown-item" value="Voir les event postés" outcome="seeAllEvents" action="#{offerControl.loadListOffer()}"/>
+	                       <h:link class="dropdown-item" value="Voir les portraits postés" outcome="seeAllPortraits" action="#{portraitControl.loadPortrait()}"/>
+                     </div>
+                  	</li>
+                <!-- </c:if> -->
+
                   <li class = "nav-item text-center" id="item">
                     <a class = "nav-link" href = "about.xhtml">A propos</a>
                   </li>
-               </ul>            
+               </ul>
             </div>
-         </nav>	
+         </nav>
 	    </ui:composition>
 </html>

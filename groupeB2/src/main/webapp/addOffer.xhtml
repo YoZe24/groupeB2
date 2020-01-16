@@ -75,10 +75,10 @@
 			     </div>
 			     <h3>Informations de l'offre</h3>
 			     <div class="form-group row">
-		         	<h:outputLabel class="col-sm-2 col-form-label" for="functionOffer">Numéro de la société</h:outputLabel>
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="function">Poste proposé</h:outputLabel>
 		         	<div class="col-sm-8">
-				        <h:inputText class="form-control" id="functionOffer" value="#{offerControl.offer.functionOffer}" size="20" maxlength="50" p:placeholder="Entrez la fonction de l'offre" required="true" requiredMessage="Veuillez entrez un nom"/>
-				    	<h:message id="functionOfferMessage" for="functionOffer" errorClass="erreur" style="color : red;"/>
+				        <h:inputText class="form-control" id="function" value="#{offerControl.offer.functionOffer}" size="20" maxlength="50" p:placeholder="Entrez le poste proposé" required="true" requiredMessage="Veuillez entrez un nom"/>
+				    	<h:message id="functionMessage" for="function" errorClass="erreur" style="color : red;"/>
 				    </div>
 			     </div>
 			     <div class="form-group row">
@@ -122,7 +122,7 @@
 			    <div class="form-group row">
 			    	 <h:outputLabel for="pathFile">Ajout d'un pdf</h:outputLabel>
 			    	 <div class="col-sm-8">
-			    	 	<h:inputFile value="#{offferControl.pdf}"/>
+			    	 	<h:inputFile value="#{offerControl.pdf}"/>
 			    	 </div>
 			    </div>
 			    
@@ -160,88 +160,6 @@
 		</h:form>
 	 </div>
 
-         <!--<fieldset>
-         	<legend>Ajout d'offre de stage</legend>
-         	<h:outputLabel for="societyName">Nom de la societé<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="societyName" value="#{offerControl.offer.societyName}" required="true" size="20" maxlength="50" />
-	        <h:message id="societyNameMessage" for="societyName" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="societyMail">Email de la societé<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="societyMail" value="#{offerControl.offer.societyMail}" required="true" size="20" maxlength="50" />
-	        <h:message id="societyMailMessage" for="societyMail" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="societySector">Secteur de la societé<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="societySector" value="#{offerControl.offer.societySector}" required="true" size="20" maxlength="50" />
-	        <h:message id="societySectorMessage" for="societySector" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="societyNum">Numéro de la societé<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="societyNum" value="#{offerControl.offer.societyNum}" required="true"/>
-	        <h:message id="societyNumMessage" for="societySector" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="functionOffer">Fonction de l'offre<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="functionOffer" value="#{offerControl.offer.functionOffer}" required="true"/>
-	        <h:message id="functionOfferMessage" for="functionOffer" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="subject">Sujet de l'offre<span class="requis">*</span></h:outputLabel>
-	        <h:inputText id="subject" value="#{offerControl.offer.subject}" required="true"/>
-	        <h:message id="subjectMessage" for="subject" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="offerTypes">Type de l'offre<span class="requis">*</span></h:outputLabel>
-	        <h:selectOneMenu id="offerTypes" value="#{offerControl.offer.offerType}" required="true">
-	        	<f:selectItems value="#{offerControl.getOfferTypes()}" />
-	        </h:selectOneMenu>
-	    	<br/>
-	    	<h:outputLabel for="skillsNeeded" id="oLskills">Compétences demandées <span class="requis">*</span></h:outputLabel>
-	    	<h:inputTextarea value="#{offerControl.offer.skillsNeeded}" cols="20" row="5"></h:inputTextarea>
-	    	<br/>
- 			<h:outputLabel for="offerDatetimepicker1">Date de début de l'offre<span class="requis">*</span></h:outputLabel>
-	     	<div class='input-group date' id='offerDatetimepicker1'>
-	            <h:inputText class="form-control" value="#{offerControl.startDateStr}"/>
-	            <span class="input-group-addon">
-	            <span class="glyphicon glyphicon-calendar"></span>
-	            </span>
-            </div>
-	        <h:message id="startDateMessage" for="startDate" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="offerDatetimepicker2">Date de fin de l'offre<span class="requis">*</span></h:outputLabel>
-	        <div class='input-group date' id='offerDatetimepicker2'>
-	            <h:inputText class="form-control" value="#{offerControl.endDateStr}"/>
-	            <span class="input-group-addon">
-	            <span class="glyphicon glyphicon-calendar"></span>
-	            </span>
-            </div>
-	        <h:message id="endDateMessage" for="endDate" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="pathFile">Ajout d'un pdf</h:outputLabel>
-	  			<h:inputFile value="#{offerControl.pdf}"/>
-   				<br />
-		        <h:message id="pathFileMessage" for="pathFileMessage" errorClass="erreur" />
-	        <br />
-	        <h:outputLabel for="amount">Montant de l'offre (pas obligatoire)</h:outputLabel>
-	        <h:inputText id="amount" value="#{offerControl.offer.amount}" />
-	        <br />
-   	 	    <fieldset>
-         		<legend>Adresse de la societé</legend>
-         		<h:outputLabel for="street">Rue<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="street" value="#{offerControl.offer.societyAddress.street}" required="true" size="20" maxlength="60" />
-	        	<h:message id="streetMessage" for="street" errorClass="erreur" />
-	        	<br />
-	        	<h:outputLabel for="num">Numéro<span class="requis">*</span></h:outputLabel>
-		        <h:inputText id="num" value="#{offerControl.offer.societyAddress.num}" required="true" size="20" maxlength="60"/>
-		        <h:message id="numMessage" for="num" errorClass="erreur" />
-		        <br />
-		        <h:outputLabel for="city">Ville<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="city" value="#{offerControl.offer.societyAddress.city}" required="true" size="20" maxlength="60" />
-	        	<h:message id="cityMessage" for="city" errorClass="erreur" />
-	        	<br />
-	        	<h:outputLabel for="cp">Code Postal<span class="requis">*</span></h:outputLabel>
-	        	<h:inputText id="cp" value="#{offerControl.offer.societyAddress.cp}" required="true" size="20" maxlength="60"/>
-	        	<h:message id="cpMessage" for="cp" errorClass="erreur" />
-	        	<br />
-         	</fieldset> 
-	        <h:messages globalOnly="true" infoClass="info" />
-   			   	<h:commandButton value="Ajouter l'offre" action="#{offerControl.addOffer(userControl.userCurrent)}"></h:commandButton>
-			<br />
-	     </fieldset>-->
+ 
 </body>
 </html>

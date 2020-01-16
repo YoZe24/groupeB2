@@ -131,7 +131,11 @@
 						<hr class="my-4"/>
 						<div class="row">
 							<div class="col">
-								<h5>PDF téléchargeable <button class="btn btn-danger">Télécharger</button></h5>
+								<h5>PDF téléchargeable 
+								<h:form>
+									<h:commandButton class="btn btn-danger" value="Télécharger" action="#{offerControl.download(offer)}"></h:commandButton>
+								</h:form>
+								</h5>
 							</div>
 						</div>
 		 			</div>	

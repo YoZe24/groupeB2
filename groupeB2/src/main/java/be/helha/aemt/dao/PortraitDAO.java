@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import be.helha.aemt.entities.Offer;
+import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Portrait;
 import be.helha.aemt.entities.User;
 
@@ -34,14 +35,13 @@ public class PortraitDAO {
 	public Portrait getById(int id){
 		Query query = em.createQuery("SELECT portrait from Portrait portrait WHERE portrait.id = :id");
 		query.setParameter("id", id);
-		return (Portrait) query.getSingleResult();
 	}
 	
 	public Portrait get(Portrait p) {
 		Query query = em.createQuery("select portrait from Portrait portrait where "
 				+ " portrait.firstname = :firstname"
-				+ " and portait.name = :name"
-				+ " and protrait.description = :varDescription");
+				+ " and portrait.name = :name"
+				+ " and portrait.description = :varDescription");
 		query.setParameter("varDescription", p.getDescription());
 		query.setParameter("firstname", p.getFirstname());
 		query.setParameter("name", p.getName());
@@ -49,9 +49,9 @@ public class PortraitDAO {
 	}
 	
 	public Portrait post(Portrait p) {
-		Portrait portraitFound = get(p);
-		if(portraitFound != null) return portraitFound;
-		
+//		Portrait portraitFound = get(p);
+//		if(portraitFound != null) return portraitFound;
+//		
 		User user = userDAO.findUserByEmail(p.getAuthor());
 		if(user != null) {
 			p.setAuthor(user);
@@ -73,5 +73,11 @@ public class PortraitDAO {
 		if(portraitFound == null) return null;
 		p.setId(portraitFound.getId());
 		return em.merge(p);
+	}
+	
+	public Portrait findById(int id) {
+		Query query = em.createQuery("select portrait from Portrait portrait where portrait.id = :varId");
+		query.setParameter("varId", id);
+		return query.getResultList().size() != 0?(Portrait) query.getResultList().get(0) : null;
 	}
 }

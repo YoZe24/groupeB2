@@ -33,6 +33,7 @@ public class Event extends Element implements Serializable{
 	public Event() {
 		super();
 		this.address = new Address();
+		this.setConfirmed(true);
 	}
 
 	public LocalDateTime getStartDate() {
@@ -75,11 +76,6 @@ public class Event extends Element implements Serializable{
 		this.description = description;
 	}
 
-	public String convertDateIntoString(LocalDateTime date) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy HH:mm ");
-		String dateTimeString = date.format(formatter);
-		return dateTimeString;
-	}
 
 	@Override
 	public String toString() {

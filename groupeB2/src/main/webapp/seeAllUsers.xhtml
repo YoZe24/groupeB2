@@ -37,7 +37,8 @@ $(document).ready(function(){
 	 </div>
 	 <br/>
 	 <div class="container text-center" id="welcomeMessage">
-	 	<p>Admin</p>
+	 	<div><b>Section admin : </b></div>	
+	 	<div><b>Listes des utilisateurs de Alumni</b></div>	 	
 	 </div>
 	 
 	 <div class="container text-center">
@@ -58,7 +59,7 @@ $(document).ready(function(){
 	 
 	 	
 	 
-	 </div>
+	 		</div>
 	 
 	 <div class="d-flex justify-content-center">
 	 	<i class="fas fa-user prefix align-self-center"/>
@@ -141,7 +142,7 @@ $(document).ready(function(){
 	 		<h:outputText value="Supprimer les utilisateurs"/>
 	 	</f:facet>
 	 	<h:form>
-	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{userControl.removeUser}">
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{userControl.removeWithElements}">
 	 			<f:param name="idRemoved" value="#{user.id}"/>
 	 		</h:commandButton>
 	 	</h:form>

@@ -25,21 +25,21 @@
 	</div>
 	<br/>
 	<div class="container">
-		<h:dataTable id="users" 
-		 			columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
-		 			headerClass="list-header" 
-		 			rowClasses="list-row" 
-		 			styleClass="list-background table table-striped table-bordered text-center" 
-		 			value="#{userControl.getAllUsers()}" 
+		<h:dataTable id="users"
+		 			columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter"
+		 			headerClass="list-header"
+		 			rowClasses="list-row"
+		 			styleClass="list-background table table-striped table-bordered text-center"
+		 			value="#{userControl.getAllUsers()}"
 		 			var="user">
-			 						
+
 			 <h:column>
 			 	<f:facet name="header">
 			 		<h:outputText value="Nom"/>
 			 	</f:facet>
 			 		<h:outputText value="#{user.name}"/>
 			 </h:column>
-			 
+
 			 <h:column>
 			 	<f:facet name="header">
 			 		<h:outputText value="Prénom"/>
@@ -69,7 +69,7 @@
 	 					</h:commandButton>
 	 				</h:form>
 			 </h:column>
-			 
+
 		 </h:dataTable>
 	 </div>
 

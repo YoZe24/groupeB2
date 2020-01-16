@@ -1,5 +1,7 @@
 package be.helha.aemt.control;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +11,8 @@ import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.Part;
@@ -31,12 +35,12 @@ public class OfferControl implements Serializable {
 	private String name = "OfferEJB";
 	private EnumOfferType typeOfferChoose = null;
 	private List<Offer> listOfferLoad = new ArrayList<>();
-	
+
 	private Part pdf;
-	
+
 	private String startDateStr = "";
 	private String endDateStr = "";
-	
+
 	private boolean offerTypeIsOk;
 	
 	private boolean valid;
@@ -69,71 +73,89 @@ public class OfferControl implements Serializable {
 	public Offer postOffer(Offer o) {
 		return bean.post(o);
 	}
-	
+
+	public void download(Offer offer) throws IOException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		externalContext.responseReset();
+		externalContext.setResponseContentType("application/pdf");
+		externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "file.pdf" + "\"");
+		OutputStream outputStream = externalContext.getResponseOutputStream();
+		outputStream.write(offer.getImg());
+
+		facesContext.responseComplete();
+	}
+
+	private byte[] getPdfBytes(Offer offer) {
+
+		return getOffer(offer).getImg();
+	}
+
 	public Offer addOffer(User u) {
 		if(this.offer.getOfferType() != EnumOfferType.CDD) {
 			this.offer.setStartDate(convertDateStrToLocalDateTime(startDateStr));
 			this.offer.setEndDate(convertDateStrToLocalDateTime(endDateStr));
 		}
-		
+
 		byte[] pdfBytes = new byte[(int) pdf.getSize()];
 		try {
 			pdf.getInputStream().read(pdfBytes);
 			this.offer.setImg(pdfBytes);
 		}catch (Exception e) {
 		}
-		
+
 		this.offer.setAuthor(u);
-		
+
 		System.out.println(offer);
 		return postOffer(offer);
 	}
-	
+
 	public Offer submitOffer() {
 		List<String> skills = new ArrayList<>();
 		Address a = new Address("testOffer", "offerNum", "offerCity", "offerCp");
 		Address aUser = new Address("testOfferUser", "userNum", "userCity", "userCp");
-		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer",EnumSection.INFORMATIQUE, aUser, EnumRole.ANCIENT);
-		//this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector",1,a,"functionOffer",true, skills,"noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
-		//User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
+		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer",EnumSection.COMPTABILITE, aUser, EnumRole.ANCIENT);
 		this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector","03",a,"functionOffer",true, "Java,Mysql","noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
 		return bean.post(offer);
 	}
-	
+
 	public void removeOffer() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map map = context.getExternalContext().getRequestParameterMap();
 		int offerId = Integer.parseInt((String) map.get("idRemoved"));
-		
+
 		Offer offerToRemove = getOfferById(offerId);
 		removeOffer(offerToRemove);
 		listOfferLoad.remove(offerToRemove);
 	}
-	
+
 	public Offer removeOffer(Offer offer) {
+		listOfferLoad.remove(offer);
 		return bean.delete(offer);
 	}
-	
-	
+
+
 	public void confirmOffer() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map map = context.getExternalContext().getRequestParameterMap();
 		int offerId = Integer.parseInt((String) map.get("idConfirmed"));
 		Offer offerUpdated = updateOffer(offerId);
+		System.out.println(offerUpdated);
 		bean.update(offerUpdated);
 		listOfferLoad.set(listOfferLoad.indexOf(offerUpdated), offerUpdated);
+		//System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++"+listOfferLoad.get(offerId));
 	}
-	
+
 	public Offer updateOffer(int id) {
 		Offer offerToUpdate = bean.getById(id);
 		offerToUpdate.setConfirmed(true);
 		return offerToUpdate;
 	}
-	
+
 	public boolean renderDate() {
 		return offer.getOfferType() != EnumOfferType.CDD;
 	}
-	
+
 	public Offer deleteOffer(Offer o) {
 		return bean.delete(o);
 	}
@@ -143,11 +165,13 @@ public class OfferControl implements Serializable {
 	public Offer updateOfferAvailable(Offer o) {
 		return bean.updateStatut(o);
 	}
-	
+
 	public void loadListOffer() {
 		this.listOfferLoad = getAllByOffer();
+		for (Offer offer : listOfferLoad) {
+		}
 	}
-	
+
 	public void loadListOffer (EnumOfferType type) {
 		System.out.println("Type choisis: " + typeOfferChoose);
 		this.listOfferLoad = getAllByOfferType(type);
@@ -155,7 +179,7 @@ public class OfferControl implements Serializable {
 	public List<Offer> getAllByOfferType(EnumOfferType type){
 		return bean.getAllByOfferType(type);
 	}
-	
+
 	public List<Offer> getAllByOffer(){
 		return bean.query();
 	}
@@ -164,7 +188,6 @@ public class OfferControl implements Serializable {
 		Offer o = getOfferById(id);
 		return o.isConfirmed();
 	}
-	
 	public Offer getOfferById(int id) {
 		return bean.getById(id);
 	}
@@ -186,14 +209,14 @@ public class OfferControl implements Serializable {
 	public void setListOfferLoad(List<Offer> listOfferLoad) {
 		this.listOfferLoad = listOfferLoad;
 	}
-	
+
 	public boolean isOfferTypeIsOk() {
 		return renderDate();
 	}
 	public void setOfferTypeIsOk(boolean offerTypeIsOk) {
 		this.offerTypeIsOk = offerTypeIsOk;
 	}
-	
+
 	private LocalDateTime convertDateStrToLocalDateTime(String dateStr) {
 		if(dateStr == null || dateStr.length() == 0) return LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -218,11 +241,23 @@ public class OfferControl implements Serializable {
 	public void setPdf(Part pdf) {
 		this.pdf = pdf;
 	}
-	
+
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validé" : "Validé";
+		return bool == false? "Non validï¿½" : "Validï¿½";
 	}
 
-	
-	
+	public void seeNotConfirmedUsers() {
+		List<Offer> listOfferNotConfirmed = new ArrayList<Offer>();
+		for (Offer offer : listOfferLoad) {
+			if(!offer.isConfirmed()) listOfferNotConfirmed.add(offer);
+		}
+		setListOfferLoad(listOfferNotConfirmed);
+	}
+
+	public void seeAllOffers() {
+		loadListOffer();
+	}
+
+
+
 }

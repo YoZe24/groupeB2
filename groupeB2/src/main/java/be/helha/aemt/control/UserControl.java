@@ -37,7 +37,7 @@ public class UserControl implements Serializable{
 
 
 	private Address addressManuel = new Address("S1", "N1", "C1", "CP1");
-	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010",EnumSection.INFORMATIQUE, addressManuel,EnumRole.ANCIENT);
+	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010",EnumSection.COMPTABILITE, addressManuel,EnumRole.ANCIENT);
 
 
 	private List<User> users= new ArrayList<User>();
@@ -67,6 +67,15 @@ public class UserControl implements Serializable{
 
 	public User addUser(User u) {
 		return bean.post(u);
+	}
+
+	public User removeWithElements() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idRemoved"));
+		User userToRemove = getUserById(userId);
+		users.remove(userToRemove);
+		return bean.removeWithElements(userToRemove);
 	}
 
 	public User submitUserManual() {
@@ -129,7 +138,7 @@ public class UserControl implements Serializable{
 	}
 
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validé" : "Validé";
+		return bool == false? "Non validï¿½" : "Validï¿½";
 	}
 
 	public void confirmUser() {
@@ -171,7 +180,7 @@ public class UserControl implements Serializable{
 	public void setSingleUser(User singleUser) {
 		this.singleUser = singleUser;
 	}
-	
+
 	public void seeNotConfirmedUsers() {
 		List<User> listUserNotConfirmed = new ArrayList<User>();
 		for (User user : users) {
@@ -179,7 +188,7 @@ public class UserControl implements Serializable{
 		}
 		setUsers(listUserNotConfirmed);
 	}
-	
+
 	public void seeAllUsers() {
 		loadUsers();
 	}
