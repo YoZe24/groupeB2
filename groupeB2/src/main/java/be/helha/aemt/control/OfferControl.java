@@ -14,13 +14,11 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
 import be.helha.aemt.entities.Address;
-import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Offer;
 import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumOfferType;
@@ -46,6 +44,14 @@ public class OfferControl implements Serializable {
 	private boolean offerTypeIsOk;
 	private Offer singleOffer;
 
+	private boolean valid;
+
+	public boolean isValid() {
+		return valid;
+	}
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
 	public OfferControl() {
 		offer = new Offer();
 		offer.setOfferType(EnumOfferType.CDD);
@@ -177,6 +183,10 @@ public class OfferControl implements Serializable {
 		return bean.query();
 	}
 
+	public boolean checkConfirmed(int id) {
+		Offer o = getOfferById(id);
+		return o.isConfirmed();
+	}
 	public Offer getOfferById(int id) {
 		return bean.getById(id);
 	}
@@ -232,7 +242,7 @@ public class OfferControl implements Serializable {
 	}
 
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validé" : "Validé";
+		return bool == false? "Non validï¿½" : "Validï¿½";
 	}
 
 	public void seeNotConfirmedUsers() {
@@ -246,23 +256,23 @@ public class OfferControl implements Serializable {
 	public void seeAllOffers() {
 		loadListOffer();
 	}
-	
+
 	public void singleOfferDetails() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map map = context.getExternalContext().getRequestParameterMap();
 		int userId = Integer.parseInt((String) map.get("idClicked"));
 		setSingleOffer(bean.getById(userId));
 	}
-	
+
 	public void setSingleOffer(Offer singleOffer) {
 		this.singleOffer = singleOffer;
 	}
 	public Offer getSingleOffer() {
 		return singleOffer;
 	}
-	
-	
-	
+
+
+
 
 
 

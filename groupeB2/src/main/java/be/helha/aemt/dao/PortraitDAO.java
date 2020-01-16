@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import be.helha.aemt.entities.Offer;
 import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Portrait;
 import be.helha.aemt.entities.User;
@@ -29,6 +30,12 @@ public class PortraitDAO {
 	public List<Portrait> query(){
 		Query query = em.createQuery("select portrait from Portrait portrait");
 		return query.getResultList();
+	}
+	
+	public Portrait getById(int id){
+		Query query = em.createQuery("SELECT portrait from Portrait portrait WHERE portrait.id = :id");
+		query.setParameter("id", id);
+		return query.getResultList().size() != 0?(Portrait) query.getResultList().get(0) : null;
 	}
 	
 	public Portrait get(Portrait p) {
