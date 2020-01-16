@@ -22,6 +22,10 @@ public class PortraitGestionEJB {
 		return ejb.query();
 	}
 	
+	public Portrait get(int id) {
+		return ejb.getById(id);
+	}
+	
 	public Portrait get(Portrait p) {
 		return ejb.get(p);
 	}

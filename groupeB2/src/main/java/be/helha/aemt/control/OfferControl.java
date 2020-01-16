@@ -9,15 +9,12 @@ import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.model.SelectItem;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
 import be.helha.aemt.entities.Address;
-import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Offer;
 import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumOfferType;
@@ -41,7 +38,15 @@ public class OfferControl implements Serializable {
 	private String endDateStr = "";
 	
 	private boolean offerTypeIsOk;
+	
+	private boolean valid;
 
+	public boolean isValid() {
+		return valid;
+	}
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
 	public OfferControl() {
 		offer = new Offer();
 		offer.setOfferType(EnumOfferType.CDD);
@@ -153,6 +158,11 @@ public class OfferControl implements Serializable {
 	
 	public List<Offer> getAllByOffer(){
 		return bean.query();
+	}
+	
+	public boolean checkConfirmed(int id) {
+		Offer o = getOfferById(id);
+		return o.isConfirmed();
 	}
 	
 	public Offer getOfferById(int id) {

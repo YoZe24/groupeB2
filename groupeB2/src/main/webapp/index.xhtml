@@ -1,7 +1,10 @@
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	 xmlns:f="http://java.sun.com/jsf/core">
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <head>
 <title>Accueil</title>
 <meta http-equiv="
@@ -69,14 +72,22 @@
 	 	</ui:repeat>
 	 </div>
 	 <div  class="container jumbotron" id="listPortraitDiv">
-	 	<ui:repeat value="#{portraitControl.query()}" var="port">
-	 		<div id="portraitOne">
-	 			<div class="container">
-	 			#{port}
-				</div>
-	 		</div>
-	 		<br/>
-	 	</ui:repeat>
+	 	<div class="row">
+	 		<ui:param name="limit" value="3"/>
+		 	<ui:repeat value="#{portraitControl.query()}" var="port">
+		 		<ui:fragment rendered="#{portraitControl.getIndexOf(port) lt limit}">
+					 <div class="col-sm-4">
+					 	<div id="portraitOne">
+					 		<br/>
+					 		<o:graphicImage value="#{portraitControl.getImgByte(port.id)}" width="210px" height="210px" dataURL="true"/>
+					 		<h3 class="display-4">#{port.name} #{port.firstname}</h3>
+					 		<hr class="my-4"/>
+					 		<p class="lead">#{port.description}</p>
+					 	</div>
+					</div>
+				</ui:fragment>
+		 	</ui:repeat>
+		 </div>
 	 </div>
 
 

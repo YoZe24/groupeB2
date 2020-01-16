@@ -4,13 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
@@ -19,7 +17,7 @@ import be.helha.aemt.entities.Portrait;
 import be.helha.aemt.entities.User;
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class PortraitControl implements Serializable {
 	
 	/**
@@ -33,6 +31,8 @@ public class PortraitControl implements Serializable {
 	private Part img;
 	
 	private Portrait portrait;
+	
+	private List<Portrait> listPortraitToDiplay = new ArrayList<>(); 
 	
 	public PortraitControl() {
 		this.portrait = new Portrait();
@@ -62,6 +62,12 @@ public class PortraitControl implements Serializable {
 		return post(portrait);
 	}
 	
+	public byte[] getImgByte(int id) {
+		Portrait port = get(id);
+		return port.getImg();
+	}
+	
+	
 	public Part getImg() {
 		return img;
 	}
@@ -71,6 +77,7 @@ public class PortraitControl implements Serializable {
 	}
 
 	public List<Portrait> query(){
+		this.listPortraitToDiplay = bean.query();
 		return bean.query();
 	}
 	
@@ -86,6 +93,10 @@ public class PortraitControl implements Serializable {
 		return bean.delete(p);
 	}
 	
+	public Portrait get(int id) {
+		return bean.get(id);
+	}
+	
 	public Portrait update(Portrait p) {
 		return bean.update(p);
 	}
@@ -97,6 +108,19 @@ public class PortraitControl implements Serializable {
 	public void setPortrait(Portrait portrait) {
 		this.portrait = portrait;
 	}
+
+	public List<Portrait> getListPortraitToDiplay() {
+		return listPortraitToDiplay;
+	}
+
+	public void setListPortraitToDiplay(List<Portrait> listPortraitToDiplay) {
+		this.listPortraitToDiplay = listPortraitToDiplay;
+	}
+	
+	public int getIndexOf(Portrait port) {
+		return listPortraitToDiplay.indexOf(port);
+	}
+	
 	
 	
 }
