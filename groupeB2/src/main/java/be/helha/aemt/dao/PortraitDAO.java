@@ -32,11 +32,12 @@ public class PortraitDAO {
 	
 	public Portrait get(Portrait p) {
 		Query query = em.createQuery("select portrait from Portrait portrait where "
-				+ "JOIN portrait.user u"
-				+ "u = :varUser"
-				+ "and protrait.description = :varDescription");
-		query.setParameter("varUser", p.getUser());
+				+ " portrait.firstname = :firstname"
+				+ " and portait.name = :name"
+				+ " and protrait.description = :varDescription");
 		query.setParameter("varDescription", p.getDescription());
+		query.setParameter("firstname", p.getFirstname());
+		query.setParameter("name", p.getName());
 		return query.getResultList().size() != 0 ? (Portrait) query.getResultList().get(0) : null;
 	}
 	
