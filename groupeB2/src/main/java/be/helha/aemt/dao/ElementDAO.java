@@ -31,6 +31,15 @@ public class ElementDAO {
 		return elements.size() == 0 ? null : elements;	
 	}
 	
+	public List<Element> getElementsByAuthor(User user){
+		Query query = em.createQuery("Select element from Element element "
+				+ " JOIN element.author a"
+				+ " where a.login = ?1");
+		query.setParameter(1, user.getLogin());
+		List<Element> elements = query.getResultList();
+		return elements.size()==0?null:elements;
+	}
+	
 	public Element get(Element e) {
 		Query query = em.createQuery("select element from Element element "
 				+ " JOIN element.author a"

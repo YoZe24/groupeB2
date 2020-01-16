@@ -55,6 +55,7 @@ public class UserControl implements Serializable{
 	public User updateUser(int id) {
 		User userToUpdate = bean.getById(id);
 		userToUpdate.setConfirmed(true);
+		userToUpdate.setGroupName("ancien");
 		return userToUpdate;
 	}
 
@@ -122,6 +123,7 @@ public class UserControl implements Serializable{
 		int userId = Integer.parseInt((String) map.get("idRemoved"));
 		User userToRemove = getUserById(userId);
 		removeUser(userToRemove);
+		users.remove(userToRemove);
 	}
 
 	public String convertBoolToString(boolean bool) {
@@ -134,6 +136,7 @@ public class UserControl implements Serializable{
 		int userId = Integer.parseInt((String) map.get("idConfirmed"));
 		User userUpdated = updateUser(userId);
 		bean.update(userUpdated);
+		users.set(users.indexOf(userUpdated), userUpdated);
 	}
 
 	public User getUserCurrent() {

@@ -40,6 +40,7 @@
 			<url-pattern>/addOffer.xhtml</url-pattern>
 			<url-pattern>/addEvent.xhtml</url-pattern>
 			<url-pattern>/addPortrait.xhtml</url-pattern>
+			<url-pattern>/userElements.xhtml</url-pattern>
 		</web-resource-collection>
 		
 		<auth-constraint>

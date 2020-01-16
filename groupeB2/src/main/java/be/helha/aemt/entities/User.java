@@ -36,7 +36,8 @@ public class User {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Address address;
-	@OneToMany(cascade = CascadeType.PERSIST)
+	
+	@OneToMany(cascade = CascadeType.PERSIST,mappedBy = "author")
 	private List<Element> elements;
 
 	@Enumerated(EnumType.STRING)
@@ -44,7 +45,7 @@ public class User {
 
 	public User() {
 		this.address = new Address();
-		this.groupName = "ancien";
+		this.groupName = "visiteur";
 		this.confirmed = false;
 	};
 
@@ -174,8 +175,8 @@ public class User {
 	}
 
 	public boolean addElement(Element e) {
-		if(elements.contains(e)) return false;
 		if(e == null) return false;
+		if(elements.contains(e)) return false;
 		elements.add(e); return true;
 	}
 
@@ -197,6 +198,16 @@ public class User {
 
 	public User clone() {
 		return new User(name, firstname, mail, login, hashPwd, phoneNumber,degreeYear,section,address,role,elements);
+	}
+	
+	
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
 	public void update(User u) {

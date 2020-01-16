@@ -13,6 +13,7 @@ import be.helha.aemt.ejb.ElementGestionEJB;
 import be.helha.aemt.entities.Address;
 import be.helha.aemt.entities.Element;
 import be.helha.aemt.entities.Event;
+import be.helha.aemt.entities.Offer;
 import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumRole;
 
@@ -50,6 +51,18 @@ public class ElementControl implements Serializable {
 	public Element post(Element e) {
 		return bean.post(e);
 	}
+	
+	public Element remove(Element e) {
+		return bean.remove(e);
+	}
+	
+//	public Element removeFromForm(Element e) {
+//		
+//	}
+	
+	public List<Element> getElementsFromUser(User user){
+		return bean.getElementsFromUser(user);
+	}
 
 	public Element submitElement() {
 		return bean.post(element);
@@ -69,6 +82,25 @@ public class ElementControl implements Serializable {
 	}
 	
 	public String convertBoolToString(boolean bool) {
-		return bool == false ? "Pas validé" : "Validé";
+		return !bool ? "Pas validé" : "Validé";
 	}
+	
+	public String getTitleOrNull(Element e) {
+		if(e instanceof Event) {
+			return ((Event)e).getTitle();
+		}return "";
+	}
+	
+	public String getFunctionOfferOrNull(Element e) {
+		if(e instanceof Offer) {
+			return ((Offer)e).getFunctionOffer();
+		}return "";
+	}
+	
+	public String getOfferTypeOrNull(Element e) {
+		if(e instanceof Offer) {
+			return ((Offer)e).getOfferType().getType();
+		}return "";
+	}
+	
 }

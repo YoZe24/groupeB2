@@ -1,0 +1,118 @@
+<html xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<title>Start Page</title>
+<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="Css.css"/>
+  
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>	
+<body>
+	<div id="header">
+		<ui:insert name="header" >
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+	 </div>
+	 <br/>
+	 <div class="container text-center" id="welcomeMessage">
+	 	<p>Vos offres/évènements</p>
+	 </div>
+	<div class="container" id="listElements">
+		<h:dataTable id="elements" 
+							value="#{elementControl.getElementsFromUser(userControl.userCurrent)}" 
+	 						var="element"
+	 						columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
+	 						headerClass="list-header" 
+	 						rowClasses="list-row" 
+	 						styleClass="list-background table table-striped table-bordered text-center">
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Type"/>
+	 	</f:facet>
+	 	<h:outputText value="#{element.getRealClassName()}"/>
+	 </h:column>	
+	 				
+ 	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Date de publication"/>
+	 	</f:facet>
+	 	<h:outputText value="#{element.convertDateIntoString(element.publishDate)}"/>
+	 </h:column>
+	 						 		 						
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Nom"/>
+	 	</f:facet>
+	 	<h:outputText value="#{element.author.name}"/>
+	 </h:column>
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Prénom"/>
+	 	</f:facet>
+	 	<h:outputText value="#{element.author.firstname}"/>
+	 </h:column>
+	 
+ 	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Titre"/>
+	 	</f:facet>
+	 	<h:outputText value="#{elementControl.getTitleOrNull(element)}"/>
+	 </h:column>	
+	 
+ 	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Fonction"/>
+	 	</f:facet>
+	 	<h:outputText value="#{elementControl.getFunctionOfferOrNull(element)}"/>
+	 </h:column>	
+	 
+	 	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Type d'offre"/>
+	 	</f:facet>
+	 	<h:outputText value="#{elementControl.getOfferTypeOrNull(element)}"/>
+	 </h:column>	
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Validation"/>
+	 	</f:facet>
+	 	<h:outputText value="#{elementControl.convertBoolToString(element.confirmed)}"/>
+	 </h:column>
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Supprimer l'élément"/>
+	 	</f:facet>
+	 	<h:form>
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{elementControl.remove(element)}">
+<!-- 	 			<f:param name="idRemoved" value="#{user.id}"/>
+ -->	 		</h:commandButton>
+	 	</h:form>
+	 	
+	 </h:column>
+	 
+	 </h:dataTable> 
+	
+	
+	</div>
+	 
+	 
+	 
+	 
+	 
+</body>
+</html>

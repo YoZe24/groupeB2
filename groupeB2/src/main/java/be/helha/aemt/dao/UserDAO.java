@@ -44,8 +44,7 @@ public class UserDAO implements Serializable {
 	}
 
 	public User postUser(User user) {
-		User userFinded = findUserByEmail(user);
-		if(userFinded != null)
+		if(findUserByEmail(user) != null || findByLogin(user.getLogin()) !=  null)
 			return null;
 
 		Address addressFinded = findAddress(user.getAddress());

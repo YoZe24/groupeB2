@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -125,6 +126,18 @@ public class Element implements Serializable{
 	public Element clone() {
 		return new Element(author, publishDate, pathFile);
 	}
+
+	public String convertDateIntoString(LocalDateTime date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//		String dateTimeString = date.format(formatter);
+		String dateTimeString = date.format(DateTimeFormatter.RFC_1123_DATE_TIME);
+		return dateTimeString;
+	}
+	
+	public String getRealClassName() {
+		return this.getClass().getSimpleName();
+	}
+	
 
 	@Override
 	public String toString() {
