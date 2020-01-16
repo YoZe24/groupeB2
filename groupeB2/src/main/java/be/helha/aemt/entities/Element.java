@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-import com.sun.el.stream.Stream;
 
 
 @Entity
@@ -42,7 +41,6 @@ public class Element implements Serializable{
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
 		this.img = img;
-		this.confirmed = false;
 	}
 
 	public Element(User author, LocalDateTime publishDate, String pathFile) {
@@ -50,7 +48,6 @@ public class Element implements Serializable{
 		this.author = author;
 		this.publishDate = publishDate;
 		this.pathFile = pathFile;
-		this.confirmed = false;
 	}
 
 	public Element() {
@@ -116,8 +113,6 @@ public class Element implements Serializable{
 	public void setPublishDate(LocalDateTime publishDate) {
 		this.publishDate = publishDate;
 	}
-
-
 
 	public boolean isConfirmed() {
 		return confirmed;
