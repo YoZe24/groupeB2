@@ -1,7 +1,7 @@
 package be.helha.aemt.enums;
 
 public enum EnumSection {
-	ECONOMIQUE("Economique"),AGRONOMIE("Agronomie"),ART_APPLIQUES("Art appliqués"),SOCIAL("Social"),SANTE("Sante"),PEDAGOGIQUE("Pedagogique"),TECHNIQUE("Technique");
+	ASSISTANT_DIRECTION("Assitant de direction"), COMPTABILITE("Comptabilité"), INFORMATIQUE("Informatique de gestion");
 	
 	private String section;
 	

@@ -37,7 +37,7 @@ public class UserControl implements Serializable{
 
 
 	private Address addressManuel = new Address("S1", "N1", "C1", "CP1");
-	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010",EnumSection.ART_APPLIQUES, addressManuel,EnumRole.ANCIENT);
+	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010",EnumSection.INFORMATIQUE, addressManuel,EnumRole.ANCIENT);
 
 
 	private List<User> users= new ArrayList<User>();
@@ -157,9 +157,11 @@ public class UserControl implements Serializable{
 	public User getUserById(int id) {
 		return bean.getById(id);
 }
-	public void singleUserDetails(int id) {
-		this.singleUser = new User();
-		this.singleUser = bean.findById(id);
+	public void singleUserDetails() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idClicked"));
+		setSingleUser(bean.getById(userId));
 	}
 
 	public User getSingleUser() {
@@ -182,5 +184,8 @@ public class UserControl implements Serializable{
 		loadUsers();
 	}
 
+	public String changePage() {
+		return "singleUser.xhtml";
+	}
 
 }

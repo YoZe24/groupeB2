@@ -37,11 +37,11 @@
 
 <!-- A garder pour ELIOT -->
 
-<!-- 	<dependency>
+ 	<dependency>
     	<groupId>org.omnifaces</groupId>
     	<artifactId>omnifaces</artifactId>
     	<version>3.4.1</version>
-	</dependency> -->
+	</dependency>
 
 
 
