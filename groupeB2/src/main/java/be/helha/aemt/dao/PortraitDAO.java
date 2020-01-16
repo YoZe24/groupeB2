@@ -35,6 +35,7 @@ public class PortraitDAO {
 	public Portrait getById(int id){
 		Query query = em.createQuery("SELECT portrait from Portrait portrait WHERE portrait.id = :id");
 		query.setParameter("id", id);
+		return query.getResultList().size() != 0?(Portrait) query.getResultList().get(0) : null;
 	}
 	
 	public Portrait get(Portrait p) {

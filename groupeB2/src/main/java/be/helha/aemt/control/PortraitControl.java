@@ -4,19 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.PortraitGestionEJB;
-import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Portrait;
 import be.helha.aemt.entities.User;
 
