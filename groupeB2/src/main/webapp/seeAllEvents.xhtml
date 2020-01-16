@@ -1,7 +1,8 @@
 <html xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <head>
 <title>Start Page</title>
 <meta http-equiv="
@@ -32,12 +33,12 @@
 	
 	
 		<h:dataTable id="events" 
-	 						columnClasses="columnCenter,columnCenter,columnCenter" 
+							value="#{eventControl.events}" 
+	 						var="event"
+	 						columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
 	 						headerClass="list-header" 
 	 						rowClasses="list-row" 
-	 						styleClass="list-background table table-striped table-bordered text-center" 
-	 						value="#{eventControl.events}" 
-	 						var="event">
+	 						styleClass="list-background table table-striped table-bordered text-center">
 	 						
 	<h:column>
 	 	<f:facet name="header">
@@ -112,16 +113,26 @@
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Supprimer les évenements"/>
+	 		<h:outputText value="Supprimer les événements"/>
 	 	</f:facet>
-	 	<h:commandButton value="Supprimer" class="btn btn-danger"></h:commandButton>
+	 	<h:form>
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{eventControl.removeEvent}">
+	 			<f:param name="idRemoved" value="#{event.id}"/>
+	 		</h:commandButton>
+	 	</h:form>
+	 	
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Confirmer l'événement"/>
 	 	</f:facet>
-	 	<h:commandButton value="Confirmer" class="btn btn-info"></h:commandButton>
+	 	<h:form>
+	 		<h:commandButton type="submit" value="Confirmer" class="btn btn-info" action="#{eventControl.confirmEvent}" rendered="#{not event.confirmed}">
+	 			<f:param name="idConfirmed" value="#{event.id}"/>
+	 		</h:commandButton>
+	 	</h:form>
+	 	
 	 </h:column>
 	 
 	 

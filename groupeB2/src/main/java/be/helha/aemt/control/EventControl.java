@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
@@ -208,6 +209,37 @@ public class EventControl implements Serializable {
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+	
+	public Event getEventById(int id) {
+		return bean.getById(id);
+	}
+	
+	public void removeEvent() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int eventId = Integer.parseInt((String) map.get("idRemoved"));
+		
+		Event eventToRemove = getEventById(eventId);
+		removeEvent(eventToRemove);
+	}
+	
+	public Event removeEvent(Event event) {
+		return bean.delete(event);
+	}
+	
+	public void confirmEvent() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int eventId = Integer.parseInt((String) map.get("idConfirmed"));
+		Event eventUpdated = updateEvent(eventId);
+		bean.update(eventUpdated);
+	}
+	
+	public Event updateEvent(int id) {
+		Event eventToUpdate = bean.getById(id);
+		eventToUpdate.setConfirmed(true);
+		return eventToUpdate;
 	}
 
 
