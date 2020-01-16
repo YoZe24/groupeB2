@@ -101,6 +101,7 @@ public class OfferControl implements Serializable {
 		
 		Offer offerToRemove = getOfferById(offerId);
 		removeOffer(offerToRemove);
+		listOfferLoad.remove(offerToRemove);
 	}
 	
 	public Offer removeOffer(Offer offer) {
@@ -114,6 +115,7 @@ public class OfferControl implements Serializable {
 		int offerId = Integer.parseInt((String) map.get("idConfirmed"));
 		Offer offerUpdated = updateOffer(offerId);
 		bean.update(offerUpdated);
+		listOfferLoad.set(listOfferLoad.indexOf(offerUpdated), offerUpdated);
 	}
 	
 	public Offer updateOffer(int id) {
@@ -204,6 +206,10 @@ public class OfferControl implements Serializable {
 	}
 	public void setPdf(Part pdf) {
 		this.pdf = pdf;
+	}
+	
+	public String convertBoolToString(boolean bool) {
+		return bool == false? "Non validé" : "Validé";
 	}
 
 	

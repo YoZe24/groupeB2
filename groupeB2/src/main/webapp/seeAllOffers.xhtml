@@ -47,14 +47,6 @@
 	 	</f:facet>
 	 	<h:outputText value="#{offer.convertDateIntoString(offer.publishDate)}"/>
 	 </h:column> 						
-	
-	
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Auteur"/>
-	 	</f:facet>
-	 	<h:outputText value="#{offer.author.login}"/>
-	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
@@ -82,13 +74,6 @@
 	 		<h:outputText value="Mail"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.societyMail}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Adresse"/>
-	 	</f:facet>
-	 	<h:outputText value="#{offer.societyAddress}"/>
 	 </h:column>
 	 
 	 <h:column>
@@ -124,6 +109,13 @@
 	 		<h:outputText value="Note supplémentaire"/>
 	 	</f:facet>
 	 	<h:outputText value="#{offer.noteSupp}"/>
+	 </h:column>
+	 
+	  <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Validé"/>
+	 	</f:facet>
+	 	<h:outputText value="#{offerControl.convertBoolToString(offer.confirmed)}"/>
 	 </h:column>
 	 
 	 

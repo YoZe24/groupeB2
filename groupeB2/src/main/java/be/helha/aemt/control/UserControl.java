@@ -122,10 +122,11 @@ public class UserControl implements Serializable{
 		int userId = Integer.parseInt((String) map.get("idRemoved"));
 		User userToRemove = getUserById(userId);
 		removeUser(userToRemove);
+		users.remove(userToRemove);
 	}
 
 	public String convertBoolToString(boolean bool) {
-		return bool == false? "Non validÃ©" : "ValidÃ©";
+		return bool == false? "Non validé" : "Validé";
 	}
 
 	public void confirmUser() {
@@ -134,6 +135,7 @@ public class UserControl implements Serializable{
 		int userId = Integer.parseInt((String) map.get("idConfirmed"));
 		User userUpdated = updateUser(userId);
 		bean.update(userUpdated);
+		users.set(users.indexOf(userUpdated), userUpdated);
 	}
 
 	public User getUserCurrent() {
@@ -163,6 +165,18 @@ public class UserControl implements Serializable{
 
 	public void setSingleUser(User singleUser) {
 		this.singleUser = singleUser;
+	}
+	
+	public void seeNotConfirmedUsers() {
+		List<User> listUserNotConfirmed = new ArrayList<User>();
+		for (User user : users) {
+			if(!user.isConfirmed()) listUserNotConfirmed.add(user);
+		}
+		setUsers(listUserNotConfirmed);
+	}
+	
+	public void seeAllUsers() {
+		loadUsers();
 	}
 
 

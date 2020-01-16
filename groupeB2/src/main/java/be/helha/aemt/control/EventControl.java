@@ -222,6 +222,7 @@ public class EventControl implements Serializable {
 		
 		Event eventToRemove = getEventById(eventId);
 		removeEvent(eventToRemove);
+		events.remove(eventToRemove);
 	}
 	
 	public Event removeEvent(Event event) {
@@ -234,6 +235,7 @@ public class EventControl implements Serializable {
 		int eventId = Integer.parseInt((String) map.get("idConfirmed"));
 		Event eventUpdated = updateEvent(eventId);
 		bean.update(eventUpdated);
+		events.set(events.indexOf(eventUpdated),eventUpdated);
 	}
 	
 	public Event updateEvent(int id) {
