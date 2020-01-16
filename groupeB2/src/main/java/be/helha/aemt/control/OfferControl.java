@@ -17,7 +17,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
@@ -34,7 +33,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
 import be.helha.aemt.entities.Address;
-import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Offer;
 import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumOfferType;
@@ -58,7 +56,16 @@ public class OfferControl implements Serializable {
 	private String endDateStr = "";
 
 	private boolean offerTypeIsOk;
+	private Offer singleOffer;
 
+	private boolean valid;
+
+	public boolean isValid() {
+		return valid;
+	}
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
 	public OfferControl() {
 		offer = new Offer();
 		offer.setOfferType(EnumOfferType.CDD);
@@ -211,6 +218,7 @@ public class OfferControl implements Serializable {
 	}
 
 	public Offer removeOffer(Offer offer) {
+		listOfferLoad.remove(offer);
 		return bean.delete(offer);
 	}
 
@@ -220,8 +228,10 @@ public class OfferControl implements Serializable {
 		Map map = context.getExternalContext().getRequestParameterMap();
 		int offerId = Integer.parseInt((String) map.get("idConfirmed"));
 		Offer offerUpdated = updateOffer(offerId);
+		System.out.println(offerUpdated);
 		bean.update(offerUpdated);
 		listOfferLoad.set(listOfferLoad.indexOf(offerUpdated), offerUpdated);
+		//System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++"+listOfferLoad.get(offerId));
 	}
 
 	public Offer updateOffer(int id) {
@@ -260,6 +270,10 @@ public class OfferControl implements Serializable {
 		return bean.query();
 	}
 
+	public boolean checkConfirmed(int id) {
+		Offer o = getOfferById(id);
+		return o.isConfirmed();
+	}
 	public Offer getOfferById(int id) {
 		return bean.getById(id);
 	}
@@ -317,6 +331,35 @@ public class OfferControl implements Serializable {
 	public String convertBoolToString(boolean bool) {
 		return bool == false? "Non valid�" : "Valid�";
 	}
+
+	public void seeNotConfirmedUsers() {
+		List<Offer> listOfferNotConfirmed = new ArrayList<Offer>();
+		for (Offer offer : listOfferLoad) {
+			if(!offer.isConfirmed()) listOfferNotConfirmed.add(offer);
+		}
+		setListOfferLoad(listOfferNotConfirmed);
+	}
+
+	public void seeAllOffers() {
+		loadListOffer();
+	}
+
+	public void singleOfferDetails() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int userId = Integer.parseInt((String) map.get("idClicked"));
+		setSingleOffer(bean.getById(userId));
+	}
+
+	public void setSingleOffer(Offer singleOffer) {
+		this.singleOffer = singleOffer;
+	}
+	public Offer getSingleOffer() {
+		return singleOffer;
+	}
+
+
+
 
 
 

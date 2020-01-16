@@ -18,12 +18,29 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script>
+$(document).ready(function(){
+  $("#searchBar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".list-row").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 	<div id="header">
 		<ui:insert name="header" >
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
 	<br/>
+	<div class="container text-center p-2">
+		<div class="d-flex justify-content-center">
+		 	<i class="fas fa-user prefix align-self-center"/>
+		 	<input type="text" id="searchBar" class="form-control" placeholder="Rechercher un utilisateur"/>
+		 </div>
+	</div>
 	<div class="container">
 		<h:dataTable id="users"
 		 			columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter"
@@ -63,7 +80,7 @@
 			 		<h:outputText value="Détails"/>
 			 	</f:facet>
 			 		<h:form>
-	 					<h:commandButton type="submit" value="Voir détails" class="btn btn-info" action="singleUser.xhtml">
+	 					<h:commandButton type="submit" value="Voir détails" class="btn btn-info" action="singleOffer.xhtml">
 	 						<f:param name="idClicked" value="#{user.id}"/>
 	 						<f:actionListener binding="#{userControl.singleUserDetails()}" />
 	 					</h:commandButton>

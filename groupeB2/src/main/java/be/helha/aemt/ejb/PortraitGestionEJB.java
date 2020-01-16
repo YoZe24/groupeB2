@@ -22,6 +22,10 @@ public class PortraitGestionEJB {
 		return ejb.query();
 	}
 	
+	public Portrait get(int id) {
+		return ejb.getById(id);
+	}
+	
 	public Portrait get(Portrait p) {
 		return ejb.get(p);
 	}
@@ -36,5 +40,9 @@ public class PortraitGestionEJB {
 	
 	public Portrait update(Portrait p) {
 		return ejb.update(p);
+	}
+	
+	public Portrait getById(int id) {
+		return ejb.findById(id);
 	}
 }

@@ -11,13 +11,26 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
   <link rel="stylesheet" href="Css.css"/>
-<title>Offres</title>
-</head>
-<body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#searchBar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".frameOffer").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+<title>Offres</title>
+</head>
+<body>
+
 
 	<div id="header">
 		<ui:insert name="header" >
@@ -35,10 +48,19 @@
 		 </h:form>
 	 </div>
 	 <br/>
+
+	 <div class="container text-center">
+	 	<div class="d-flex justify-content-center">
+	 		<i class="fas fa-file-signature prefix align-self-center"/>
+	 		<input type="text" id="searchBar" class="form-control" placeholder="Rechercher une offre"/>
+	 	</div>
+	 </div>
+
+
 	 <div  class="container jumbotron" id="listOfferDiv">
 	 	<ui:repeat value="#{offerControl.listOfferLoad}" var="offer">
-			 	<div id="offerOne" style="
-    				border-style: solid;">
+			 	<div class="container frameOffer">
+			 	<div id="offerOne" style="border-style: solid;">
 			 		<div class="container">
 			 			<div class="row">
 	 						<div class="col">
@@ -105,7 +127,7 @@
 					   	 	<div class="col">
 					      		<h5>Statut
 					      			<c:set var = "dispo" scope = "session" value = "#{offer.available}"/>
-      								<c:choose>
+      								  <c:choose>
 									    <c:when test="${dispo = true}">
 									        <p class="lead">Disponible</p>
 									    </c:when>
@@ -130,10 +152,11 @@
 								</h5>
 							</div>
 						</div>
-		 			</div>	
+		 			</div>
 		 		</div>
-		 		<br/>
+
 	 	</ui:repeat>
+		</div>
 	 </div>
 
 </body>

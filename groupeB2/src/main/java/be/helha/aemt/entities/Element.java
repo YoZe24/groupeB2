@@ -142,7 +142,7 @@ public class Element implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Element [id=" + id + ", author=" + author + ", publishDate=" + publishDate + ", pathFile=" + pathFile
+		return "Element [id=" + id + ", author=" + author + ", publishDate=" + publishDate + ", pathFile=" + pathFile + ", confirmed=" + confirmed
 				+ "]";
 	}
 

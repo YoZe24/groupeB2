@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="Css.css"/>
+<title>Fiche offre</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<div id="header">
+		<ui:insert name="header" >
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+	</div>
+	<br/>
+	<div  class="container jumbotron" id="listOfferDiv">
+	 	<ui:repeat value="#{offerControl.listOfferLoad}" var="offer">
+			 	<div id="offerOne" style="
+    				border-style: solid;">
+			 		<div class="container frameOffer">
+			 			<div class="row">
+	 						<div class="col">
+	 							<h3>Offre publié par #{offerControl.singleOffer.author.name} le #{offerControl.singleOffer.convertDateIntoString(offerControl.singleOffer.publishDate)}</h3>
+	 						</div>
+	 					</div>
+	 					<hr class="my-4"/>
+	 					<div class="row">
+						    <div class="col">
+						      	<h4>Entreprise</h4>
+						    </div>
+						    <div class="col">
+						      	<h4>Offre</h4>
+						    </div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Nom de la société<p class="lead">#{offerControl.singleOffer.societyName}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Function de l'offre<p class="lead">#{offerControl.singleOffer.functionOffer}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Email de la société<p class="lead">#{offerControl.singleOffer.societyMail}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Sujet de l'offre<p class="lead">#{offerControl.singleOffer.subject}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Numéro de la société<p class="lead">#{offerControl.singleOffer.societyNum}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Compétences demandées<p class="lead">#{offerControl.singleOffer.skillsNeeded}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Secteur de la société<p class="lead">#{offerControl.singleOffer.societySector}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Note suplémentaire<p class="lead">#{offerControl.singleOffer.noteSupp}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Adresse de la société<p class="lead">#{offerControl.singleOffer.societyAddress.street} #{offerControl.singleOffer.societyAddress.num}</p>
+					      		<p class="lead">#{offer.societyAddress.city} #{offerControl.singleOffer.societyAddress.cp}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Date de l'offre<p class="lead">Début : #{offerControl.singleOffer.convertDateIntoString(offerControl.singleOffer.startDate)}</p><p class="lead">Fin : #{offerControl.singleOffer.convertDateIntoString(offerControl.singleOffer.endDate)}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Statut
+					      			<c:set var = "dispo" scope = "session" value = "#{offer.available}"/>
+      								<c:choose>
+									    <c:when test="${dispo = true}">
+									        <p class="lead">Disponible</p>
+									    </c:when>
+									    <c:otherwise>
+									        <p class="lead">Indisponible</p>
+									    </c:otherwise>
+									</c:choose>
+					      		</h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Montant (optionel)<p class="lead">#{offerControl.singleOffer.amount}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+							<div class="col">
+								<h5>PDF téléchargeable 
+								<h:form>
+									<h:commandButton class="btn btn-danger" value="Télécharger" action="#{offerControl.download(offerControl.singleOffer)}"></h:commandButton>
+								</h:form>
+								</h5>
+							</div>
+						</div>
+		 			</div>	
+		 		</div>
+		 		<br/>
+	 	</ui:repeat>
+	 </div>
+
+</body>
+</html>

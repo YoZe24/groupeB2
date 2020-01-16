@@ -39,110 +39,68 @@ $(document).ready(function(){
 	 <br/>
 	 <div class="container text-center" id="welcomeMessage">
 	 	<div><b>Section admin : </b></div>	
-	 	<div><b>Listes des événements postés par les admins</b></div>	 	
+	 	<div><b>Listes des portraits postés par les admins</b></div>	 	
 	 </div>
 	 
 	 <div class="container text-center">
 
 	 		 <div class="d-flex justify-content-center">
 
+
+				 <div class="p-3">
+					<h:form>
+						<h:commandButton type="submit" value="Afficher les portraits" class="btn btn-warning" action="#{portraitControl.seeAllPortraits}"/>
+					</h:form>
+				 </div>
+
+
+
+	 		</div>
 	 		
-
-					 <div class="p-3">
-						<h:form>
-							<h:commandButton type="submit" value="Afficher les événements" class="btn btn-warning" action="#{eventControl.seeAllEvents}"/>
-						</h:form>
-					 </div>
-
-
-			</div>
-	 	</div>
+	 </div>
 	 
 	 
 	 <div class="container text-center">
 	 
 	 <div class="d-flex justify-content-center m-4">
 	 	<i class="fas fa-calendar prefix align-self-center"/>
-	 	<input type="text" id="searchBar" class="form-control" placeholder="Rechercher un event posté"/>
+	 	<input type="text" id="searchBar" class="form-control" placeholder="Rechercher un portrait posté"/>
 	 </div>
 	 
 	 </div>
 	
 	 
 	 
-	 <div class="container" id="listEvents">
+	 <div class="container" id="listPortraits">
 	
 	
-		<h:dataTable id="events" 
-							value="#{eventControl.events}" 
-	 						var="event"
-	 						columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
+		<h:dataTable id="portraits" 
+							value="#{portraitControl.portraits}" 
+	 						var="portrait"
+	 						columnClasses="columnCenter" 
 	 						headerClass="list-header" 
 	 						rowClasses="list-row" 
 	 						styleClass="list-background table table-striped table-bordered text-center">
 	 						
 	<h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Date publication"/>
+	 		<h:outputText value="Nom de l'ancien"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.convertDateIntoString(event.publishDate)}"/>
-	 </h:column> 						
-	
-	
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Auteur"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.author.login}"/>
+	 	<h:outputText value="#{portrait.name}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Nom"/>
+	 		<h:outputText value="Prénom de l'ancien"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.author.name}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Prénom"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.author.firstname}"/>
-	 </h:column>
-	 						
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Titre événement"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.title}"/>
+	 	<h:outputText value="#{portrait.firstname}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Description"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.description}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Début de l'événement"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.convertDateIntoString(event.startDate)}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Fin de l'événement"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.convertDateIntoString(event.endDate)}"/>
-	 </h:column>
-	 
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Lieu"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.address}"/>
+	 	<h:outputText value="#{portrait.description}"/>
 	 </h:column>
 	 
 	 <h:column>
@@ -150,8 +108,8 @@ $(document).ready(function(){
 	 		<h:outputText value="Supprimer les événements"/>
 	 	</f:facet>
 	 	<h:form>
-	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{eventControl.removeEvent}">
-	 			<f:param name="idRemoved" value="#{event.id}"/>
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{portraitControl.removePortrait}">
+	 			<f:param name="idRemoved" value="#{portrait.id}"/>
 	 		</h:commandButton>
 	 	</h:form>
 	 	
