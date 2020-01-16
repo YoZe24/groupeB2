@@ -8,14 +8,13 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.persistence.Query;
 
 import be.helha.aemt.ejb.UserGestionEJB;
 import be.helha.aemt.entities.Address;
 import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumRole;
+import be.helha.aemt.enums.EnumSection;
 
 @Named
 @SessionScoped
@@ -38,11 +37,14 @@ public class UserControl implements Serializable{
 
 
 	private Address addressManuel = new Address("S1", "N1", "C1", "CP1");
-	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010","section", addressManuel,EnumRole.ANCIENT);
+	private User userManual = new User("A1", "FS1", "M1", "LA1", "91e8c23c79fe019eea9a858d90e4be24dc917988c6fe2e4a55a2339f027b005c", "PN1","2010",EnumSection.ART_APPLIQUES, addressManuel,EnumRole.ANCIENT);
 
 
 	private List<User> users= new ArrayList<User>();
 
+	public EnumSection[] getSections() {
+		return EnumSection.values();
+	}
 
 	public UserControl() {
 		user = new User();
