@@ -1,6 +1,5 @@
 package be.helha.aemt.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,9 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 import be.helha.aemt.enums.EnumRole;
+import be.helha.aemt.enums.EnumSection;
 
 @Entity
 public class User {
@@ -29,7 +28,8 @@ public class User {
 	private String hashPwd;
 	private String phoneNumber;
 	private String degreeYear;
-	private String section;
+	@Enumerated(EnumType.STRING)
+	private EnumSection section;
 	private boolean confirmed;
 
 	private String groupName;
@@ -49,7 +49,7 @@ public class User {
 		this.confirmed = false;
 	};
 
-	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber, String degreeYear, String section,
+	public User(String name, String firstname, String mail, String login, String hashPwd, String phoneNumber, String degreeYear, EnumSection section,
 			Address address,EnumRole role) {
 		this();
 		this.name = name;
@@ -65,7 +65,7 @@ public class User {
 		this.confirmed = false;
 	}
 
-	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber, String degreeYear, String section,
+	public User( String name, String firstname, String mail, String login, String hashPwd, String phoneNumber, String degreeYear, EnumSection section,
 			Address address, EnumRole role, List<Element> elements) {
 		this(name,firstname,mail,login,hashPwd,phoneNumber,degreeYear,section,address,role);
 //		this.id = id;
@@ -81,7 +81,7 @@ public class User {
 		this.hashPwd = "";
 		this.phoneNumber = "";
 		this.degreeYear = "";
-		this.section = "";
+		this.section = EnumSection.AGRONOMIE;
 		this.address.setToVoid();
 	}
 
@@ -188,11 +188,11 @@ public class User {
 		this.degreeYear = degreeYear;
 	}
 
-	public String getSection() {
+	public EnumSection getSection() {
 		return section;
 	}
 
-	public void setSection(String section) {
+	public void setSection(EnumSection section) {
 		this.section = section;
 	}
 
@@ -249,7 +249,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", mail=" + mail + ", login=" + login
-				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber +", degreeYear=" + degreeYear +", section=" + section+"]";
+				+ ", hashPwd=" + hashPwd + ", phoneNumber=" + phoneNumber +", degreeYear=" + degreeYear +", section=" + section.getSection()+"]";
 	}
 
 }

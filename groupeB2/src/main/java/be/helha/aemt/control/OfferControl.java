@@ -5,20 +5,24 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import be.helha.aemt.ejb.OfferGestionEJB;
 import be.helha.aemt.entities.Address;
+import be.helha.aemt.entities.Event;
 import be.helha.aemt.entities.Offer;
 import be.helha.aemt.entities.User;
 import be.helha.aemt.enums.EnumOfferType;
 import be.helha.aemt.enums.EnumRole;
+import be.helha.aemt.enums.EnumSection;
 
 @Named
 @SessionScoped
@@ -84,9 +88,41 @@ public class OfferControl implements Serializable {
 		List<String> skills = new ArrayList<>();
 		Address a = new Address("testOffer", "offerNum", "offerCity", "offerCp");
 		Address aUser = new Address("testOfferUser", "userNum", "userCity", "userCp");
-		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
+		User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer",EnumSection.ECONOMIQUE, aUser, EnumRole.ANCIENT);
+		//this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector",1,a,"functionOffer",true, skills,"noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
+		//User u = new User("testOffer", "testOffer", "testOffer@gmail.com", "testoffer", "testOffer", "testOffer","testOffer","testOffer", aUser, EnumRole.ANCIENT);
 		this.offer = new Offer(u, LocalDateTime.now(), "pathFile","SocietyTest", "societyMail","societySector","03",a,"functionOffer",true, "Java,Mysql","noteSupp","subject",EnumOfferType.CDD,LocalDateTime.now(),LocalDateTime.now(),200.0);
 		return bean.post(offer);
+	}
+	
+	public void removeOffer() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int offerId = Integer.parseInt((String) map.get("idRemoved"));
+		
+		Offer offerToRemove = getOfferById(offerId);
+		removeOffer(offerToRemove);
+		listOfferLoad.remove(offerToRemove);
+	}
+	
+	public Offer removeOffer(Offer offer) {
+		return bean.delete(offer);
+	}
+	
+	
+	public void confirmOffer() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map map = context.getExternalContext().getRequestParameterMap();
+		int offerId = Integer.parseInt((String) map.get("idConfirmed"));
+		Offer offerUpdated = updateOffer(offerId);
+		bean.update(offerUpdated);
+		listOfferLoad.set(listOfferLoad.indexOf(offerUpdated), offerUpdated);
+	}
+	
+	public Offer updateOffer(int id) {
+		Offer offerToUpdate = bean.getById(id);
+		offerToUpdate.setConfirmed(true);
+		return offerToUpdate;
 	}
 	
 	public boolean renderDate() {
@@ -102,6 +138,11 @@ public class OfferControl implements Serializable {
 	public Offer updateOfferAvailable(Offer o) {
 		return bean.updateStatut(o);
 	}
+	
+	public void loadListOffer() {
+		this.listOfferLoad = getAllByOffer();
+	}
+	
 	public void loadListOffer (EnumOfferType type) {
 		System.out.println("Type choisis: " + typeOfferChoose);
 		this.listOfferLoad = getAllByOfferType(type);
@@ -109,6 +150,11 @@ public class OfferControl implements Serializable {
 	public List<Offer> getAllByOfferType(EnumOfferType type){
 		return bean.getAllByOfferType(type);
 	}
+	
+	public List<Offer> getAllByOffer(){
+		return bean.query();
+	}
+	
 	public Offer getOfferById(int id) {
 		return bean.getById(id);
 	}
@@ -161,6 +207,10 @@ public class OfferControl implements Serializable {
 	}
 	public void setPdf(Part pdf) {
 		this.pdf = pdf;
+	}
+	
+	public String convertBoolToString(boolean bool) {
+		return bool == false? "Non validé" : "Validé";
 	}
 
 	

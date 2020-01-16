@@ -29,95 +29,120 @@
 	 <div class="container text-center" id="welcomeMessage">
 	 	<p>Admin</p>
 	 </div>
-	 <div class="container" id="listEvents">
+	 <div class="container-fluid" id="listOffers">
 	
 	
-		<h:dataTable id="events" 
-							value="#{eventControl.events}" 
-	 						var="event"
-	 						columnClasses="columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter,columnCenter" 
+		<h:dataTable id="offers" 
+							value="#{offerControl.listOfferLoad}" 
+	 						var="offer"
+	 						columnClasses="columnCenter" 
 	 						headerClass="list-header" 
 	 						rowClasses="list-row" 
-	 						styleClass="list-background table table-striped table-bordered text-center">
-	 						
+	 						styleClass="list-background table table-striped table-bordered text-center">					
+	 
+	 	
 	<h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Date publication"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.convertDateIntoString(event.publishDate)}"/>
+	 	<h:outputText value="#{offer.convertDateIntoString(offer.publishDate)}"/>
 	 </h:column> 						
-	
-	
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Auteur"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.author.login}"/>
-	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Nom"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.author.name}"/>
+	 	<h:outputText value="#{offer.author.name}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
 	 		<h:outputText value="Prénom"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.author.firstname}"/>
-	 </h:column>
-	 						
-	 <h:column>
-	 	<f:facet name="header">
-	 		<h:outputText value="Titre événement"/>
-	 	</f:facet>
-	 	<h:outputText value="#{event.title}"/>
+	 	<h:outputText value="#{offer.author.firstname}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Description"/>
+	 		<h:outputText value="Nom de l'entreprise"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.description}"/>
+	 	<h:outputText value="#{offer.societyName}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Début de l'événement"/>
+	 		<h:outputText value="Mail"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.convertDateIntoString(event.startDate)}"/>
+	 	<h:outputText value="#{offer.societyMail}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Fin de l'événement"/>
+	 		<h:outputText value="Compétence requise"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.convertDateIntoString(event.endDate)}"/>
+	 	<h:outputText value="#{offer.skillsNeeded}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Valid"/>
+	 		<h:outputText value="Type d'offre"/>
 	 	</f:facet>
-	 	<h:outputText value="#{elementControl.convertBoolToString(event.confirmed)}"/>
+	 	<h:outputText value="#{offer.offerType}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Lieu"/>
+	 		<h:outputText value="Début de l'offre"/>
 	 	</f:facet>
-	 	<h:outputText value="#{event.address}"/>
+	 	<h:outputText value="#{offer.convertDateIntoString(offer.startDate)}"/>
 	 </h:column>
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Supprimer les événements"/>
+	 		<h:outputText value="Fin de l'offre"/>
+	 	</f:facet>
+	 	<h:outputText value="#{offer.convertDateIntoString(offer.endDate)}"/>
+	 </h:column>
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Note supplémentaire"/>
+	 	</f:facet>
+	 	<h:outputText value="#{offer.noteSupp}"/>
+	 </h:column>
+	 
+	  <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Validé"/>
+	 	</f:facet>
+	 	<h:outputText value="#{offerControl.convertBoolToString(offer.confirmed)}"/>
+	 </h:column>
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 <h:column>
+	 	<f:facet name="header">
+	 		<h:outputText value="Supprimer les offres"/>
 	 	</f:facet>
 	 	<h:form>
-	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{eventControl.removeEvent}">
-	 			<f:param name="idRemoved" value="#{event.id}"/>
+	 		<h:commandButton type="submit" value="Supprimer" class="btn btn-danger" action="#{offerControl.removeOffer}">
+	 			<f:param name="idRemoved" value="#{offer.id}"/>
 	 		</h:commandButton>
 	 	</h:form>
 	 	
@@ -125,11 +150,11 @@
 	 
 	 <h:column>
 	 	<f:facet name="header">
-	 		<h:outputText value="Confirmer l'événement"/>
+	 		<h:outputText value="Confirmer l'offre"/>
 	 	</f:facet>
 	 	<h:form>
-	 		<h:commandButton type="submit" value="Confirmer" class="btn btn-info" action="#{eventControl.confirmEvent}" rendered="#{not event.confirmed}">
-	 			<f:param name="idConfirmed" value="#{event.id}"/>
+	 		<h:commandButton type="submit" value="Confirmer" class="btn btn-info" action="#{offerControl.confirmOffer}" rendered="#{not offer.confirmed}">
+	 			<f:param name="idConfirmed" value="#{offer.id}"/>
 	 		</h:commandButton>
 	 	</h:form>
 	 	

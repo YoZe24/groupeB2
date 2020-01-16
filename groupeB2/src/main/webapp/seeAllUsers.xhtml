@@ -17,6 +17,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script>
+$(document).ready(function(){
+  $("#searchBar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".list-row").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 </head>	
 <body>
 	<div id="header">
@@ -28,7 +39,37 @@
 	 <div class="container text-center" id="welcomeMessage">
 	 	<p>Admin</p>
 	 </div>
-	<div class="container" id="listUsers">
+	 
+	 <div class="container text-center">
+	 
+	 		 <div class="d-flex justify-content-center">
+	 	
+	 		<div class="p-3">
+			<h:form>
+				<h:commandButton type="submit" value="Afficher les utilisateurs non validés" class="btn btn-warning form-control" action="#{userControl.seeNotConfirmedUsers}"/>
+			</h:form>
+		 </div>
+	 
+		 <div class="p-3">
+			<h:form>
+				<h:commandButton type="submit" value="Afficher les utilisateurs" class="btn btn-warning" action="#{userControl.seeAllUsers}"/>
+			</h:form>
+		 </div>
+	 
+	 	
+	 
+	 </div>
+	 
+	 <div class="d-flex justify-content-center">
+	 	<i class="fas fa-user prefix align-self-center"/>
+	 	<input type="text" id="searchBar" class="form-control" placeholder="Rechercher un utilisateur"/>
+	 </div>
+	 
+	 </div>
+	 
+	
+	 
+	<div class="container-fluid" id="listUsers">
 		<h:dataTable id="users" 
 							value="#{userControl.users}" 
 	 						var="user"

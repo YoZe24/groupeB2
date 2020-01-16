@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 
 import be.helha.aemt.dao.EventDAO;
 import be.helha.aemt.entities.Event;
+import be.helha.aemt.entities.User;
 
 @Stateless
 public class EventGestionEJB {
@@ -38,5 +39,9 @@ public class EventGestionEJB {
 	
 	public Event update(Event e) {
 		return ejb.update(e);
+	}
+
+	public Event getById(int id) {
+		return ejb.findById(id);
 	}
 }

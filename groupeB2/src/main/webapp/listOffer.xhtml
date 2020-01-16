@@ -37,21 +37,97 @@
 	 <br/>
 	 <div  class="container jumbotron" id="listOfferDiv">
 	 	<ui:repeat value="#{offerControl.listOfferLoad}" var="offer">
-			 	<div id="offerOne">
+			 	<div id="offerOne" style="
+    				border-style: solid;">
 			 		<div class="container">
 			 			<div class="row">
 	 						<div class="col">
-	 							<h4>Offre #{userControl.typeOfferChose}</h4>
+	 							<h3>Offre publié par #{offer.author.name} le #{offer.convertDateIntoString(offer.publishDate)}</h3>
 	 						</div>
 	 					</div>
+	 					<hr class="my-4"/>
+	 					<div class="row">
+						    <div class="col">
+						      	<h4>Entreprise</h4>
+						    </div>
+						    <div class="col">
+						      	<h4>Offre</h4>
+						    </div>
+						</div>
+						<hr class="my-4"/>
 						<div class="row">
 					   	 	<div class="col">
-					      		<p class="lead"></p>
+					      		<h5>Nom de la société<p class="lead">#{offer.societyName}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Function de l'offre<p class="lead">#{offer.functionOffer}</p></h5>
 					    	</div>
 						</div>
 						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Email de la société<p class="lead">#{offer.societyMail}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Sujet de l'offre<p class="lead">#{offer.subject}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Numéro de la société<p class="lead">#{offer.societyNum}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Compétences demandées<p class="lead">#{offer.skillsNeeded}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Secteur de la société<p class="lead">#{offer.societySector}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Note suplémentaire<p class="lead">#{offer.noteSupp}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Adresse de la société<p class="lead">#{offer.societyAddress.street} #{offer.societyAddress.num}</p>
+					      		<p class="lead">#{offer.societyAddress.city} #{offer.societyAddress.cp}</p></h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Date de l'offre<p class="lead">Début : #{offer.convertDateIntoString(offer.startDate)}</p><p class="lead">Fin : #{offer.convertDateIntoString(offer.endDate)}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+					   	 	<div class="col">
+					      		<h5>Statut
+					      			<c:set var = "dispo" scope = "session" value = "#{offer.available}"/>
+      								<c:choose>
+									    <c:when test="${dispo = true}">
+									        <p class="lead">Disponible</p>
+									    </c:when>
+									    <c:otherwise>
+									        <p class="lead">Indisponible</p>
+									    </c:otherwise>
+									</c:choose>
+					      		</h5>
+					    	</div>
+					    	<div class="col">
+					      		<h5>Montant (optionel)<p class="lead">#{offer.amount}</p></h5>
+					    	</div>
+						</div>
+						<hr class="my-4"/>
+						<div class="row">
+							<div class="col">
+								<h5>PDF téléchargeable <button class="btn btn-danger">Télécharger</button></h5>
+							</div>
+						</div>
 		 			</div>	
 		 		</div>
+		 		<br/>
 	 	</ui:repeat>
 	 </div>
 

@@ -126,8 +126,7 @@ public class OfferDAO {
 	}*/
 	
 	public Offer getById(int id){
-		Query query = em.createQuery("SELECT offer from Offer offer"
-				+"WHERE offer.id = :id");
+		Query query = em.createQuery("SELECT offer from Offer offer WHERE offer.id = :id");
 		query.setParameter("id", id);
 		return (Offer) query.getSingleResult();
 	}

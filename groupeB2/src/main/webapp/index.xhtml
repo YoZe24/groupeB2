@@ -65,33 +65,8 @@
 					</div>
 				</div>
 	 		</div>
+	 		<br/>
 	 	</ui:repeat>
-
-
-	 	<!--  <h:dataTable value="#{eventControl.query()}" var="event"
-	 			styleClass="list-background table table-striped table-bordered text-center"
-	 			columnClasses="listColumnCenter,listColumnCenter,listColumnCenter,listColumnCenter"
-	 			headerClass="list-header"
-	 			rowClasses="list-row">
-	 		<h:column>
-			    <f:facet name="header">Titre</f:facet>
-			    	<h:outputText value="#{event.title}"/>
-			</h:column>
-			<h:column>
-			    <f:facet name="header">Description</f:facet>
-			    	<h:outputText value="#{event.description}"/>
-			</h:column>
-			<h:column>
-			    <f:facet name="header">Date début</f:facet>
-			    	<h:outputText value="#{event.startDate}"/>
-			</h:column>
-			<h:column>
-			    <f:facet name="header">Date de fin</f:facet>
-			    	<h:outputText value="#{event.endDate}">
-			    		<f:convertDateTime type="date" pattern="yyyy-MM-dd"/>
-			    	</h:outputText>
-			</h:column>
-	 	</h:dataTable>-->
 	 </div>
 
 
@@ -109,6 +84,7 @@
 		<h:commandButton class="btn btn-info" value="Ajout portrait" action="addPortrait.xhtml?faces-redirect=true"></h:commandButton>
 		<h:commandButton class="btn btn-info" value="Afficher les utilisateurs" onclick="#{userControl.loadUsers()}" action="seeAllUsers.xhtml"></h:commandButton>
 		<h:commandButton class="btn btn-info" value="Afficher les events" onclick="#{eventControl.loadEvents()}" action="seeAllEvents.xhtml"></h:commandButton>
+		<h:commandButton class="btn btn-info" value="Afficher les offres" onclick="#{offerControl.loadListOffer()}" action="seeAllOffers.xhtml"></h:commandButton>
 
 	</h:form>
 	<!--<h:form>

@@ -85,4 +85,10 @@ public class EventDAO {
 		return em.merge(e);
 
 	}
+
+	public Event findById(int id) {
+		Query query = em.createQuery("select event from Event event where event.id = :varId");
+		query.setParameter("varId", id);
+		return query.getResultList().size() != 0?(Event) query.getResultList().get(0) : null;
+	}
 }

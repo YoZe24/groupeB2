@@ -5,30 +5,22 @@
 	xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:c="http://java.sun.com/jstl/core">
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 <head>
 <title>Ajout d'offre</title>
 <meta http-equiv="
 	Content-Type" content="text/html; charset=UTF-8" />
-<!-- 	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
-  	<link rel="stylesheet" href="Css.css"/>
 	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"/>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 	
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		 -->		  
-		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
 <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
+<link rel="stylesheet" href="Css.css"/>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 		 		  
 		 
  	<script type="text/javascript">
 	    $(function () {
@@ -41,9 +33,134 @@
 
 </head>
 <body>
-	<h1>Bonjour #{userControl.userCurrent.name}</h1>
-	   <h:form enctype='multipart/form-data'>
-         <fieldset>
+
+	<div id="header">
+		<ui:insert name="header" >
+		  <ui:include src="header.xhtml" />
+		</ui:insert>
+	 </div>
+	 
+	 <div  class="container text-center">
+	 	<h1>Bonjour #{userControl.userCurrent.name}</h1>
+	 	<h2>Ajouter une offre</h2>
+	 	 <h:form enctype='multipart/form-data'> 
+		 	<h3>Informations de la société</h3>
+		 		<div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="societyName">Nom de la société</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:inputText class="form-control" id="societyName" value="#{offerControl.offer.societyName}" size="20" maxlength="50" p:placeholder="Entrez le nom de la société" required="true" requiredMessage="Veuillez entrez un nom"/>
+				    	<h:message id="societyNameMessage" for="societyName" errorClass="erreur" style="color : red;"/>
+				    </div>
+			     </div>
+			     <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="societyMail">Email de la société</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:inputText class="form-control" id="societyMail" value="#{offerControl.offer.societyMail}" size="20" maxlength="50" p:placeholder="Entrez le mail de la société" required="true" requiredMessage="Veuillez entrez un nom"/>
+				   		<h:message id="societyMailMessage" for="societyMail" errorClass="erreur" style="color : red;"/> 
+				    </div>
+			     </div>
+			      <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="societySector">Secteur de la société</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:inputText class="form-control" id="societySector" value="#{offerControl.offer.societySector}" size="20" maxlength="50" p:placeholder="Entrez le secteur d'activité de la société" required="true" requiredMessage="Veuillez entrez un nom"/>
+				    	<h:message id="societySectorMessage" for="societySector" errorClass="erreur" style="color : red;"/>
+				    </div>
+			     </div>
+			      <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="societyNum">Numéro de la société</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:inputText class="form-control" id="societyNum" value="#{offerControl.offer.societyNum}" size="20" maxlength="50" p:placeholder="Entrez le numéro de la société" required="true" requiredMessage="Veuillez entrez un nom"/>
+				    	<h:message id="societyNumMessage" for="societyNum" errorClass="erreur" style="color : red;"/>
+				    </div>
+			     </div>
+			     <h3>Informations de l'offre</h3>
+			     <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="functionOffer">Numéro de la société</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:inputText class="form-control" id="functionOffer" value="#{offerControl.offer.functionOffer}" size="20" maxlength="50" p:placeholder="Entrez la fonction de l'offre" required="true" requiredMessage="Veuillez entrez un nom"/>
+				    	<h:message id="functionOfferMessage" for="functionOffer" errorClass="erreur" style="color : red;"/>
+				    </div>
+			     </div>
+			     <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="subject">Sujet de l'offre</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:inputText class="form-control" id="subject" value="#{offerControl.offer.subject}" size="20" maxlength="50" p:placeholder="Entrez le sujet de l'offre" required="true" requiredMessage="Veuillez entrez un nom"/>
+				    	<h:message id="subjectMessage" for="subject" errorClass="erreur" style="color : red;"/>
+				    </div>
+			     </div>
+			      <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="offerTypes">Type de l'offre</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:selectOneMenu id="offerTypes" value="#{offerControl.offer.offerType}" required="true" requiredMessage="Veuillez choisir un type d'offre">
+	        				<f:selectItems value="#{offerControl.getOfferTypes()}" />
+	       				</h:selectOneMenu>
+	       				<h:message id="offerTypesMessage" for="offersTypes" errorClass="erreur" style="color : red;"/>
+				    </div>
+			     </div>
+			      <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="olSkills">Compétences demandées</h:outputLabel>
+		         	<div class="col-sm-8">
+				        <h:inputTextarea value="#{offerControl.offer.skillsNeeded}" cols="20" row="5"></h:inputTextarea>
+				    </div>
+			     </div>
+			   	<div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="startDate">Date de début l'offre</h:outputLabel>
+		         	<div class='col-sm-8'>
+		         			<h:outputLabel>Date de début l'évènement (format: "YYYY-MM-DD HH:mm")</h:outputLabel>
+			            	<h:inputText class="form-control" value="#{offerControl.startDateStr}" required="true" requiredMessage="Veuillez choisir une date de début"/>
+			            	<h:message id="startDateMessage" for="startDate" errorClass="erreur" style="color : red;"/>
+            		</div>
+			    </div>
+			    <div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="startDate">Date de fin l'offre</h:outputLabel>
+		         		<div class='col-sm-8'>
+		         			<h:outputLabel>Date de début l'évènement (format: "YYYY-MM-DD HH:mm")</h:outputLabel>
+			            	<h:inputText class="form-control" value="#{offerControl.endDateStr}" required="true" requiredMessage="Veuillez choisir une date de fin"/>
+			            	<h:message id="endDateMessage" for="endDate" errorClass="erreur" style="color : red;"/>
+            			</div>
+			    </div>
+			    <div class="form-group row">
+			    	 <h:outputLabel for="pathFile">Ajout d'un pdf</h:outputLabel>
+			    	 <div class="col-sm-8">
+			    	 	<h:inputFile value="#{offferControl.pdf}"/>
+			    	 </div>
+			    </div>
+			    
+			    <h3>Adresse de la société</h3>
+	         	<div class="form-group row">
+		         	<h:outputLabel class="col-sm-2 col-form-label" for="street">Rue</h:outputLabel>
+		         	<div class="col-sm-8">
+				       	<h:inputText  class="form-control" id="street" value="#{offerControl.offer.societyAddress.street}" size="20" maxlength="60"  p:placeholder="Entrez votre rue" required="true" requiredMessage="Veuillez entrez une rue"/>
+				    	<h:message id="streetMessage" for="street" errorClass="erreur" style="color : red;"/>
+				    </div>
+			    </div>
+	        	<div class="form-group row">
+		        	<h:outputLabel class="col-sm-2 col-form-label" for="num">Numéro</h:outputLabel>
+		        	<div class="col-sm-8">
+				     	<h:inputText  class="form-control" id="num" value="#{offerControl.offer.societyAddress.num}" size="20" maxlength="60" p:placeholder="Entrez votre numéro" required="true" requiredMessage="Veuillez entrez un numéro"/>
+				    	<h:message id="numMessage" for="num" errorClass="erreur" style="color : red;"/>
+				    </div>
+			    </div>
+		       	<div class="form-group row">        
+				    <h:outputLabel class="col-sm-2 col-form-label" for="city">Ville</h:outputLabel>
+				    <div class="col-sm-8">
+				       	<h:inputText  class="form-control" id="city" value="#{offerControl.offer.societyAddress.city}" size="20" maxlength="60" p:placeholder="Entrez votre ville" required="true" requiredMessage="Veuillez entrez une ville"/>
+				    	<h:message id="cityMessage" for="city" errorClass="erreur" style="color : red;"/>
+				    </div>
+			    </div>
+		       	<div class="form-group row">   		        
+			       	<h:outputLabel class="col-sm-2 col-form-label" for="cp">Code Postal</h:outputLabel>
+			       	<div class="col-sm-8">
+				       	<h:inputText  class="form-control" id="cp" value="#{offerControl.offer.societyAddress.cp}" size="20" maxlength="60" p:placeholder="Entrez votre code postal" required="true" requiredMessage="Veuillez entrez un code postal"/>
+				    	<h:message id="cpMessage" for="cp" errorClass="erreur" style="color : red;"/>
+				    </div>        
+			    </div>
+			    <h:messages globalOnly="true" infoClass="info" />
+			    <h:commandButton id="submit" value="Ajouter" action="#{offerControl.addOffer(userControl.userCurrent)}" styleClass="btn btn-success" style="float : left;"/> 
+		</h:form>
+	 </div>
+
+         <!--<fieldset>
          	<legend>Ajout d'offre de stage</legend>
          	<h:outputLabel for="societyName">Nom de la societé<span class="requis">*</span></h:outputLabel>
 	        <h:inputText id="societyName" value="#{offerControl.offer.societyName}" required="true" size="20" maxlength="50" />
@@ -125,7 +242,6 @@
 	        <h:messages globalOnly="true" infoClass="info" />
    			   	<h:commandButton value="Ajouter l'offre" action="#{offerControl.addOffer(userControl.userCurrent)}"></h:commandButton>
 			<br />
-	     </fieldset>
-	</h:form>
+	     </fieldset>-->
 </body>
 </html>
